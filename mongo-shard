@@ -1,0 +1,32 @@
+shard设置
+启动 config server
+
+mongod --configsvr --dbpath <path> --port <port>
+
+启动 mongos
+mongos --configdb <config server hostnames>
+mongos --configdb cfg0.example.net:27019,cfg1.example.net:27019,cfg2.example.net:27国
+连接到
+mongo --host <hostname of machine running mongos> --port <port mongos listens on>
+
+你也可以使用 enableSharding 命令对数据库开启分片,语法如下:
+
+
+db.auditOrigData.find({ time: { '$gt': 1430150485, '$lt': 1430156243 },   clientMac: '00:ee:bd:51:50:86' }).explain()
+{
+	"cursor" : "BasicCursor",
+	"isMultiKey" : false,
+	"n" : 669,
+	"nscannedObjects" : 46066903,
+	"nscanned" : 46066903,
+	"nscannedObjectsAllPlans" : 46066903,
+	"nscannedAllPlans" : 46066903,
+	"scanAndOrder" : false,
+	"indexOnly" : false,
+	"nYields" : 359897,
+	"nChunkSkips" : 0,
+	"millis" : 124632,
+	"server" : "srv7:27017",
+	"filterSet" : false
+}
+

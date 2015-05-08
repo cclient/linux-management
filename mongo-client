@@ -1,0 +1,31 @@
+db.addUser('sa','sa')
+
+mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]
+
+
+db.auditOrigData.update({clientMac:'20:1a:06:38:7a:76'},{$set:{clientMac:'3c:97:0e:9a:82:88'}},{multi:true})
+
+
+删除course表中，所有的lectures.lectures_count字段
+
+db.course.update({},{$unset:{"lectures.lectures_count":""}},{multi:true})
+
+
+根据条件往表里插入一个字段
+
+db.lecture.update({"course_id":"5352d5ab92fc7705666ae8c9"},{$set:{"file_type":"PDF"}},{multi:true})
+
+db.personinfo.find( { 'arr_qq.704904800':{$exists:true}})
+
+
+db.auditOrigData.find({proto:{$ne:'http'}})
+
+
+
+
+{"$or":[{"city":{"$exists":false}},{"city":{"$ne":""}}]}
+
+{"$or":[{"operatype":{"$gte":"1040","$lt":1050}},{"operatype":{"$gte":"1050","$lt":1060}}]}
+
+areaReport.ensureIndex({date: 1, pubID: 1}, funciton(){});
+

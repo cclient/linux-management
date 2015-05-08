@@ -1,0 +1,40 @@
+Git创建Develop分支的命令：
+
+git checkout -b develop master
+
+
+取消修改
+git reset --hard
+
+将Develop分支发布到Master分支的命令：
+
+# 切换到Master分支
+　　git checkout master
+　　# 对Develop分支进行合并
+　　git merge --no-ff develop
+
+
+
+
+
+如果要自己定义要新建的项目目录名称，可以在上面的命令末尾指定新的名字：
+$ git clone git://github.com/schacon/grit.git mygrit
+
+当执行 "git reset HEAD" 命令时，暂存区的目录树会被重写，被 master 分支指向的目录树所替换，但是工作区不受影响。
+
+当执行 "git rm --cached <file>" 命令时，会直接从暂存区删除文件，工作区则不做出改变。
+
+当执行 "git checkout ." 或者 "git checkout -- <file>" 命令时，会用暂存区全部或指定的文件替换工作区的文件。这个操作很危险，会清除工作区中未添加到暂存区的改动。
+
+当执行 "git checkout HEAD ." 或者 "git checkout HEAD <file>" 命令时，会用 HEAD 指向的 master 分支中的全部或者部分文件替换暂存区和以及工作区中的文件。这个命令也是极具危险性的，因为不但会清除工作区中未提交的改动，也会清除暂存区中未提交的改动。
+git diff
+
+执行 git diff 来查看执行 git status 的结果的详细信息。
+
+git diff 命令显示已写入缓存与已修改但尚未写入缓存的改动的区别。git diff 有两个主要的应用场景。
+
+尚未缓存的改动：git diff
+查看已缓存的改动： git diff --cached
+查看已缓存的与未缓存的所有改动：git diff HEAD
+显示摘要而非整个 diff：git diff --stat
+在 hello.php 文件中输入以下内容

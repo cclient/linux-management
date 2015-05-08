@@ -1,0 +1,27 @@
+sed -n '/ruby/p' ab
+
+
+
+sed -i -e '68a URIEncoding="UTF-8"’ server.xml
+
+
+
+读旧值
+
+sed -n '/ruby/p' ab | sed 's/ruby/bird/g’ >oldssh
+
+newssh
+
+
+
+sed -i '/ssh_authorized_/a\\t- ssh-rsa BBBBBC' user-data.sample
+
+sed -i '/ssh_authorized_/a\\tdddddddddddcccddd' user-data.sample
+
+
+
+ 553  sed -n '/ssh-rsa/p' ~/user-data.sample | sed 's/ssh-rsa/rsa-ssh/g'
+
+
+
+c$ sed -n '/ruby/p' ~/user-data.sample | sed 's/ruby/bird/g'

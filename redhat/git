@@ -1,0 +1,44 @@
+wget -P /etc/yum.repos.d/ http://geekery.altervista.org/geekery-el5-i386.repo
+wget http://packages.sw.be/rpmforge-release/rpmforge-release-0.5.2-2.el5.rf.i386.rpm
+rpm -ivh rpmforge-release-0.5.2-2.el5.rf.i386.rpm
+epel-release只能在http://rpm.pbone.net/上找了
+rpm -ivh epel-release-5-4.noarch.rpm
+2.开始使用yum安装git
+yum -y install git
+git --version
+git version 1.7.10
+
+
+http://blog.slogra.com/post-176.html
+
+出错
+It's possible that the above module doesn't match the
+current version of Python, which is:
+2.4.3 (#1, Dec 10 2010, 17:24:32)
+[GCC 4.1.2 20080704 (Red Hat 4.1.2-50)]
+
+[root@localhost xiaoyun]# which python
+/usr/bin/python
+[root@localhost xiaoyun]# /usr/bin/py
+pydoc       pylupdate   python      python2     python2.4   python_old  pyuic
+[root@localhost xiaoyun]# /usr/bin/python
+python      python2     python2.4   python_old
+[root@localhost xiaoyun]# /usr/bin/python -V
+Python 2.7.6
+
+[root@localhost xiaoyun]# /usr/bin/python2.4 -V
+Python 2.4.3
+
+这是因为 yum 依赖 Python 2.4.3 而现在默认的 Python 版本是2.6.5。修复也很简单，将 /usr/bin/yum 文件的首行
+
+!#/usr/bin/python
+修改为
+
+!#/usr/bin/python2.4
+
+查看已经是2.4了
+
+It's possible that the above module doesn't match the
+current version of Python, which is:
+2.7.6 (default, Apr 17 2015, 02:59:55)
+

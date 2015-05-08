@@ -1,0 +1,16 @@
+import os
+
+目录 文件夹 文件
+for i in os.walk('c:'+os.sep+'ant'):
+    print i
+
+输出:
+('c:\\ant', ['bin', 'docs', 'etc', 'lib', 'Project'], ['fetch.xml', 'get-m2.xml', 'INSTALL', 'KEYS', 'LICENSE', 'NOTICE', 'README', 'WHATSNEW'])
+('c:\\ant\\bin', [], ['ant', 'ant.bat', 'ant.cmd', 'antenv.cmd', 'antRun', 'antRun.bat', 'antRun.pl', 'complete-ant-cmd.pl', 'envset.cmd', 'lcp.bat', 'runant.pl', 'runant.py', 'runrc.cmd'])
+('c:\\ant\\docs', ['ant2', 'antlibs', 'images', 'manual', 'projects', 'slides', 'webtest'], ['antnews.html', 'ant_in_anger.html', 'ant_task_guidelines.html', 'appendix_e.pdf', 'breadcrumbs.js', 'bugs.html', 'bylaws.html', 'contributors.html', 'external.html', 'faq.html', 'favicon.ico', 'index.html', 'legal.html', 'LICENSE', 'license.html', 'mail.html', 'mission.html', 'nightlies.html', 'page.css', 'problems.html', 'projects.html', 'resources.html', 'svn.html'])
+('c:\\ant\\docs\\ant2', [], ['actionlist.html', 'features.html', 'FunctionalRequirements.html', 'original-specification.html', 'requested-features.html', 'requested-features.txt', 'VFS.txt'])
+('c:\\ant\\docs\\antlibs', ['antunit', 'compress', 'dotnet', 'props', 'svn'], ['bindownload.cgi', 'bindownload.html', 'charter.html', 'index.html', 'proper.html', 'sandbox.html', 'srcdownload.cgi', 'srcdownload.html'])
+('c:\\ant\\docs\\antlibs\\antunit', [], ['index.html'])
+('c:\\ant\\docs\\antlibs\\compress', [], ['index.html'])
+('c:\\ant\\docs\\antlibs\\dotnet', [], ['index.html'])
+('c:\\ant\\docs\\antlibs\\props', [], ['index.html'])

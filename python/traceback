@@ -1,0 +1,30 @@
+跟踪异常返回信息
+
+import traceback
+try:
+    raise SyntaxError, "traceback test"
+except:
+    traceback.print_exc()
+
+extract_tb函数来格式化跟踪返回信息, 得到包含错误信息的列表
+
+import sys
+def tracebacktest():
+    raise SyntaxError, "traceback test"
+try:
+    tracebacktest()
+except:
+    info = sys.exc_info()
+    for file, lineno, function, text in traceback.extract_tb(info[2]):
+        print file, "line:", lineno, "in", function
+        print text
+    print "** %s: %s" % info[:2]
+
+
+
+    info
+    <traceback object at 0x106dc9440>
+    extrack_tb
+    traceback.extract_tb(info[2])
+
+    [('./filter.py', 7, '<module>', 'tracebacktest()'), ('./filter.py', 5, 'tracebacktest', 'raise SyntaxError, "traceback test"')]

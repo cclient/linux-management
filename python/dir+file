@@ -1,0 +1,14 @@
+
+//文件数组
+os.listdir("./")
+['filter.py', 'server.py']
+
+//前后缀分开
+os.path.splitext(l)
+('filter', '.py')
+修改时间
+os.path.getmtime(l)
+1430387842.0
+
+os.path.join(a, b)
+a/b

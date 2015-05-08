@@ -1,0 +1,41 @@
+fdisk -l
+Device     Boot Start    End Sectors  Size Id Type
+
+/dev/sda1  *     4096 266239  262144  128M  c W95 FAT32 (LBA)
+
+/dev/sda2           1   4095    4095    2M ee GPT
+
+
+
+Partition table entries are not in disk order.
+
+
+
+
+
+Disk /dev/sdb: 3 GiB, 3221225472 bytes, 6291456 sectors
+
+Units: sectors of 1 * 512 = 512 bytes
+
+Sector size (logical/physical): 512 bytes / 512 bytes
+
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+parted /dev/sdb
+
+GNU Parted 3.1
+Using /dev/sdb
+Welcome to GNU Parted! Type 'help' to view a list of commands.
+(parted)
+
+(parted) mklabel gpt
+将MBR磁盘格式化为GPT
+
+//(parted) mklable msdos  如果要反过来.将GPT磁盘转化为MBR磁盘
+
+
+
+(parted) mkpart primary 0 100
+划分一个起始位置为0大小为100M的主分区
+

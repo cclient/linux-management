@@ -1,0 +1,15 @@
+vmare
+cd coreos_developer_vmware_insecure
+ssh -i insecure_ssh_key core@10.0.1.81
+Replacing the key
+
+We highly recommend that you disable the original insecure OEM SSH key and replace it with your own. This is a simple two step process: first, add your public key, and then remove the original OEM one.
+
+cat ~/.ssh/id_rsa.pub | ssh core@10.0.1.81 -i insecure_ssh_key update-ssh-keys -a user
+ssh core@10.0.1.81 update-ssh-keys -D oem
+
+make could_config iso
+
+mkdir -p /tmp/new-drive/openstack/latest/
+cp node.yaml /tmp/new-drive/openstack/latest/user_data
+hdiutil makehybrid -iso -joliet -joliet-volume-name "config-2" -joliet -o node.iso /tmp/new-drive

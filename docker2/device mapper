@@ -1,0 +1,27 @@
+localhost / # ls -l /sys/class/misc/device-mapper/
+total 0
+-r--r--r-- 1 root root 4096 Apr 17 03:52 dev
+drwxr-xr-x 2 root root    0 Apr 16 04:57 power
+lrwxrwxrwx 1 root root    0 Apr 17 03:52 subsystem -> ../../../../class/misc
+-rw-r--r-- 1 root root 4096 Apr 17 03:52 uevent
+
+ grep device-mapper /proc/devices
+254 device-mapper
+
+
+yun install -y device-mapper
+
+sudo modprobe dm_mod
+
+curl https://get.docker.io/ |sudo sh
+
+启动docker 守护进程 详情
+DEBUG=1 /usr/bin/docker -d
+
+在使用了updatart 的ubuntu眄 日志输出在 /var/log/upstartdocker.log
+
+docker默认配置文件
+
+/etc/default/docker
+DOCKER_OPTS
+/usr/lib/systemd/system/docker.service ExecStart

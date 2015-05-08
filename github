@@ -1,0 +1,26 @@
+github 高亮语法
+//大标题
+## angular-study
+//缩进标题
+### Goals
+//li 点标志行
+* Minimal dependencies - I really want to keep this project a pure html/js app.
+// '暗背影色'
+1. Run: `docker run -d -p 9000:9000 --privileged -v /var/run/docker.sock:/var/run/docker.sock dockerui/dockerui`
+//超链接
+[here](https://github.com/crosbymichael/dockerui/wiki/Dockerui-with-Nginx-HTTP-Auth)
+
+
+//内容黑体
+**DockerUI:**
+//内容后标信字体
+Copyright (c) 2014 Michael Crosby. crosbymichael.com
+
+
+//图片
+![Containers](/containers.png)
+
+
+//缩进代码段？
+    # Connect to a tcp socket:
+    $ docker run -d -p 9000:9000 --privileged dockerui/dockerui -e http://127.0.0.1:2375

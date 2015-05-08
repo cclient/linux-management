@@ -1,0 +1,3 @@
+ 250  find -name  mkmf.log  /
+
+  251  find -name /  mkmf.log

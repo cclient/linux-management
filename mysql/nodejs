@@ -1,0 +1,50 @@
+var MYSQL_REPORT = require('../../config').MYSQL_REPORT;
+var arr = MYSQL_REPORT.split(':');
+var mysql = require('mysql');
+var tables = {};
+
+function getTable(database) {
+	if (tables[database]) {
+		return tables[database];
+	} else {
+		var connection = mysql.createPool({
+			connectionLimit: 30,
+			supportBigNumbers: true,
+			host: arr[0],
+			port: +arr[1],
+			user: arr[2],
+			database: database,
+			password: arr[3]
+		});
+		tables[database] = connection;
+		return tables[database];
+	}
+}
+function getWordsTable(database) {
+	if (tables[database]) {
+		return tables[database];
+	} else {
+		var connection = mysql.createPool({
+			connectionLimit: 30,
+			supportBigNumbers: true,
+			host: '10.10.3.1',
+			port: 1503,
+			user: 'suran',
+			database: database,
+			password: 'goyoosuran123'
+		});
+		tables[database] = connection;
+		return tables[database];
+	}
+}
+
+
+exports.summaryTable = getTable('summary');
+exports.logTable = getTable('log');
+exports.wordsTable = getWordsTable('words');
+
+if (!module.parent) {
+	getTable('summary').query('select count(1) from summary', function (err, result) {
+		console.log(err, result);
+	})
+}

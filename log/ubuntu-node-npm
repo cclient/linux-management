@@ -1,0 +1,53 @@
+ubuntu 安装 nodejs npm forver
+有个小问题，ubuntu
+apt-get install 安装的nodejs 命令行下的操作命令是nodejs
+
+而官网上安装文件装在mac或windows 的命令是node
+首先
+1apt-get install nodejs
+2apt-get install npm
+3npm install -g forever
+
+nodejs可执行，npm可执行，但forever执行失败。
+提示错误为
+root@ubuntu1:~# forever
+/usr/bin/env: node: No such file or directory
+因为forever去找node命令了，而apt-get安装成功的命令是nodejs 所以失败了。
+
+知道错在这里，要改就有很多办法了。
+改代码，或加个node->nodejs的连接文件。
+
+以下是笨办法，个人操作的过程，有很多冗余操作。
+移除旧包
+ sudo apt-get autoremove nodejs
+ sudo apt-get autoremove npm
+
+重装
+sudo apt-get autoremove nodejs
+
+成功提示有一句
+update-alternatives: using /usr/bin/nodejs to provide /usr/bin/js (js) in auto mode
+
+nodejs->js的关系倒是很清楚
+js 和nodejs 都可以进入node环境
+
+重命名
+mv nodejs node
+OK node命令可进node环境
+但是npm 却不通了
+root@ubuntu1:/# npm
+-bash: /usr/bin/npm: /usr/bin/nodejs: bad interpreter: No such file or directory
+npm去找nodejs 但我已经把nodejs改成node了
+
+修改npm 内容
+root@ubuntu1:/# vim /usr/bin/npm
+
+第一行是
+#!/usr/bin/nodejs 改为 #!/usr/bin/node
+保存退出
+
+再执行npm 成功
+
+node npm forever 都成功
+
+

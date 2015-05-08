@@ -1,0 +1,10 @@
+apt-get remove ruby
+
+ apt-get remove rails
+
+     apt-get remove rails
+
+
+     apt-get remove gem
+
+     apt-get purge redmine

@@ -1,0 +1,34 @@
+ sudo scp cdpmac@172.17.8.1:~/Downloads/kube* /opt/bin/
+
+scp local_file remote_username@remote_ip:remote_folder
+或者
+scp local_file remote_username@remote_ip:remote_file
+或者
+scp local_file remote_ip:remote_folder
+或者
+scp local_file remote_ip:remote_file
+第1,2个指定了用户名，命令执行后需要再输入密码，第1个仅指定了远程的目录，文件名字不变，第2个指定了文件名；
+第3,4个没有指定用户名，命令执行后需要输入用户名和密码，第3个仅指定了远程的目录，文件名字不变，第4个指定了文件名；
+* 例程：
+scp /home/space/music/1.mp3 root@www.cumt.edu.cn:/home/root/others/music
+scp /home/space/music/1.mp3 root@www.cumt.edu.cn:/home/root/others/music/002.mp3
+scp /home/space/music/1.mp3 www.cumt.edu.cn:/home/root/others/music
+scp /home/space/music/1.mp3 www.cumt.edu.cn:/home/root/others/music/002.mp3
+* 复制目录：
+* 命令格式：
+scp -r local_folder remote_username@remote_ip:remote_folder
+或者
+scp -r local_folder remote_ip:remote_folder
+第1个指定了用户名，命令执行后需要再输入密码；
+第2个没有指定用户名，命令执行后需要输入用户名和密码；
+* 例程：
+scp -r /home/space/music/ root@www.cumt.edu.cn:/home/root/others/
+scp -r /home/space/music/ www.cumt.edu.cn:/home/root/others/
+上面 命令 将 本地 music 目录 复制 到 远程 others 目录下，即复制后有 远程 有 ../others/music/ 目录
+======
+从 远程 复制到 本地
+======
+从 远程 复制到 本地，只要将 从 本地 复制到 远程 的命令 的 后2个参数 调换顺序 即可；
+
+scp root@www.cumt.edu.cn:/home/root/others/music /home/space/music/i.mp3
+scp -r www.cumt.edu.cn:/home/root/others/ /home/space/music/

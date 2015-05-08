@@ -1,0 +1,93 @@
+var db = {},
+	config = require('../../config');
+
+var _ = require('underscore');
+
+
+function getRedisClient(ip, port, _options) {
+
+	var dbName = ip + port;
+	if (db[dbName]) {
+		return db[dbName];
+	}
+
+	var options = _.extend({
+		retry_max_delay: 5000
+	}, _options||null);
+
+	var redis = require("redis").createClient(port, ip, options);
+	var isEnable = false;
+
+	redis.on("error", function (err) {
+		isEnable = false;
+		console.error("Redis ERROR: " + err);
+	});
+
+	redis.on("ready", function () {
+		isEnable = true;
+	});
+
+	redis.on("reconnecting", function (arg) {
+		console.error("Redis reconnecting: " + JSON.stringify(arg));
+		isEnable = false;
+	});
+
+	redis.on("connect", function () {
+		isEnable = true;
+	});
+
+	redis.on("end", function () {
+		isEnable = false;
+	});
+
+// redis health check
+	setInterval(function () {
+		var myTimeout = setTimeout(function () {
+			isEnable = false;
+		}, 2000)
+
+		redis.ping(function (err) {
+			clearTimeout(myTimeout);
+			if (err) {
+				isEnable = false;
+				var len = redis.command_queue.length;
+
+				if (len > 1000) {
+					console.log('>> clean redis queue ', redis.command_queue.length);
+					for (var i = 0; i < len; i++) {
+						redis.command_queue.shift();
+					}
+				}
+			} else {
+				isEnable = true;
+				//console.log('enable all redis command');
+			}
+		});
+	}, 10000);
+
+	db[dbName] = redis;
+	return db[dbName];
+}
+
+function getRedisDecorator (config) {
+	var url = '127.0.0.1:6379', options = {};
+	if (typeof(config) == 'string') {
+		url = config;
+	} else {
+		url = config.url;
+		if (config.options) options = config.options;
+	}
+	return getRedisClient(url.split(':')[0], +url.split(':')[1], options);
+}
+
+//exports.statsDb = getRedisClient(config.REDIS_STATS.split(':')[0], +config.REDIS_STATS.split(':')[1]);
+//exports.queueDb = getRedisClient(config.REDIS_QUEUE.split(':')[0], +config.REDIS_QUEUE.split(':')[1]);
+//exports.statsWordsDb = getRedisClient(config.REDIS_STATS_WORDS.split(':')[0], +config.REDIS_STATS_WORDS.split(':')[1]);
+//exports.statsViewDb = getRedisClient(config.REDIS_STATS_VIEW.split(':')[0], +config.REDIS_STATS_VIEW.split(':')[1]);
+
+exports.statsDb = getRedisDecorator(config.REDIS_STATS);
+exports.queueDb = getRedisDecorator(config.REDIS_QUEUE);
+exports.statsWordsDb = getRedisDecorator(config.REDIS_STATS_WORDS);
+exports.statsViewDb = getRedisDecorator(config.REDIS_STATS_VIEW);
+exports.bidDb = getRedisDecorator(config.REDIS_BID);
+exports.statsReport = getRedisDecorator(config.REDIS_REPORT);

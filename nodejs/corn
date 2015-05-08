@@ -1,0 +1,53 @@
+在linux下使用crontab来进行任务调度十分方便，你可以指定每隔一段时间执行指定的程序、也可以指定每天的某个时刻执行某个程序、还可以按照星期、月份来指定。在nodejs中也有类似的cron模块，可以实现同样的功能，时间语法也一样。
+
+1，安装cron模块
+[plain] view plaincopy在CODE上查看代码片派生到我的代码片
+#npm install -g cron  
+2，启动一个任务
+[javascript] view plaincopy在CODE上查看代码片派生到我的代码片
+var cronJob = require("cron").CronJob;  
+//每秒钟执行一次  
+new cronJob('* * * * * *', function () {  
+        //your job code here  
+}, null, true, 'Asia/Chongqing');  
+//每隔30秒执行一次，会在0秒和30秒处执行  
+new cronJob('*/30 * * * * *', function () {  
+        //your job code here  
+}, null, true, 'Asia/Chongqing');  
+//从早上8点到下午18点，每隔半个小时执行一次，会在0分和30分处执行  
+new cronJob('* */30 8-18 * * *', function () {  
+        //your job code here  
+}, null, true, 'Asia/Chongqing');  
+//在每天的10点和18点的第26分钟各执行一次  
+new cronJob('* 26 10,18 * * *', function () {  
+        //your job code here  
+}, null, true, 'Asia/Chongqing');  
+3，不立即执行任务，人工启动
+[javascript] view plaincopy在CODE上查看代码片派生到我的代码片
+var jobid = new cronJob('* 26 10,18 * * *', function () {  
+        //your job code here  
+}, null, false, 'Asia/Chongqing');  
+jobid.start();  
+4，设置时区
+cronJob中的时间适合时区有关的，所以需要配合正确的时区，关于时间可以参考这篇文章：
+http://blog.csdn.net/newborn2012/article/details/17753635
+5，动态设置时间
+[javascript] view plaincopy在CODE上查看代码片派生到我的代码片
+var jobid = new cronJob('* * * * * *', function () {  
+        //your job code here  
+}, null, false, 'Asia/Chongqing');  
+var second = "12";  
+var minute = "0";  
+var hour = "8-19";  
+var interval = "3";  
+var time = require("cron").time(second + ' ' + minute + ' ' + hour+ '/' + interval + ' * * *', 'Asia/Chongqing');  
+jobid.stop();  
+jobid.setTime(time);  
+jobid.start();  
+6，终止cron任务
+[javascript] view plaincopy在CODE上查看代码片派生到我的代码片
+var jobid = new cronJob('* 26 10,18 * * *', function () {  
+        //your job code here  
+}, null, true, 'Asia/Chongqing');  
+...  
+jobid.stop();  

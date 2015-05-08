@@ -1,0 +1,14 @@
+root@srv7:~# ps -ef |grep python
+root      7745     1  0 Apr13 ?        00:00:00 python probe_collect.py
+root      7751  7745  0 Apr13 ?        00:06:49 python probe_collect.py
+root      7752  7745  0 Apr13 ?        00:06:53 python probe_collect.py
+root      7753  7745  0 Apr13 ?        00:07:01 python probe_collect.py
+root      7754  7745  0 Apr13 ?        00:31:27 python probe_collect.py
+root      8571     1  0 11:29 ?        00:00:00 python audit_collect.py
+root      8577  8571  1 11:29 ?        00:01:02 python audit_collect.py
+root      8578  8571  1 11:29 ?        00:01:10 python audit_collect.py
+root      8579  8571  1 11:29 ?        00:01:05 python audit_collect.py
+root      8580  8571  0 11:29 ?        00:00:53 python audit_collect.py
+root     16427  7374  0 13:06 pts/1    00:00:00 grep python
+root     19228     1  0 Apr16 ?        00:00:00 python /root/gengtao/probe/probe-api/app.py
+root     19239 19228  0 Apr16 ?        00:30:22 /usr/bin/python /root/gengtao/probe/probe-api/app.py

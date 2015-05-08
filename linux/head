@@ -1,0 +1,7 @@
+  head config/database.yml -n 10
+
+  head config/database.yml -l 10
+
+  man cat
+
+  head config/database.yml -n 15

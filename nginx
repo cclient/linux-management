@@ -1,0 +1,45 @@
+Configuring nginx
+
+To configure nginx to send the X-Frame-Options header, add this either to your http, server or location configuration:
+
+add_header X-Frame-Options SAMEORIGIN;
+
+
+482  nginx -t
+
+  483  nginx -t
+
+  484  ls
+
+  485  cp full_1_yunpro.cn_bundle.crt 1_yunpro.cn_bundle.crt
+
+  486  nginx -t
+
+  487  nginx -s reload
+
+  488  ss -ln
+
+  489  cd ..
+
+  490  tail -f /var/log/nginx/access.log /var/log/nginx/error.log
+
+  491  nginx -t
+
+  492  nginx -s reload
+
+  493  tail -f /var/log/nginx/access.log /var/log/nginx/error.log
+
+  494  cd /etc/nginx/sites-
+
+  495  cd /etc/nginx/
+
+  496  ls
+
+  497  nano nginx.conf
+
+  498  nginx -t
+
+  499  nginx -s rleoad
+
+  500  nginx -s reload
+
