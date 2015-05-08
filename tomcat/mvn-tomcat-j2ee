@@ -1,0 +1,27 @@
+bug
+
+eclipse 发布j2ee项目至 tomcat 失败
+具体为 classnotfound
+ 修复方式，拷贝mvn 引用jar包 到webapp/WEB-INF/lib/下
+  可以手动修复
+  也可以改Pom builider-plugins 下添加
+
+   	<plugin>
+   				<groupId>org.apache.maven.plugins</groupId>
+   				<artifactId>maven-dependency-plugin</artifactId>
+   				<executions>
+   					<execution>
+   						<id>copy-dependencies</id>
+   						<phase>test</phase>
+   						<goals>
+   							<goal>copy-dependencies</goal>
+   						</goals>
+   						<configuration>
+   							<outputDirectory>
+   								target/classes/lib
+   							</outputDirectory>
+   						</configuration>
+   					</execution>
+   				</executions>
+   			</plugin>
+
