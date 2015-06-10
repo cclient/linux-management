@@ -1,0 +1,21 @@
+#确认jdk版本
+/usr/libexec/java_home
+#会得到下面信息（不同版本显示不一样）
+/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home
+#上面是1.7版本jdk，可以使用 -v 标识来获取其他已安装版本jdk，如：系统自带的1.6版本jdk
+/usr/libexec/java_home -v '1.6*'
+#会得到下面信息（Mac OS X 10.9.4自带的1.6jdk）
+/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
+获取以上信息后开始创建配置文件
+#创建.bash_profile配置文件（已经有该文件就跳过此步骤）
+touch ~/.bash_profile
+#vim编辑.bash_profile文件
+vim ~/.bash_profile
+#如果不习惯vim命令就使用自带的文本编辑器打开
+open ~/.bash_profile
+#将下面内容输入到.bash_profile里面
+# Mac默认 JDK 6（Mac默认自带了一个jdk6版本）export JAVA_6_HOME=$(/usr/libexec/java_home -v 1.6)# 设置 JDK 7export JAVA_7_HOME=$(/usr/libexec/java_home -v 1.7)#默认JDK 7export JAVA_HOME=$JAVA_7_HOME#alias命令动态切换JDK版本alias jdk6="export JAVA_HOME=$JAVA_6_HOME"alias jdk7="export JAVA_HOME=$JAVA_7_HOME”
+#输入完成后保存执行下面命令
+#重新执行.bash_profile文件
+source ~/.bash_profile
+#切换直接终端输入jdk6或jdk7来切换jdk版本

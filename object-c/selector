@@ -1,0 +1,57 @@
+了解Objective-C中Selector基本概念和操作
+2011-07-26 10:50 Andrew Huang 互联网 字号：T | T
+一键收藏，随时查看，分享好友！
+本文介绍的是了解Objective-C中Selector基本概念和操作，主要介绍了Selector基本概念和操作，我们先来看内容。
+AD：干货来了,不要等！WOT2015 北京站演讲PPT开放下载！
+了解Objective-C中Selector基本概念和操作是本文要介绍的内容，在iphone程序中会大量看到@selector这样的用法。<<iphone开发基础>>花了很大一个篇幅来解析这个语法，但是不知是翻译问题，还是解释过细，不大看得懂，很是不给力.直到程序用这个语法，并且仔细看了一些解析文章。才明白这一语法。
+   
+简而言之，你可以理解 @selector()就是取类方法的编号,他的行为基本可以等同C语言的中函数指针,只不过C语言中，可以把函数名直接赋给一个函数指针，而Objective-C的类不能直接应用函数指针，这样只能做一个@selector语法来取.
+   
+它的结果是一个SEL类型。这个类型本质是类方法的编号(函数地址)?因此我们有如下代码。
+
+一、取得selector值.
+
+C函数指针
+
+int add(int val)  
+{  
+  return val+1;  
+}  
+ 
+ 
+int (* c_func)(int val); //定义一个函数指针变量  
+_func = add ;  //把函数addr地址直接赋给c_func 
+Objective-C的选择器,
+
+@interface foo  
+-(int)add:int val;  
+@end  
+ 
+ 
+SEL class_func ; //定义一个类方法指针  
+class_func = @selector(add:int); 
+注意1. @selector是查找当前类的方法，而[object @selector(方法名:方法参数..) ] ;是取object对应类的相庆方法.
+
+注意2.查找类方法时，除了方法名,方法参数也查询条件之一.
+
+注意3. 可以用字符串来找方法 SEL　变量名　=　NSSelectorFromString(方法名字的字符串);
+
+注意4. 可以运行中用SEL变量反向查出方法名字字符串
+
+NSString　*变量名　=　NSStringFromSelector(SEL参数); 
+二、执行selector值.
+
+取得相庆值后，怎么处理SEL值呢，这一点仍然与函数指针一样，就是执行它
+   
+函数指针执行，（以下有几种等效形式）
+
+*c_func(10);  
+c_func(10); 
+SEL变量的执行.用performSelecor方法来执行. 
+
+[对象　performSelector:SEL变量　withObject:参数1　withObject:参数2]; 
+三.selector的应用场合
+
+selector本质是跟C的回调函数一样。主要用于两个对象之间进行松耦合的通讯.这种方法很多开发环境用到。比如GTK，Delphi.基本上整个Cocoa库之间对象，控制之间通讯都是在这个基础构建的。
+
+小结：了解Objective-C中Selector基本概念和操作是本文要介绍的内容的内容介绍完了，希望本文对你有所帮助！

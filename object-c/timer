@@ -1,0 +1,1 @@
+ timer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(timerUpdate) userInfo:nil repeats:YES];

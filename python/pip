@@ -1,0 +1,14 @@
+类似python
+pip install -U django==1.7
+
+$ sudo pip install -U django==1.7
+
+$ pip install pillow
+
+$ pip list
+
+$ pip freeze > requirements.txt
+
+$ pip install -r requirements.txt
+
+python manage.py runserver

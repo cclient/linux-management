@@ -1,0 +1,39 @@
+#ifdef __cplusplus
+//指示编译器这部分代码按C语言的进行编译
+extern "C" {
+#endif
+#ifdef __cplusplus
+}  // extern "C"
+#endif
+
+
+重命名标志符
+  typedef NSUInteger JKFlags;
+
+##重命名结构体
+  typedef struct Books
+  {
+     NSString *title;
+     NSString *author;
+     NSString *subject;
+     int book_id;
+
+  } Book;
+
+
+  atomic 原子操作
+  nonatomic 非原子
+
+
+关键字	描述	是否默认
+strong	强引用	是
+weak	弱引用
+readonly	只读
+readwrite	可读可写	是
+natomic	具有原子性、线程安全的	是
+nonatomic	不具有原子性，非线程安全的，如果属性不会被多个线程访问，建议定义成nonatomic类型，这样执行效率高
+getter	强行指定属性对应的getter方法
+setter	强行指定属性对应的setter方法
+
+
+楼上的没说全，你都知道引用是别名，那就应该知道在函数内部可以修改rp指向的地址，以前指向的是a,你可以把他改成指向b;传指针是传入参数的一份拷贝，在函数内部修改指针指向的地址，并不会修改原实参所指向的地址。可以写一个简单的程序测试下，在函数内部修改形参所指向的地址，调用完成后，看看实参指向的地址是否改变！传指针不会改变，传引用的会！动手实验下，记得更劳靠！

@@ -19,6 +19,6 @@
 
 <configuration>
     <property> <name>fs.default.name</name>
-        <value>hdfs://namenode/</value>
+        <value>hdfs://localhost/</value>
         <final>true</final>
     </property> </configuration>

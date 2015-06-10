@@ -1,0 +1,516 @@
+ubuntu
+已安装jdk,hadoop
+下载文件
+ scp cdpmac@172.16.231.1:~/Downloads/spark-1.3.1-bin-hadoop2.6.tgz ~/spark-1.3.1.tgz
+cd ~
+tar -zxvf ~/spark-1.3.1.tgz
+ sudo mv  spark-1.3.1-bin-hadoop2.6/ /usr/spark-1.3.1
+
+
+ cdpmac@ubuntu:/usr/spark-1.3.1$ sbin/start-all.sh
+ starting org.apache.spark.deploy.master.Master, logging to /usr/spark-1.3.1/sbin/../logs/spark-cdpmac-org.apache.spark.deploy.master.Master-1-ubuntu.out
+ cdpmac@localhost's password:
+ localhost: starting org.apache.spark.deploy.worker.Worker, logging to /usr/spark-1.3.1/sbin/../logs/spark-cdpmac-org.apache.spark.deploy.worker.Worker-1-ubuntu.out
+ localhost: failed to launch org.apache.spark.deploy.worker.Worker:
+ localhost:   JAVA_HOME is not set
+ localhost: full log in /usr/spark-1.3.1/sbin/../logs/spark-cdpmac-org.apache.spark.deploy.worker.Worker-1-ubuntu.out
+我明明有JAVA_HOME bing一下
+http://www.dataguru.cn/thread-359015-1-1.html
+这明明是程序的bug
+vim sbin/start-all.sh
+添加一行
+JAVA_HOME=/usr/lib/jvm/jdk1.8.0_45
+
+
+ cdpmac@ubuntu:/usr/spark-1.3.1$ $JAVA_HOME
+ -bash: /usr/lib/jvm/jdk1.8.0_45: Is a directory
+
+
+bin/run-example org.apache.spark.examples.SparkPi
+一直出错
+
+Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
+15/06/02 05:23:25 INFO SparkContext: Running Spark version 1.3.1
+15/06/02 05:23:25 WARN Utils: Your hostname, ubuntu resolves to a loopback address: 127.0.1.1; using 172.16.231.140 instead (on interface eth0)
+15/06/02 05:23:25 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+15/06/02 05:23:26 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+15/06/02 05:23:26 INFO SecurityManager: Changing view acls to: root
+15/06/02 05:23:26 INFO SecurityManager: Changing modify acls to: root
+15/06/02 05:23:26 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: Set(root); users with modify permissions: Set(root)
+15/06/02 05:23:27 INFO Slf4jLogger: Slf4jLogger started
+15/06/02 05:23:27 INFO Remoting: Starting remoting
+15/06/02 05:23:27 INFO Remoting: Remoting started; listening on addresses :[akka.tcp://sparkDriver@172.16.231.140:50028]
+15/06/02 05:23:27 INFO Utils: Successfully started service 'sparkDriver' on port 50028.
+15/06/02 05:23:27 INFO SparkEnv: Registering MapOutputTracker
+15/06/02 05:23:27 INFO SparkEnv: Registering BlockManagerMaster
+15/06/02 05:23:27 INFO DiskBlockManager: Created local directory at /tmp/spark-98102cb3-906c-49e7-8fd3-4ad7ee2f19a5/blockmgr-4ba566c5-6db2-457c-aa17-f334364d7b5c
+15/06/02 05:23:27 INFO MemoryStore: MemoryStore started with capacity 133.6 MB
+15/06/02 05:23:27 INFO HttpFileServer: HTTP File server directory is /tmp/spark-d033fe61-3a2d-4093-986c-005d83b6792c/httpd-8399a345-e827-4d90-ab9f-d0afebab3821
+15/06/02 05:23:27 INFO HttpServer: Starting HTTP Server
+15/06/02 05:23:27 INFO Server: jetty-8.y.z-SNAPSHOT
+15/06/02 05:23:27 INFO AbstractConnector: Started SocketConnector@0.0.0.0:47689
+15/06/02 05:23:27 INFO Utils: Successfully started service 'HTTP file server' on port 47689.
+15/06/02 05:23:27 INFO SparkEnv: Registering OutputCommitCoordinator
+15/06/02 05:23:28 INFO Server: jetty-8.y.z-SNAPSHOT
+15/06/02 05:23:28 INFO AbstractConnector: Started SelectChannelConnector@0.0.0.0:4040
+15/06/02 05:23:28 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+15/06/02 05:23:28 INFO SparkUI: Started SparkUI at http://172.16.231.140:4040
+15/06/02 05:23:28 INFO SparkContext: Added JAR file:/usr/spark-1.3.1/lib/spark-examples-1.3.1-hadoop2.6.0.jar at http://172.16.231.140:47689/jars/spark-examples-1.3.1-hadoop2.6.0.jar with timestamp 1433247808526
+15/06/02 05:23:28 INFO Executor: Starting executor ID <driver> on host localhost
+15/06/02 05:23:28 INFO AkkaUtils: Connecting to HeartbeatReceiver: akka.tcp://sparkDriver@172.16.231.140:50028/user/HeartbeatReceiver
+15/06/02 05:23:29 INFO NettyBlockTransferService: Server created on 43046
+15/06/02 05:23:29 INFO BlockManagerMaster: Trying to register BlockManager
+15/06/02 05:23:29 INFO BlockManagerMasterActor: Registering block manager localhost:43046 with 133.6 MB RAM, BlockManagerId(<driver>, localhost, 43046)
+15/06/02 05:23:29 INFO BlockManagerMaster: Registered BlockManager
+Exception in thread "main" java.lang.IllegalArgumentException: java.net.UnknownHostException: namenode
+	at org.apache.hadoop.security.SecurityUtil.buildTokenService(SecurityUtil.java:374)
+	at org.apache.hadoop.hdfs.NameNodeProxies.createNonHAProxy(NameNodeProxies.java:312)
+	at org.apache.hadoop.hdfs.NameNodeProxies.createProxy(NameNodeProxies.java:178)
+	at org.apache.hadoop.hdfs.DFSClient.<init>(DFSClient.java:665)
+	at org.apache.hadoop.hdfs.DFSClient.<init>(DFSClient.java:601)
+	at org.apache.hadoop.hdfs.DistributedFileSystem.initialize(DistributedFileSystem.java:148)
+	at org.apache.hadoop.fs.FileSystem.createFileSystem(FileSystem.java:2596)
+	at org.apache.hadoop.fs.FileSystem.access$200(FileSystem.java:91)
+	at org.apache.hadoop.fs.FileSystem$Cache.getInternal(FileSystem.java:2630)
+	at org.apache.hadoop.fs.FileSystem$Cache.get(FileSystem.java:2612)
+	at org.apache.hadoop.fs.FileSystem.get(FileSystem.java:370)
+	at org.apache.spark.util.Utils$.getHadoopFileSystem(Utils.scala:1522)
+	at org.apache.spark.scheduler.EventLoggingListener.<init>(EventLoggingListener.scala:64)
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:400)
+	at org.apache.spark.examples.SparkPi$.main(SparkPi.scala:28)
+	at org.apache.spark.examples.SparkPi.main(SparkPi.scala)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.apache.spark.deploy.SparkSubmit$.org$apache$spark$deploy$SparkSubmit$$runMain(SparkSubmit.scala:569)
+	at org.apache.spark.deploy.SparkSubmit$.doRunMain$1(SparkSubmit.scala:166)
+	at org.apache.spark.deploy.SparkSubmit$.submit(SparkSubmit.scala:189)
+	at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:110)
+	at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+Caused by: java.net.UnknownHostException: namenode
+	... 25 more
+Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
+
+官网信息
+http://spark.apache.org/docs/latest/running-on-yarn.html
+有一条
+spark.yarn.access.namenodes
+
+设为
+spark.yarn.access.namenodes      hdfs://localhost:50030
+错误依旧
+
+搞毛呢
+原来是默认的设置是错的
+cat /usr/spark-1.3.1/conf/spark-defaults.conf
+# Default system properties included when running spark-submit.
+# This is useful for setting default environmental settings.
+
+# Example:
+ spark.master                     spark://master:7077
+ spark.eventLog.enabled           true
+ spark.eventLog.dir               hdfs://namenode/directory
+ spark.serializer                 org.apache.spark.serializer.KryoSerializer
+ spark.driver.memory              256m
+ spark.executor.extraJavaOptions  -XX:+PrintGCDetails -Dkey=value -Dnumbers="one two three"
+ spark.yarn.access.namenodes      hdfs://localhost:50030
+
+ 默认的这里是
+ 改为
+  spark.eventLog.dir               hdfs://localhost:50030/directory
+先不管这个
+cd /usr/spark-1.3.1/conf
+cp spark-defaults.conf.template spark-defaults.conf
+vim spark-defaults.conf
+
+
+
+Connecting to master akka.tcp://sparkMaster@master:7077/user/Master...
+http://blog.csdn.net/shenqiongniujiahui/article/details/44035207
+
+改 spark.master                     spark://master:7077 中master为localhost
+还是不可用
+注掉这句，则通过。
+
+执行用例
+/usr/spark-1.3.1/bin/run-example org.apache.spark.examples.SparkPi
+源码位置在
+
+
+run java
+#注意要用类全名
+./spark-submit --class "sparkfisrttest.cdpspark.App" hadoop-examples.jar
+报错
+Exception in thread "main" java.lang.NoClassDefFoundError: com/mongodb/hadoop/MongoConfig
+引包
+root@ubuntu:/usr/spark-1.3.1/bin# ./spark-submit --jars /usr/hadoop/lib/mongo-hadoop-core-1.3.1.jar --class "sparkfisrttest.cdpspark.App"  hadoop-examples.jar
+
+root@ubuntu:/usr/spark-1.3.1/bin# ./spark-submit --jars /usr/hadoop/lib/mongo-hadoop-core-1.3.1.jar,/usr/hadoop/lib/mongodb-driver-3.0.1.jar,/usr/hadoop/lib/mongo-java-driver-3.0.1.jar  --class "sparkfisrttest.cdpspark.App"  hadoop-examples.jar
+ Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
+ 15/06/04 03:10:42 INFO SparkContext: Running Spark version 1.3.1
+ 15/06/04 03:10:42 WARN Utils: Your hostname, ubuntu resolves to a loopback address: 127.0.0.1; using 172.16.231.146 instead (on interface eth0)
+ 15/06/04 03:10:42 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+ 15/06/04 03:10:42 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+ 15/06/04 03:10:43 INFO SecurityManager: Changing view acls to: root
+ 15/06/04 03:10:43 INFO SecurityManager: Changing modify acls to: root
+ 15/06/04 03:10:43 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: Set(root); users with modify permissions: Set(root)
+ 15/06/04 03:10:43 INFO Slf4jLogger: Slf4jLogger started
+ 15/06/04 03:10:43 INFO Remoting: Starting remoting
+ 15/06/04 03:10:43 INFO Remoting: Remoting started; listening on addresses :[akka.tcp://sparkDriver@172.16.231.146:46536]
+ 15/06/04 03:10:43 INFO Utils: Successfully started service 'sparkDriver' on port 46536.
+ 15/06/04 03:10:44 INFO SparkEnv: Registering MapOutputTracker
+ 15/06/04 03:10:44 INFO SparkEnv: Registering BlockManagerMaster
+ 15/06/04 03:10:44 INFO DiskBlockManager: Created local directory at /tmp/spark-f187f58f-6aaf-45fd-b407-55fcad08ff38/blockmgr-92b95dd3-8d00-4a8c-9f26-5ff52d58a5bb
+ 15/06/04 03:10:44 INFO MemoryStore: MemoryStore started with capacity 133.6 MB
+ 15/06/04 03:10:44 INFO HttpFileServer: HTTP File server directory is /tmp/spark-98c8db7b-97c4-46e3-b70b-4498ad2231b8/httpd-e3e24de1-4e5d-41e5-8bec-8453d7d6ef5d
+ 15/06/04 03:10:44 INFO HttpServer: Starting HTTP Server
+ 15/06/04 03:10:44 INFO Server: jetty-8.y.z-SNAPSHOT
+ 15/06/04 03:10:44 INFO AbstractConnector: Started SocketConnector@0.0.0.0:46504
+ 15/06/04 03:10:44 INFO Utils: Successfully started service 'HTTP file server' on port 46504.
+ 15/06/04 03:10:44 INFO SparkEnv: Registering OutputCommitCoordinator
+ 15/06/04 03:10:44 INFO Server: jetty-8.y.z-SNAPSHOT
+ 15/06/04 03:10:44 INFO AbstractConnector: Started SelectChannelConnector@0.0.0.0:4040
+ 15/06/04 03:10:44 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+ 15/06/04 03:10:44 INFO SparkUI: Started SparkUI at http://172.16.231.146:4040
+ 15/06/04 03:10:44 INFO SparkContext: Added JAR file:/usr/hadoop/lib/mongo-hadoop-core-1.3.1.jar at http://172.16.231.146:46504/jars/mongo-hadoop-core-1.3.1.jar with timestamp 1433412644552
+ 15/06/04 03:10:44 INFO SparkContext: Added JAR file:/usr/hadoop/lib/mongodb-driver-3.0.1.jar at http://172.16.231.146:46504/jars/mongodb-driver-3.0.1.jar with timestamp 1433412644554
+ 15/06/04 03:10:44 INFO SparkContext: Added JAR file:/usr/hadoop/lib/mongo-java-driver-3.0.1.jar at http://172.16.231.146:46504/jars/mongo-java-driver-3.0.1.jar with timestamp 1433412644558
+ 15/06/04 03:10:44 INFO SparkContext: Added JAR file:/usr/spark-1.3.1/bin/hadoop-examples.jar at http://172.16.231.146:46504/jars/hadoop-examples.jar with timestamp 1433412644560
+ 15/06/04 03:10:44 INFO Executor: Starting executor ID <driver> on host localhost
+ 15/06/04 03:10:44 INFO AkkaUtils: Connecting to HeartbeatReceiver: akka.tcp://sparkDriver@172.16.231.146:46536/user/HeartbeatReceiver
+ 15/06/04 03:10:44 INFO NettyBlockTransferService: Server created on 46418
+ 15/06/04 03:10:44 INFO BlockManagerMaster: Trying to register BlockManager
+ 15/06/04 03:10:44 INFO BlockManagerMasterActor: Registering block manager localhost:46418 with 133.6 MB RAM, BlockManagerId(<driver>, localhost, 46418)
+ 15/06/04 03:10:44 INFO BlockManagerMaster: Registered BlockManager
+ 15/06/04 03:10:45 INFO EventLoggingListener: Logging events to hdfs://localhost:50030/directory/local-1433412644604
+ 15/06/04 03:10:46 INFO MemoryStore: ensureFreeSpace(246841) called with curMem=0, maxMem=140142182
+ 15/06/04 03:10:46 INFO MemoryStore: Block broadcast_0 stored as values in memory (estimated size 241.1 KB, free 133.4 MB)
+ 15/06/04 03:10:47 INFO MemoryStore: ensureFreeSpace(27165) called with curMem=246841, maxMem=140142182
+ 15/06/04 03:10:47 INFO MemoryStore: Block broadcast_0_piece0 stored as bytes in memory (estimated size 26.5 KB, free 133.4 MB)
+ 15/06/04 03:10:47 INFO BlockManagerInfo: Added broadcast_0_piece0 in memory on localhost:46418 (size: 26.5 KB, free: 133.6 MB)
+ 15/06/04 03:10:47 INFO BlockManagerMaster: Updated info of block broadcast_0_piece0
+ 15/06/04 03:10:47 INFO SparkContext: Created broadcast 0 from newAPIHadoopRDD at App.java:61
+ 15/06/04 03:10:47 INFO cluster: Cluster created with settings {hosts=[172.16.231.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+ 15/06/04 03:10:47 INFO cluster: No server chosen by PrimaryServerSelector from cluster description ClusterDescription{type=UNKNOWN, connectionMode=SINGLE, all=[ServerDescription{address=172.16.231.1:27017, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out
+ 15/06/04 03:10:47 INFO connection: Opened connection [connectionId{localValue:1, serverValue:14}] to 172.16.231.1:27017
+ 15/06/04 03:10:47 INFO cluster: Monitor thread successfully connected to server with description ServerDescription{address=172.16.231.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 6]}, minWireVersion=0, maxWireVersion=2, maxDocumentSize=16777216, roundTripTimeNanos=2793715}
+ 15/06/04 03:10:47 INFO connection: Opened connection [connectionId{localValue:2, serverValue:15}] to 172.16.231.1:27017
+ 15/06/04 03:10:47 INFO cluster: Cluster created with settings {hosts=[172.16.231.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+ 15/06/04 03:10:47 INFO StandaloneMongoSplitter: Running splitvector to check splits against mongodb://172.16.231.1:27017/lewifi.auditOrigData
+ 15/06/04 03:10:47 INFO cluster: No server chosen by ReadPreferenceServerSelector{readPreference=primary} from cluster description ClusterDescription{type=UNKNOWN, connectionMode=SINGLE, all=[ServerDescription{address=172.16.231.1:27017, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out
+ 15/06/04 03:10:47 INFO connection: Opened connection [connectionId{localValue:3, serverValue:16}] to 172.16.231.1:27017
+ 15/06/04 03:10:47 INFO cluster: Monitor thread successfully connected to server with description ServerDescription{address=172.16.231.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 6]}, minWireVersion=0, maxWireVersion=2, maxDocumentSize=16777216, roundTripTimeNanos=1398417}
+ 15/06/04 03:10:47 INFO connection: Opened connection [connectionId{localValue:4, serverValue:17}] to 172.16.231.1:27017
+ 15/06/04 03:10:47 INFO MongoCollectionSplitter: Created split: min=null, max= { "_id" : { "$oid" : "54d8489e48c9bc218e0591a6"}}
+ 15/06/04 03:10:47 INFO MongoCollectionSplitter: Created split: min={ "_id" : { "$oid" : "54d8489e48c9bc218e0591a6"}}, max= { "_id" : { "$oid" : "54d84ed048c9bc218e05ad54"}}
+ 15/06/04 03:10:47 INFO MongoCollectionSplitter: Created split: min={ "_id" : { "$oid" : "54d84ed048c9bc218e05ad54"}}, max= { "_id" : { "$oid" : "54d8563e48c9bc218e05c901"}}
+ 15/06/04 03:10:47 INFO MongoCollectionSplitter: Created split: min={ "_id" : { "$oid" : "54d8563e48c9bc218e05c901"}}, max= { "_id" : { "$oid" : "54d85dc348c9bc218e05e4b0"}}
+ 15/06/04 03:10:47 INFO MongoCollectionSplitter: Created split: min={ "_id" : { "$oid" : "54d85dc348c9bc218e05e4b0"}}, max= { "_id" : { "$oid" : "54d8632148c9bc218e06005f"}}
+ 15/06/04 03:10:47 INFO MongoCollectionSplitter: Created split: min={ "_id" : { "$oid" : "54d8632148c9bc218e06005f"}}, max= { "_id" : { "$oid" : "54d86b3248c9bc218e061c4c"}}
+ 15/06/04 03:10:47 INFO MongoCollectionSplitter: Created split: min={ "_id" : { "$oid" : "54d86b3248c9bc218e061c4c"}}, max= { "_id" : { "$oid" : "54d8759d48c9bc218e063843"}}
+ 15/06/04 03:10:47 INFO MongoCollectionSplitter: Created split: min={ "_id" : { "$oid" : "54d8759d48c9bc218e063843"}}, max= { "_id" : { "$oid" : "54d87c6b48c9bc218e0653f0"}}
+ 15/06/04 03:10:47 INFO MongoCollectionSplitter: Created split: min={ "_id" : { "$oid" : "54d87c6b48c9bc218e0653f0"}}, max= { "_id" : { "$oid" : "54d8847a48c9bc218e066f9d"}}
+ 15/06/04 03:10:47 INFO MongoCollectionSplitter: Created split: min={ "_id" : { "$oid" : "54d8847a48c9bc218e066f9d"}}, max= { "_id" : { "$oid" : "54d88b3e48c9bc218e068b4a"}}
+ 15/06/04 03:10:47 INFO MongoCollectionSplitter: Created split: min={ "_id" : { "$oid" : "54d88b3e48c9bc218e068b4a"}}, max= { "_id" : { "$oid" : "54d8969748c9bc218e06a6f7"}}
+ 15/06/04 03:10:47 INFO MongoCollectionSplitter: Created split: min={ "_id" : { "$oid" : "54d8969748c9bc218e06a6f7"}}, max= { "_id" : { "$oid" : "54d8a4c148c9bc218e06c2a4"}}
+ 15/06/04 03:10:47 INFO MongoCollectionSplitter: Created split: min={ "_id" : { "$oid" : "54d8a4c148c9bc218e06c2a4"}}, max= { "_id" : { "$oid" : "54d8aed348c9bc218e06de51"}}
+ 15/06/04 03:10:47 INFO MongoCollectionSplitter: Created split: min={ "_id" : { "$oid" : "54d8aed348c9bc218e06de51"}}, max= { "_id" : { "$oid" : "54d8c31d48c9bc218e06f9fe"}}
+ 15/06/04 03:10:48 INFO MongoCollectionSplitter: Created split: min={ "_id" : { "$oid" : "54d8c31d48c9bc218e06f9fe"}}, max= { "_id" : { "$oid" : "54d8ecbc48c9bc218e0715ab"}}
+ 15/06/04 03:10:48 INFO MongoCollectionSplitter: Created split: min={ "_id" : { "$oid" : "54d8ecbc48c9bc218e0715ab"}}, max= { "_id" : { "$oid" : "54d9067548c9bc218e073158"}}
+ 15/06/04 03:10:48 INFO MongoCollectionSplitter: Created split: min={ "_id" : { "$oid" : "54d9067548c9bc218e073158"}}, max= { "_id" : { "$oid" : "54d92cae48c9bc218e074d05"}}
+ 15/06/04 03:10:48 INFO MongoCollectionSplitter: Created split: min={ "_id" : { "$oid" : "54d92cae48c9bc218e074d05"}}, max= { "_id" : { "$oid" : "54d954c148c9bc218e0768b2"}}
+ 15/06/04 03:10:48 INFO MongoCollectionSplitter: Created split: min={ "_id" : { "$oid" : "54d954c148c9bc218e0768b2"}}, max= { "_id" : { "$oid" : "54d9626048c9bc218e07845f"}}
+ 15/06/04 03:10:48 INFO MongoCollectionSplitter: Created split: min={ "_id" : { "$oid" : "54d9626048c9bc218e07845f"}}, max= { "_id" : { "$oid" : "54d9683748c9bc218e07a00c"}}
+ 15/06/04 03:10:48 INFO MongoCollectionSplitter: Created split: min={ "_id" : { "$oid" : "54d9683748c9bc218e07a00c"}}, max= { "_id" : { "$oid" : "54d96a2648c9bc218e07bbb9"}}
+ 15/06/04 03:10:48 INFO MongoCollectionSplitter: Created split: min={ "_id" : { "$oid" : "54d96a2648c9bc218e07bbb9"}}, max= { "_id" : { "$oid" : "54d9716848c9bc218e07d767"}}
+ 15/06/04 03:10:48 INFO MongoCollectionSplitter: Created split: min={ "_id" : { "$oid" : "54d9716848c9bc218e07d767"}}, max= { "_id" : { "$oid" : "54d97cb948c9bc218e0816c1"}}
+ 15/06/04 03:10:48 INFO MongoCollectionSplitter: Created split: min={ "_id" : { "$oid" : "54d97cb948c9bc218e0816c1"}}, max= { "_id" : { "$oid" : "54d989f548c9bc218e0832d5"}}
+ 15/06/04 03:10:48 INFO MongoCollectionSplitter: Created split: min={ "_id" : { "$oid" : "54d989f548c9bc218e0832d5"}}, max= null
+ 15/06/04 03:10:48 INFO SparkContext: Starting job: collect at App.java:63
+ 15/06/04 03:10:48 INFO DAGScheduler: Got job 0 (collect at App.java:63) with 25 output partitions (allowLocal=false)
+ 15/06/04 03:10:48 INFO DAGScheduler: Final stage: Stage 0(collect at App.java:63)
+ 15/06/04 03:10:48 INFO DAGScheduler: Parents of final stage: List()
+ 15/06/04 03:10:48 INFO DAGScheduler: Missing parents: List()
+ 15/06/04 03:10:48 INFO DAGScheduler: Submitting Stage 0 (MapPartitionsRDD[1] at values at App.java:62), which has no missing parents
+ 15/06/04 03:10:48 INFO MemoryStore: ensureFreeSpace(2400) called with curMem=274006, maxMem=140142182
+ 15/06/04 03:10:48 INFO MemoryStore: Block broadcast_1 stored as values in memory (estimated size 2.3 KB, free 133.4 MB)
+ 15/06/04 03:10:48 INFO MemoryStore: ensureFreeSpace(1427) called with curMem=276406, maxMem=140142182
+ 15/06/04 03:10:48 INFO MemoryStore: Block broadcast_1_piece0 stored as bytes in memory (estimated size 1427.0 B, free 133.4 MB)
+ 15/06/04 03:10:48 INFO BlockManagerInfo: Added broadcast_1_piece0 in memory on localhost:46418 (size: 1427.0 B, free: 133.6 MB)
+ 15/06/04 03:10:48 INFO BlockManagerMaster: Updated info of block broadcast_1_piece0
+ 15/06/04 03:10:48 INFO SparkContext: Created broadcast 1 from broadcast at DAGScheduler.scala:839
+ 15/06/04 03:10:48 INFO DAGScheduler: Submitting 25 missing tasks from Stage 0 (MapPartitionsRDD[1] at values at App.java:62)
+ 15/06/04 03:10:48 INFO TaskSchedulerImpl: Adding task set 0.0 with 25 tasks
+ 15/06/04 03:10:49 INFO TaskSetManager: Starting task 0.0 in stage 0.0 (TID 0, localhost, ANY, 1718 bytes)
+ 15/06/04 03:10:49 INFO Executor: Running task 0.0 in stage 0.0 (TID 0)
+ 15/06/04 03:10:49 INFO Executor: Fetching http://172.16.231.146:46504/jars/hadoop-examples.jar with timestamp 1433412644560
+ 15/06/04 03:10:50 INFO Utils: Fetching http://172.16.231.146:46504/jars/hadoop-examples.jar to /tmp/spark-48cac901-8a29-4e17-b523-e5a8f503e528/userFiles-f8f92460-6a4e-4691-93fb-60b93d3092c1/fetchFileTemp4217537870330870496.tmp
+ 15/06/04 03:10:50 INFO Executor: Adding file:/tmp/spark-48cac901-8a29-4e17-b523-e5a8f503e528/userFiles-f8f92460-6a4e-4691-93fb-60b93d3092c1/hadoop-examples.jar to class loader
+ 15/06/04 03:10:50 INFO Executor: Fetching http://172.16.231.146:46504/jars/mongodb-driver-3.0.1.jar with timestamp 1433412644554
+ 15/06/04 03:10:50 INFO Utils: Fetching http://172.16.231.146:46504/jars/mongodb-driver-3.0.1.jar to /tmp/spark-48cac901-8a29-4e17-b523-e5a8f503e528/userFiles-f8f92460-6a4e-4691-93fb-60b93d3092c1/fetchFileTemp8808163380241780826.tmp
+ 15/06/04 03:10:50 INFO Executor: Adding file:/tmp/spark-48cac901-8a29-4e17-b523-e5a8f503e528/userFiles-f8f92460-6a4e-4691-93fb-60b93d3092c1/mongodb-driver-3.0.1.jar to class loader
+ 15/06/04 03:10:50 INFO Executor: Fetching http://172.16.231.146:46504/jars/mongo-java-driver-3.0.1.jar with timestamp 1433412644558
+ 15/06/04 03:10:50 INFO Utils: Fetching http://172.16.231.146:46504/jars/mongo-java-driver-3.0.1.jar to /tmp/spark-48cac901-8a29-4e17-b523-e5a8f503e528/userFiles-f8f92460-6a4e-4691-93fb-60b93d3092c1/fetchFileTemp8292553191162513174.tmp
+ 15/06/04 03:10:50 INFO Executor: Adding file:/tmp/spark-48cac901-8a29-4e17-b523-e5a8f503e528/userFiles-f8f92460-6a4e-4691-93fb-60b93d3092c1/mongo-java-driver-3.0.1.jar to class loader
+ 15/06/04 03:10:50 INFO Executor: Fetching http://172.16.231.146:46504/jars/mongo-hadoop-core-1.3.1.jar with timestamp 1433412644552
+ 15/06/04 03:10:50 INFO Utils: Fetching http://172.16.231.146:46504/jars/mongo-hadoop-core-1.3.1.jar to /tmp/spark-48cac901-8a29-4e17-b523-e5a8f503e528/userFiles-f8f92460-6a4e-4691-93fb-60b93d3092c1/fetchFileTemp4947044698580102209.tmp
+ 15/06/04 03:10:50 INFO Executor: Adding file:/tmp/spark-48cac901-8a29-4e17-b523-e5a8f503e528/userFiles-f8f92460-6a4e-4691-93fb-60b93d3092c1/mongo-hadoop-core-1.3.1.jar to class loader
+ 15/06/04 03:10:51 INFO NewHadoopRDD: Input split: MongoInputSplit{URI=mongodb://172.16.231.1:27017/lewifi.auditOrigData, authURI=null, min={ }, max={ "_id" : { "$oid" : "54d8489e48c9bc218e0591a6"}}, query={ }, sort={ }, fields={ }, notimeout=false}
+ 15/06/04 03:10:51 INFO cluster: Cluster created with settings {hosts=[172.16.231.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+ 15/06/04 03:10:51 INFO connection: Opened connection [connectionId{localValue:5, serverValue:18}] to 172.16.231.1:27017
+ 15/06/04 03:10:51 INFO cluster: Monitor thread successfully connected to server with description ServerDescription{address=172.16.231.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 6]}, minWireVersion=0, maxWireVersion=2, maxDocumentSize=16777216, roundTripTimeNanos=3193094}
+ 15/06/04 03:10:51 INFO connection: Opened connection [connectionId{localValue:6, serverValue:19}] to 172.16.231.1:27017
+ 15/06/04 03:10:51 INFO MongoRecordReader: Read 7084.0 documents from:
+ 15/06/04 03:10:51 INFO MongoRecordReader: MongoInputSplit{URI=mongodb://172.16.231.1:27017/lewifi.auditOrigData, authURI=null, min={ }, max={ "_id" : { "$oid" : "54d8489e48c9bc218e0591a6"}}, query={ }, sort={ }, fields={ }, notimeout=false}
+ 15/06/04 03:10:54 INFO Executor: Finished task 0.0 in stage 0.0 (TID 0). 2845650 bytes result sent to driver
+ 15/06/04 03:10:54 INFO TaskSetManager: Starting task 1.0 in stage 0.0 (TID 1, localhost, ANY, 1735 bytes)
+ 15/06/04 03:10:54 INFO Executor: Running task 1.0 in stage 0.0 (TID 1)
+ 15/06/04 03:10:54 INFO NewHadoopRDD: Input split: MongoInputSplit{URI=mongodb://172.16.231.1:27017/lewifi.auditOrigData, authURI=null, min={ "_id" : { "$oid" : "54d8489e48c9bc218e0591a6"}}, max={ "_id" : { "$oid" : "54d84ed048c9bc218e05ad54"}}, query={ }, sort={ }, fields={ }, notimeout=false}
+ 15/06/04 03:10:54 INFO cluster: Cluster created with settings {hosts=[172.16.231.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+ 15/06/04 03:10:54 INFO cluster: No server chosen by ReadPreferenceServerSelector{readPreference=primary} from cluster description ClusterDescription{type=UNKNOWN, connectionMode=SINGLE, all=[ServerDescription{address=172.16.231.1:27017, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out
+ 15/06/04 03:10:54 INFO connection: Opened connection [connectionId{localValue:7, serverValue:20}] to 172.16.231.1:27017
+ 15/06/04 03:10:54 INFO cluster: Monitor thread successfully connected to server with description ServerDescription{address=172.16.231.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 6]}, minWireVersion=0, maxWireVersion=2, maxDocumentSize=16777216, roundTripTimeNanos=2947722}
+ 15/06/04 03:10:54 INFO connection: Opened connection [connectionId{localValue:8, serverValue:21}] to 172.16.231.1:27017
+ 15/06/04 03:10:55 INFO TaskSetManager: Finished task 0.0 in stage 0.0 (TID 0) in 5605 ms on localhost (1/25)
+ 15/06/04 03:10:55 INFO MongoRecordReader: Read 7085.0 documents from:
+ 15/06/04 03:10:55 INFO MongoRecordReader: MongoInputSplit{URI=mongodb://172.16.231.1:27017/lewifi.auditOrigData, authURI=null, min={ "_id" : { "$oid" : "54d8489e48c9bc218e0591a6"}}, max={ "_id" : { "$oid" : "54d84ed048c9bc218e05ad54"}}, query={ }, sort={ }, fields={ }, notimeout=false}
+ 15/06/04 03:10:55 INFO Executor: Finished task 1.0 in stage 0.0 (TID 1). 3162709 bytes result sent to driver
+ 15/06/04 03:10:55 INFO TaskSetManager: Starting task 2.0 in stage 0.0 (TID 2, localhost, ANY, 1735 bytes)
+ 15/06/04 03:10:55 INFO Executor: Running task 2.0 in stage 0.0 (TID 2)
+ 15/06/04 03:10:55 INFO NewHadoopRDD: Input split: MongoInputSplit{URI=mongodb://172.16.231.1:27017/lewifi.auditOrigData, authURI=null, min={ "_id" : { "$oid" : "54d84ed048c9bc218e05ad54"}}, max={ "_id" : { "$oid" : "54d8563e48c9bc218e05c901"}}, query={ }, sort={ }, fields={ }, notimeout=false}
+ 15/06/04 03:10:55 INFO cluster: Cluster created with settings {hosts=[172.16.231.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+ 15/06/04 03:10:55 INFO cluster: No server chosen by ReadPreferenceServerSelector{readPreference=primary} from cluster description ClusterDescription{type=UNKNOWN, connectionMode=SINGLE, all=[ServerDescription{address=172.16.231.1:27017, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out
+ 15/06/04 03:10:56 INFO connection: Opened connection [connectionId{localValue:9, serverValue:22}] to 172.16.231.1:27017
+ 15/06/04 03:10:56 INFO cluster: Monitor thread successfully connected to server with description ServerDescription{address=172.16.231.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 6]}, minWireVersion=0, maxWireVersion=2, maxDocumentSize=16777216, roundTripTimeNanos=1275594}
+ 15/06/04 03:10:56 INFO connection: Opened connection [connectionId{localValue:10, serverValue:23}] to 172.16.231.1:27017
+ 15/06/04 03:10:56 INFO TaskSetManager: Finished task 1.0 in stage 0.0 (TID 1) in 1539 ms on localhost (2/25)
+ 15/06/04 03:10:56 INFO MongoRecordReader: Read 7085.0 documents from:
+ 15/06/04 03:10:56 INFO MongoRecordReader: MongoInputSplit{URI=mongodb://172.16.231.1:27017/lewifi.auditOrigData, authURI=null, min={ "_id" : { "$oid" : "54d84ed048c9bc218e05ad54"}}, max={ "_id" : { "$oid" : "54d8563e48c9bc218e05c901"}}, query={ }, sort={ }, fields={ }, notimeout=false}
+ 15/06/04 03:10:59 INFO Executor: Finished task 2.0 in stage 0.0 (TID 2). 3197017 bytes result sent to driver
+ 15/06/04 03:10:59 INFO TaskSetManager: Starting task 3.0 in stage 0.0 (TID 3, localhost, ANY, 1735 bytes)
+ 15/06/04 03:10:59 INFO Executor: Running task 3.0 in stage 0.0 (TID 3)
+ 15/06/04 03:10:59 INFO NewHadoopRDD: Input split: MongoInputSplit{URI=mongodb://172.16.231.1:27017/lewifi.auditOrigData, authURI=null, min={ "_id" : { "$oid" : "54d8563e48c9bc218e05c901"}}, max={ "_id" : { "$oid" : "54d85dc348c9bc218e05e4b0"}}, query={ }, sort={ }, fields={ }, notimeout=false}
+ 15/06/04 03:10:59 INFO cluster: Cluster created with settings {hosts=[172.16.231.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+ 15/06/04 03:10:59 INFO cluster: No server chosen by ReadPreferenceServerSelector{readPreference=primary} from cluster description ClusterDescription{type=UNKNOWN, connectionMode=SINGLE, all=[ServerDescription{address=172.16.231.1:27017, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out
+ 15/06/04 03:10:59 INFO connection: Opened connection [connectionId{localValue:11, serverValue:24}] to 172.16.231.1:27017
+ 15/06/04 03:10:59 INFO cluster: Monitor thread successfully connected to server with description ServerDescription{address=172.16.231.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 6]}, minWireVersion=0, maxWireVersion=2, maxDocumentSize=16777216, roundTripTimeNanos=780149}
+ 15/06/04 03:10:59 INFO connection: Opened connection [connectionId{localValue:12, serverValue:25}] to 172.16.231.1:27017
+ 15/06/04 03:11:00 INFO TaskSetManager: Finished task 2.0 in stage 0.0 (TID 2) in 3867 ms on localhost (3/25)
+ 15/06/04 03:11:01 INFO MongoRecordReader: Read 7085.0 documents from:
+ 15/06/04 03:11:01 INFO MongoRecordReader: MongoInputSplit{URI=mongodb://172.16.231.1:27017/lewifi.auditOrigData, authURI=null, min={ "_id" : { "$oid" : "54d8563e48c9bc218e05c901"}}, max={ "_id" : { "$oid" : "54d85dc348c9bc218e05e4b0"}}, query={ }, sort={ }, fields={ }, notimeout=false}
+ 15/06/04 03:11:01 INFO Executor: Finished task 3.0 in stage 0.0 (TID 3). 3049408 bytes result sent to driver
+ 15/06/04 03:11:01 INFO TaskSetManager: Starting task 4.0 in stage 0.0 (TID 4, localhost, ANY, 1735 bytes)
+ 15/06/04 03:11:01 INFO Executor: Running task 4.0 in stage 0.0 (TID 4)
+ 15/06/04 03:11:01 INFO NewHadoopRDD: Input split: MongoInputSplit{URI=mongodb://172.16.231.1:27017/lewifi.auditOrigData, authURI=null, min={ "_id" : { "$oid" : "54d85dc348c9bc218e05e4b0"}}, max={ "_id" : { "$oid" : "54d8632148c9bc218e06005f"}}, query={ }, sort={ }, fields={ }, notimeout=false}
+ 15/06/04 03:11:01 INFO cluster: Cluster created with settings {hosts=[172.16.231.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+ 15/06/04 03:11:01 INFO cluster: No server chosen by ReadPreferenceServerSelector{readPreference=primary} from cluster description ClusterDescription{type=UNKNOWN, connectionMode=SINGLE, all=[ServerDescription{address=172.16.231.1:27017, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out
+ 15/06/04 03:11:01 INFO connection: Opened connection [connectionId{localValue:13, serverValue:26}] to 172.16.231.1:27017
+ 15/06/04 03:11:01 INFO cluster: Monitor thread successfully connected to server with description ServerDescription{address=172.16.231.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 6]}, minWireVersion=0, maxWireVersion=2, maxDocumentSize=16777216, roundTripTimeNanos=1057302}
+ 15/06/04 03:11:01 INFO connection: Opened connection [connectionId{localValue:14, serverValue:27}] to 172.16.231.1:27017
+ 15/06/04 03:11:01 INFO TaskSetManager: Finished task 3.0 in stage 0.0 (TID 3) in 1736 ms on localhost (4/25)
+ 15/06/04 03:11:01 INFO MongoRecordReader: Read 7085.0 documents from:
+ 15/06/04 03:11:01 INFO MongoRecordReader: MongoInputSplit{URI=mongodb://172.16.231.1:27017/lewifi.auditOrigData, authURI=null, min={ "_id" : { "$oid" : "54d85dc348c9bc218e05e4b0"}}, max={ "_id" : { "$oid" : "54d8632148c9bc218e06005f"}}, query={ }, sort={ }, fields={ }, notimeout=false}
+ 15/06/04 03:11:02 INFO Executor: Finished task 4.0 in stage 0.0 (TID 4). 2959109 bytes result sent to driver
+ 15/06/04 03:11:02 INFO TaskSetManager: Starting task 5.0 in stage 0.0 (TID 5, localhost, ANY, 1735 bytes)
+ 15/06/04 03:11:02 INFO Executor: Running task 5.0 in stage 0.0 (TID 5)
+ 15/06/04 03:11:02 INFO NewHadoopRDD: Input split: MongoInputSplit{URI=mongodb://172.16.231.1:27017/lewifi.auditOrigData, authURI=null, min={ "_id" : { "$oid" : "54d8632148c9bc218e06005f"}}, max={ "_id" : { "$oid" : "54d86b3248c9bc218e061c4c"}}, query={ }, sort={ }, fields={ }, notimeout=false}
+ 15/06/04 03:11:02 INFO cluster: Cluster created with settings {hosts=[172.16.231.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+ 15/06/04 03:11:02 INFO connection: Opened connection [connectionId{localValue:15, serverValue:28}] to 172.16.231.1:27017
+ 15/06/04 03:11:02 INFO cluster: No server chosen by ReadPreferenceServerSelector{readPreference=primary} from cluster description ClusterDescription{type=UNKNOWN, connectionMode=SINGLE, all=[ServerDescription{address=172.16.231.1:27017, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out
+ 15/06/04 03:11:02 INFO cluster: Monitor thread successfully connected to server with description ServerDescription{address=172.16.231.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 6]}, minWireVersion=0, maxWireVersion=2, maxDocumentSize=16777216, roundTripTimeNanos=2469250}
+ 15/06/04 03:11:02 INFO connection: Opened connection [connectionId{localValue:16, serverValue:29}] to 172.16.231.1:27017
+ 15/06/04 03:11:02 INFO TaskSetManager: Finished task 4.0 in stage 0.0 (TID 4) in 828 ms on localhost (5/25)
+ 15/06/04 03:11:02 INFO MongoRecordReader: Read 7085.0 documents from:
+ 15/06/04 03:11:02 INFO MongoRecordReader: MongoInputSplit{URI=mongodb://172.16.231.1:27017/lewifi.auditOrigData, authURI=null, min={ "_id" : { "$oid" : "54d8632148c9bc218e06005f"}}, max={ "_id" : { "$oid" : "54d86b3248c9bc218e061c4c"}}, query={ }, sort={ }, fields={ }, notimeout=false}
+ 15/06/04 03:11:03 INFO Executor: Finished task 5.0 in stage 0.0 (TID 5). 3015975 bytes result sent to driver
+ 15/06/04 03:11:03 INFO TaskSetManager: Starting task 6.0 in stage 0.0 (TID 6, localhost, ANY, 1735 bytes)
+ 15/06/04 03:11:03 INFO Executor: Running task 6.0 in stage 0.0 (TID 6)
+ 15/06/04 03:11:03 INFO NewHadoopRDD: Input split: MongoInputSplit{URI=mongodb://172.16.231.1:27017/lewifi.auditOrigData, authURI=null, min={ "_id" : { "$oid" : "54d86b3248c9bc218e061c4c"}}, max={ "_id" : { "$oid" : "54d8759d48c9bc218e063843"}}, query={ }, sort={ }, fields={ }, notimeout=false}
+ 15/06/04 03:11:03 INFO cluster: Cluster created with settings {hosts=[172.16.231.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+ 15/06/04 03:11:03 INFO cluster: No server chosen by ReadPreferenceServerSelector{readPreference=primary} from cluster description ClusterDescription{type=UNKNOWN, connectionMode=SINGLE, all=[ServerDescription{address=172.16.231.1:27017, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out
+ 15/06/04 03:11:03 INFO connection: Opened connection [connectionId{localValue:17, serverValue:30}] to 172.16.231.1:27017
+ 15/06/04 03:11:03 INFO cluster: Monitor thread successfully connected to server with description ServerDescription{address=172.16.231.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 6]}, minWireVersion=0, maxWireVersion=2, maxDocumentSize=16777216, roundTripTimeNanos=644120}
+ 15/06/04 03:11:03 INFO connection: Opened connection [connectionId{localValue:18, serverValue:31}] to 172.16.231.1:27017
+ 15/06/04 03:11:03 INFO TaskSetManager: Finished task 5.0 in stage 0.0 (TID 5) in 769 ms on localhost (6/25)
+ 15/06/04 03:11:03 INFO MongoRecordReader: Read 7085.0 documents from:
+ 15/06/04 03:11:03 INFO MongoRecordReader: MongoInputSplit{URI=mongodb://172.16.231.1:27017/lewifi.auditOrigData, authURI=null, min={ "_id" : { "$oid" : "54d86b3248c9bc218e061c4c"}}, max={ "_id" : { "$oid" : "54d8759d48c9bc218e063843"}}, query={ }, sort={ }, fields={ }, notimeout=false}
+ 15/06/04 03:11:06 INFO Executor: Finished task 6.0 in stage 0.0 (TID 6). 2964461 bytes result sent to driver
+ 15/06/04 03:11:06 INFO TaskSetManager: Starting task 7.0 in stage 0.0 (TID 7, localhost, ANY, 1735 bytes)
+ 15/06/04 03:11:06 INFO Executor: Running task 7.0 in stage 0.0 (TID 7)
+ 15/06/04 03:11:06 INFO NewHadoopRDD: Input split: MongoInputSplit{URI=mongodb://172.16.231.1:27017/lewifi.auditOrigData, authURI=null, min={ "_id" : { "$oid" : "54d8759d48c9bc218e063843"}}, max={ "_id" : { "$oid" : "54d87c6b48c9bc218e0653f0"}}, query={ }, sort={ }, fields={ }, notimeout=false}
+ 15/06/04 03:11:06 INFO cluster: Cluster created with settings {hosts=[172.16.231.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+ 15/06/04 03:11:06 INFO cluster: No server chosen by ReadPreferenceServerSelector{readPreference=primary} from cluster description ClusterDescription{type=UNKNOWN, connectionMode=SINGLE, all=[ServerDescription{address=172.16.231.1:27017, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out
+ 15/06/04 03:11:06 INFO connection: Opened connection [connectionId{localValue:19, serverValue:32}] to 172.16.231.1:27017
+ 15/06/04 03:11:06 INFO cluster: Monitor thread successfully connected to server with description ServerDescription{address=172.16.231.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 6]}, minWireVersion=0, maxWireVersion=2, maxDocumentSize=16777216, roundTripTimeNanos=855654}
+ 15/06/04 03:11:06 INFO connection: Opened connection [connectionId{localValue:20, serverValue:33}] to 172.16.231.1:27017
+ 15/06/04 03:11:06 INFO TaskSetManager: Finished task 6.0 in stage 0.0 (TID 6) in 3445 ms on localhost (7/25)
+ 15/06/04 03:11:07 INFO MongoRecordReader: Read 7085.0 documents from:
+ 15/06/04 03:11:07 INFO MongoRecordReader: MongoInputSplit{URI=mongodb://172.16.231.1:27017/lewifi.auditOrigData, authURI=null, min={ "_id" : { "$oid" : "54d8759d48c9bc218e063843"}}, max={ "_id" : { "$oid" : "54d87c6b48c9bc218e0653f0"}}, query={ }, sort={ }, fields={ }, notimeout=false}
+ 15/06/04 03:11:07 INFO Executor: Finished task 7.0 in stage 0.0 (TID 7). 3187049 bytes result sent to driver
+ 15/06/04 03:11:07 INFO TaskSetManager: Starting task 8.0 in stage 0.0 (TID 8, localhost, ANY, 1735 bytes)
+ 15/06/04 03:11:07 INFO Executor: Running task 8.0 in stage 0.0 (TID 8)
+ 15/06/04 03:11:07 INFO NewHadoopRDD: Input split: MongoInputSplit{URI=mongodb://172.16.231.1:27017/lewifi.auditOrigData, authURI=null, min={ "_id" : { "$oid" : "54d87c6b48c9bc218e0653f0"}}, max={ "_id" : { "$oid" : "54d8847a48c9bc218e066f9d"}}, query={ }, sort={ }, fields={ }, notimeout=false}
+ 15/06/04 03:11:07 INFO cluster: Cluster created with settings {hosts=[172.16.231.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+ 15/06/04 03:11:07 INFO cluster: No server chosen by ReadPreferenceServerSelector{readPreference=primary} from cluster description ClusterDescription{type=UNKNOWN, connectionMode=SINGLE, all=[ServerDescription{address=172.16.231.1:27017, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out
+ 15/06/04 03:11:07 INFO connection: Opened connection [connectionId{localValue:21, serverValue:34}] to 172.16.231.1:27017
+ 15/06/04 03:11:07 INFO cluster: Monitor thread successfully connected to server with description ServerDescription{address=172.16.231.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 6]}, minWireVersion=0, maxWireVersion=2, maxDocumentSize=16777216, roundTripTimeNanos=2135375}
+ 15/06/04 03:11:07 INFO connection: Opened connection [connectionId{localValue:22, serverValue:35}] to 172.16.231.1:27017
+ 15/06/04 03:11:07 INFO TaskSetManager: Finished task 7.0 in stage 0.0 (TID 7) in 846 ms on localhost (8/25)
+ 15/06/04 03:11:07 INFO MongoRecordReader: Read 7085.0 documents from:
+ 15/06/04 03:11:07 INFO MongoRecordReader: MongoInputSplit{URI=mongodb://172.16.231.1:27017/lewifi.auditOrigData, authURI=null, min={ "_id" : { "$oid" : "54d87c6b48c9bc218e0653f0"}}, max={ "_id" : { "$oid" : "54d8847a48c9bc218e066f9d"}}, query={ }, sort={ }, fields={ }, notimeout=false}
+ 15/06/04 03:11:08 INFO Executor: Finished task 8.0 in stage 0.0 (TID 8). 3105695 bytes result sent to driver
+ 15/06/04 03:11:08 INFO TaskSetManager: Starting task 9.0 in stage 0.0 (TID 9, localhost, ANY, 1735 bytes)
+ 15/06/04 03:11:08 INFO Executor: Running task 9.0 in stage 0.0 (TID 9)
+ 15/06/04 03:11:08 INFO NewHadoopRDD: Input split: MongoInputSplit{URI=mongodb://172.16.231.1:27017/lewifi.auditOrigData, authURI=null, min={ "_id" : { "$oid" : "54d8847a48c9bc218e066f9d"}}, max={ "_id" : { "$oid" : "54d88b3e48c9bc218e068b4a"}}, query={ }, sort={ }, fields={ }, notimeout=false}
+ 15/06/04 03:11:08 INFO cluster: Cluster created with settings {hosts=[172.16.231.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+ 15/06/04 03:11:08 INFO cluster: No server chosen by ReadPreferenceServerSelector{readPreference=primary} from cluster description ClusterDescription{type=UNKNOWN, connectionMode=SINGLE, all=[ServerDescription{address=172.16.231.1:27017, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out
+ 15/06/04 03:11:08 INFO connection: Opened connection [connectionId{localValue:23, serverValue:36}] to 172.16.231.1:27017
+ 15/06/04 03:11:08 INFO cluster: Monitor thread successfully connected to server with description ServerDescription{address=172.16.231.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 6]}, minWireVersion=0, maxWireVersion=2, maxDocumentSize=16777216, roundTripTimeNanos=1032500}
+ 15/06/04 03:11:08 INFO connection: Opened connection [connectionId{localValue:24, serverValue:37}] to 172.16.231.1:27017
+ 15/06/04 03:11:08 INFO TaskSetManager: Finished task 8.0 in stage 0.0 (TID 8) in 1130 ms on localhost (9/25)
+ 15/06/04 03:11:09 INFO MongoRecordReader: Read 7085.0 documents from:
+ 15/06/04 03:11:09 INFO MongoRecordReader: MongoInputSplit{URI=mongodb://172.16.231.1:27017/lewifi.auditOrigData, authURI=null, min={ "_id" : { "$oid" : "54d8847a48c9bc218e066f9d"}}, max={ "_id" : { "$oid" : "54d88b3e48c9bc218e068b4a"}}, query={ }, sort={ }, fields={ }, notimeout=false}
+ 15/06/04 03:11:10 INFO Executor: Finished task 9.0 in stage 0.0 (TID 9). 3010644 bytes result sent to driver
+ 15/06/04 03:11:10 INFO TaskSetManager: Starting task 10.0 in stage 0.0 (TID 10, localhost, ANY, 1735 bytes)
+ 15/06/04 03:11:10 INFO Executor: Running task 10.0 in stage 0.0 (TID 10)
+ 15/06/04 03:11:10 INFO NewHadoopRDD: Input split: MongoInputSplit{URI=mongodb://172.16.231.1:27017/lewifi.auditOrigData, authURI=null, min={ "_id" : { "$oid" : "54d88b3e48c9bc218e068b4a"}}, max={ "_id" : { "$oid" : "54d8969748c9bc218e06a6f7"}}, query={ }, sort={ }, fields={ }, notimeout=false}
+ 15/06/04 03:11:10 INFO cluster: Cluster created with settings {hosts=[172.16.231.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+ 15/06/04 03:11:11 INFO cluster: No server chosen by ReadPreferenceServerSelector{readPreference=primary} from cluster description ClusterDescription{type=UNKNOWN, connectionMode=SINGLE, all=[ServerDescription{address=172.16.231.1:27017, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out
+ 15/06/04 03:11:11 INFO TaskSetManager: Finished task 9.0 in stage 0.0 (TID 9) in 2534 ms on localhost (10/25)
+ 15/06/04 03:11:11 INFO connection: Opened connection [connectionId{localValue:25, serverValue:38}] to 172.16.231.1:27017
+ 15/06/04 03:11:11 INFO cluster: Monitor thread successfully connected to server with description ServerDescription{address=172.16.231.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 6]}, minWireVersion=0, maxWireVersion=2, maxDocumentSize=16777216, roundTripTimeNanos=317078}
+ 15/06/04 03:11:11 INFO connection: Opened connection [connectionId{localValue:26, serverValue:39}] to 172.16.231.1:27017
+ 15/06/04 03:11:28 ERROR Executor: Exception in task 10.0 in stage 0.0 (TID 10)
+ java.lang.OutOfMemoryError: Java heap space
+ 	at org.bson.BsonBinaryReader.doReadStartDocument(BsonBinaryReader.java:246)
+ 	at org.bson.AbstractBsonReader.readStartDocument(AbstractBsonReader.java:422)
+ 	at com.mongodb.DBObjectCodec.readDocument(DBObjectCodec.java:342)
+ 	at com.mongodb.DBObjectCodec.decode(DBObjectCodec.java:136)
+ 	at com.mongodb.DBObjectCodec.decode(DBObjectCodec.java:61)
+ 	at com.mongodb.CompoundDBObjectCodec.decode(CompoundDBObjectCodec.java:43)
+ 	at com.mongodb.CompoundDBObjectCodec.decode(CompoundDBObjectCodec.java:27)
+ 	at com.mongodb.connection.ReplyMessage.<init>(ReplyMessage.java:57)
+ 	at com.mongodb.connection.GetMoreProtocol.receiveMessage(GetMoreProtocol.java:124)
+ 	at com.mongodb.connection.GetMoreProtocol.execute(GetMoreProtocol.java:68)
+ 	at com.mongodb.connection.GetMoreProtocol.execute(GetMoreProtocol.java:37)
+ 	at com.mongodb.connection.DefaultServer$DefaultServerProtocolExecutor.execute(DefaultServer.java:155)
+ 	at com.mongodb.connection.DefaultServerConnection.executeProtocol(DefaultServerConnection.java:219)
+ 	at com.mongodb.connection.DefaultServerConnection.getMore(DefaultServerConnection.java:194)
+ 	at com.mongodb.operation.QueryBatchCursor.getMore(QueryBatchCursor.java:197)
+ 	at com.mongodb.operation.QueryBatchCursor.hasNext(QueryBatchCursor.java:93)
+ 	at com.mongodb.MongoBatchCursorAdapter.hasNext(MongoBatchCursorAdapter.java:46)
+ 	at com.mongodb.DBCursor.hasNext(DBCursor.java:152)
+ 	at com.mongodb.hadoop.input.MongoRecordReader.nextKeyValue(MongoRecordReader.java:73)
+ 	at org.apache.spark.rdd.NewHadoopRDD$$anon$1.hasNext(NewHadoopRDD.scala:143)
+ 	at org.apache.spark.InterruptibleIterator.hasNext(InterruptibleIterator.scala:39)
+ 	at scala.collection.Iterator$$anon$11.hasNext(Iterator.scala:327)
+ 	at scala.collection.Iterator$class.foreach(Iterator.scala:727)
+ 	at scala.collection.AbstractIterator.foreach(Iterator.scala:1157)
+ 	at scala.collection.generic.Growable$class.$plus$plus$eq(Growable.scala:48)
+ 	at scala.collection.mutable.ArrayBuffer.$plus$plus$eq(ArrayBuffer.scala:103)
+ 	at scala.collection.mutable.ArrayBuffer.$plus$plus$eq(ArrayBuffer.scala:47)
+ 	at scala.collection.TraversableOnce$class.to(TraversableOnce.scala:273)
+ 	at scala.collection.AbstractIterator.to(Iterator.scala:1157)
+ 	at scala.collection.TraversableOnce$class.toBuffer(TraversableOnce.scala:265)
+ 	at scala.collection.AbstractIterator.toBuffer(Iterator.scala:1157)
+ 	at scala.collection.TraversableOnce$class.toArray(TraversableOnce.scala:252)
+ 15/06/04 03:11:28 ERROR SparkUncaughtExceptionHandler: Uncaught exception in thread Thread[Executor task launch worker-0,5,main]
+ java.lang.OutOfMemoryError: Java heap space
+ 	at org.bson.BsonBinaryReader.doReadStartDocument(BsonBinaryReader.java:246)
+ 	at org.bson.AbstractBsonReader.readStartDocument(AbstractBsonReader.java:422)
+ 	at com.mongodb.DBObjectCodec.readDocument(DBObjectCodec.java:342)
+ 	at com.mongodb.DBObjectCodec.decode(DBObjectCodec.java:136)
+ 	at com.mongodb.DBObjectCodec.decode(DBObjectCodec.java:61)
+ 	at com.mongodb.CompoundDBObjectCodec.decode(CompoundDBObjectCodec.java:43)
+ 	at com.mongodb.CompoundDBObjectCodec.decode(CompoundDBObjectCodec.java:27)
+ 	at com.mongodb.connection.ReplyMessage.<init>(ReplyMessage.java:57)
+ 	at com.mongodb.connection.GetMoreProtocol.receiveMessage(GetMoreProtocol.java:124)
+ 	at com.mongodb.connection.GetMoreProtocol.execute(GetMoreProtocol.java:68)
+ 	at com.mongodb.connection.GetMoreProtocol.execute(GetMoreProtocol.java:37)
+ 	at com.mongodb.connection.DefaultServer$DefaultServerProtocolExecutor.execute(DefaultServer.java:155)
+ 	at com.mongodb.connection.DefaultServerConnection.executeProtocol(DefaultServerConnection.java:219)
+ 	at com.mongodb.connection.DefaultServerConnection.getMore(DefaultServerConnection.java:194)
+ 	at com.mongodb.operation.QueryBatchCursor.getMore(QueryBatchCursor.java:197)
+ 	at com.mongodb.operation.QueryBatchCursor.hasNext(QueryBatchCursor.java:93)
+ 	at com.mongodb.MongoBatchCursorAdapter.hasNext(MongoBatchCursorAdapter.java:46)
+ 	at com.mongodb.DBCursor.hasNext(DBCursor.java:152)
+ 	at com.mongodb.hadoop.input.MongoRecordReader.nextKeyValue(MongoRecordReader.java:73)
+ 	at org.apache.spark.rdd.NewHadoopRDD$$anon$1.hasNext(NewHadoopRDD.scala:143)
+ 	at org.apache.spark.InterruptibleIterator.hasNext(InterruptibleIterator.scala:39)
+ 	at scala.collection.Iterator$$anon$11.hasNext(Iterator.scala:327)
+ 	at scala.collection.Iterator$class.foreach(Iterator.scala:727)
+ 	at scala.collection.AbstractIterator.foreach(Iterator.scala:1157)
+ 	at scala.collection.generic.Growable$class.$plus$plus$eq(Growable.scala:48)
+ 	at scala.collection.mutable.ArrayBuffer.$plus$plus$eq(ArrayBuffer.scala:103)
+ 	at scala.collection.mutable.ArrayBuffer.$plus$plus$eq(ArrayBuffer.scala:47)
+ 	at scala.collection.TraversableOnce$class.to(TraversableOnce.scala:273)
+ 	at scala.collection.AbstractIterator.to(Iterator.scala:1157)
+ 	at scala.collection.TraversableOnce$class.toBuffer(TraversableOnce.scala:265)
+ 	at scala.collection.AbstractIterator.toBuffer(Iterator.scala:1157)
+ 	at scala.collection.TraversableOnce$class.toArray(TraversableOnce.scala:252)
+ 15/06/04 03:11:28 INFO TaskSetManager: Starting task 11.0 in stage 0.0 (TID 11, localhost, ANY, 1735 bytes)
+ 15/06/04 03:11:28 INFO Executor: Running task 11.0 in stage 0.0 (TID 11)
+ 15/06/04 03:11:28 WARN TaskSetManager: Lost task 10.0 in stage 0.0 (TID 10, localhost): java.lang.OutOfMemoryError: Java heap space
+ 	at org.bson.BsonBinaryReader.doReadStartDocument(BsonBinaryReader.java:246)
+ 	at org.bson.AbstractBsonReader.readStartDocument(AbstractBsonReader.java:422)
+ 	at com.mongodb.DBObjectCodec.readDocument(DBObjectCodec.java:342)
+ 	at com.mongodb.DBObjectCodec.decode(DBObjectCodec.java:136)
+ 	at com.mongodb.DBObjectCodec.decode(DBObjectCodec.java:61)
+ 	at com.mongodb.CompoundDBObjectCodec.decode(CompoundDBObjectCodec.java:43)
+ 	at com.mongodb.CompoundDBObjectCodec.decode(CompoundDBObjectCodec.java:27)
+ 	at com.mongodb.connection.ReplyMessage.<init>(ReplyMessage.java:57)
+ 	at com.mongodb.connection.GetMoreProtocol.receiveMessage(GetMoreProtocol.java:124)
+ 	at com.mongodb.connection.GetMoreProtocol.execute(GetMoreProtocol.java:68)
+ 	at com.mongodb.connection.GetMoreProtocol.execute(GetMoreProtocol.java:37)
+ 	at com.mongodb.connection.DefaultServer$DefaultServerProtocolExecutor.execute(DefaultServer.java:155)
+ 	at com.mongodb.connection.DefaultServerConnection.executeProtocol(DefaultServerConnection.java:219)
+ 	at com.mongodb.connection.DefaultServerConnection.getMore(DefaultServerConnection.java:194)
+ 	at com.mongodb.operation.QueryBatchCursor.getMore(QueryBatchCursor.java:197)
+ 	at com.mongodb.operation.QueryBatchCursor.hasNext(QueryBatchCursor.java:93)
+ 	at com.mongodb.MongoBatchCursorAdapter.hasNext(MongoBatchCursorAdapter.java:46)
+ 	at com.mongodb.DBCursor.hasNext(DBCursor.java:152)
+ 	at com.mongodb.hadoop.input.MongoRecordReader.nextKeyValue(MongoRecordReader.java:73)
+ 	at org.apache.spark.rdd.NewHadoopRDD$$anon$1.hasNext(NewHadoopRDD.scala:143)
+ 	at org.apache.spark.InterruptibleIterator.hasNext(InterruptibleIterator.scala:39)
+ 	at scala.collection.Iterator$$anon$11.hasNext(Iterator.scala:327)
+ 	at scala.collection.Iterator$class.foreach(Iterator.scala:727)
+ 	at scala.collection.AbstractIterator.foreach(Iterator.scala:1157)
+ 	at scala.collection.generic.Growable$class.$plus$plus$eq(Growable.scala:48)
+ 	at scala.collection.mutable.ArrayBuffer.$plus$plus$eq(ArrayBuffer.scala:103)
+ 	at scala.collection.mutable.ArrayBuffer.$plus$plus$eq(ArrayBuffer.scala:47)
+ 	at scala.collection.TraversableOnce$class.to(TraversableOnce.scala:273)
+ 	at scala.collection.AbstractIterator.to(Iterator.scala:1157)
+ 	at scala.collection.TraversableOnce$class.toBuffer(TraversableOnce.scala:265)
+ 	at scala.collection.AbstractIterator.toBuffer(Iterator.scala:1157)
+ 	at scala.collection.TraversableOnce$class.toArray(TraversableOnce.scala:252)
+
+ 15/06/04 03:11:29 ERROR TaskSetManager: Task 10 in stage 0.0 failed 1 times; aborting job
+ 15/06/04 03:11:29 INFO TaskSchedulerImpl: Cancelling stage 0
+ 15/06/04 03:11:29 INFO NewHadoopRDD: Input split: MongoInputSplit{URI=mongodb://172.16.231.1:27017/lewifi.auditOrigData, authURI=null, min={ "_id" : { "$oid" : "54d8969748c9bc218e06a6f7"}}, max={ "_id" : { "$oid" : "54d8a4c148c9bc218e06c2a4"}}, query={ }, sort={ }, fields={ }, notimeout=false}
+ 15/06/04 03:11:29 INFO cluster: Cluster created with settings {hosts=[172.16.231.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+ 15/06/04 03:11:29 INFO cluster: No server chosen by ReadPreferenceServerSelector{readPreference=primary} from cluster description ClusterDescription{type=UNKNOWN, connectionMode=SINGLE, all=[ServerDescription{address=172.16.231.1:27017, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out
+ 15/06/04 03:11:29 INFO Executor: Executor is trying to kill task 11.0 in stage 0.0 (TID 11)
+ 15/06/04 03:11:29 INFO TaskSchedulerImpl: Stage 0 was cancelled
+ Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
+
+至少取到数据了
+
+日志太多，注掉
+
+java
+map
+int count = dataSet.map(new Function<Integer, Integer>() {
+      @Override
+      public Integer call(Integer integer) {
+        double x = Math.random() * 2 - 1;
+        double y = Math.random() * 2 - 1;
+        return (x * x + y * y < 1) ? 1 : 0;
+      }
+    }).reduce(new Function2<Integer, Integer, Integer>() {
+      @Override
+      public Integer call(Integer integer, Integer integer2) {
+        return integer + integer2;
+      }
+    });
+

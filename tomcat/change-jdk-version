@@ -1,0 +1,6 @@
+配置tomcat使用特定的java sdk版本的方法非常简单：
+1、修改tomcat/bin/catalina.bat，增加 set JAVA_HOME=XXXXXX，其中XXXXXX为jdk 的路径，如c:/j2sdk1_4
+
+2、修改tomcat/bin/setclasspath.bat，同样增加 set JAVA_HOME=XXXXXX
+
+其实这个问题是很初级的，但是一般人常常忘了步骤2，导致的结果就是特定版本的java启动tomcat，但是jdk用的还是系统默认的（在系统的JAVA_HOME中的设置）。

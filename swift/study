@@ -1,0 +1,56 @@
+##const
+let consta=70
+let consta:Double=70
+##val->string  类似 shell的${}
+let apple=3;
+let applesummary="I have \(apple) apples."
+##[]->array []->map 类似js
+#array
+var sho pping List = [" catfi sh", "wate r", " tulip s", " blue paint "]
+#map table obj 类似js ptyon  ]
+var occ upati ons = [
+ "Malcolm": "Captain",
+ "Kaylee": "Mechanic", 7. ]
+##ini array
+1. let emp tyArr ay = Stri ng[]( )
+2. let emp tyDic tiona ry = Dict ionar y<Str ing, Float >()
+
+
+## for in
+
+let arr = [75 , 43, 103, 87, 12]
+var teamScore = 0
+for score in arr
+{
+if score>50 {
+ }
+}
+
+for i in 0..3{
+3. firstForLoop += i 4. }
+
+
+#可空类型 这是类似的c#?
+var optionalString: String? = "Hello"
+optiona lStri ng == nil
+
+# switch 不用break 必有default
+switch veget able {
+ case "c elery ":
+}
+
+##二维数组
+let int erest ingNu mber s = [
+2. "Prime": [2, 3, 5, 7, 11, 13],
+3. "Fibonacci": [1, 1, 2, 3, 5, 8],
+4. "Square": [1, 4, 9, 16, 25],
+5. ]
+6. var largest = 0
+7. for (ki nd, n umber s) i n int erest ingNu mbers { 8. for number in numbers {
+9. 10. 11.
+if number > largest { largest = number
+}
+12. } 13. }
+
+
+

@@ -25,3 +25,457 @@ docker默认配置文件
 /etc/default/docker
 DOCKER_OPTS
 /usr/lib/systemd/system/docker.service ExecStart
+
+
+
+   12  scp cdpmac@172.16.227.1:~/Downloads/nettool ~/nettool
+   13  scp cdpmac@172.16.227.1:~/Downloads/nettool ~/
+   14  scp cdpmac@172.16.227.1:~/Downloads/nettool/ ~/nettool
+   15  scp cdpmac@172.16.227.1:~/Downloads/nettool/* ~/nettool
+   16  cp ~/nettool/* /opt/bin/
+   17  cp ~/nettool/.* /opt/bin/
+
+   24  cd nettool
+   25  rm nettool
+   26  scp cdpmac@172.16.227.1:~/Downloads/nettool/.* ~/nettool/
+   27  scp -r cdpmac@172.16.227.1:~/Downloads/nettool/ ~/nettool/
+   28  cd nettool/
+   29  ls
+   30  cd ..
+   31  ls .*
+   32  cp -r nettool/ /opt/bin/
+   33  sudo cp -r nettool/ /opt/bin/
+   34  sudo su
+   35  ifconfig
+   36  sudo shutdonw -h 0
+   37  sudo shutdown -h 0
+   38  ifconfig
+   39  cat /media/configdrive/openstack/latest/user_data
+   40  systemctl list-units
+   41  etcdctl ls
+   42  etcd
+   43  fleetctl list-machines
+   44  fleetctl list-machines
+   45  ls /opt/bin/
+   46  history
+   47  fleetctl list-machines
+   48  fleetctl list-machines
+   52  curl 127.0.0.1:8080
+   53  cat /media/configdrive/openstack/latest/user_data
+   54  ifconfig
+   55  sudo shutdown -h 0
+   56  ifconfig
+   57  cat /media/configdrive/openstack/latest/user_data
+   58  /google
+   59  ls /opt/bin/
+   60  curl https://github.com/kelseyhightower/kube-register
+   61  ls /opt/bin/
+   62  ls -al /opt/bin/
+   63  cat /media/configdrive/openstack/latest/user_data
+   64  ls -al /opt/bin/
+   65  ls -al /opt/bin/
+   66  fleetctl list-machine
+   67  fleetctl list-machines
+   68  ifconfig
+   69  systemctl list-units
+   70  systemctl list-units
+   71  systemctl list-machines
+   72  sudo systemctl list-machin
+
+   78  fleetctl list-machines
+   79  etcdctl ls
+   80  etcdctl help
+   81  etcdctl ls
+   82  etcdctl get /coreos.com
+   83  etcdctl ls
+   84  etcdctl ls -a
+   85  etcdctl ls -r
+   88  etcdctl ls --recursive
+   89  etcdctl get /coreos.com/network/config
+   90  etcdctl rmdir /coreos.com/network/config
+
+  106  etcdctl ls --recursive
+  107  ls
+  108  cd /opt/bin/
+  109  ls
+  110  kube-register -help
+  111  kubectl
+  112  kubectl
+  113  ls
+  114  kube-controller-manager --help
+  115  ls
+  116  chmod u+x kubelet
+  117  sudo chmod u+x kubelet
+  118  ls
+  119  kubelet
+  120  sudo kubelet
+  121  sudo kubelet proxy --www=$PWD/www
+  122  sudo kubelet
+  123  curl localhost:/static/index.html#/groups//selector
+  124  curl localhost/static/index.html#/groups//selector
+  125  curl localhost:8001/static/index.html#/groups//selector
+  126  sudo shutdown -h 0
+  127  logout
+  128  ls
+  129  cat /media/configdrive/openstack/latest/user_data
+  130  ifconfig
+
+  133  systemctl list-units
+  134  docker
+  135  docker ps
+  140  fleetctl  list-machines
+  141  sudo shutdown -h 0
+  142  systemctl list-units
+  144  fleetctl list-machines
+  145  rm -rf /var/lib/etcd/
+  146  sudo rm -rf /var/lib/etcd/
+  147  sudo reboot
+  148  etcd
+  149  etcdctl ls
+  150  etcd
+  151  rm -rf  /var/lib/etcd/*
+  152  etcd
+  153  ls
+  154  rm  -rf localhost.etcd/
+  155  ls
+  156  sudo reboot
+  157  etcd
+  158  rm  -rf localhost.etcd/
+  159  rm -rf  /var/lib/etcd/*
+  160  ls /var/lib/etcd/
+  161  sudo reboot
+  162  ls
+  163  etcdctl ls
+  164  etcd
+  165  systemctl list-units
+  166  ls
+  167  sudo reboot
+  168  ls /media/configdrive/openstack/latest/user_data
+  169  vim /media/configdrive/openstack/latest/user_data
+  170  etcd
+  171  vim /media/configdrive/openstack/latest/user_data
+  172  logout
+  173  sudo reboot
+  174  vim /media/configdrive/openstack/latest/user_data
+  175  sudo reboot
+  176  vim /media/configdrive/openstack/latest/user_data
+  177  etcd
+  178  journalctl -f -u flannel
+  179  vim /media/configdrive/openstack/latest/user_data
+  180  journalctl -f -u flanneld
+  181  fleetctl list-machines
+  182  scp cdpmac@172.17.8.1:~/Downloads/kube/* /opt/bin
+  183  sudo scp cdpmac@172.17.8.1:~/Downloads/kube/* /opt/bin
+  184  ls /opt/bin/
+  185  ls
+  186  chmod +x *
+  187  ls
+  188  chmod +x /opt/bin/*
+  189  sudi chmod +x /opt/bin/*
+  190  sudo chmod +x /opt/bin/*
+  191  ls /opt/bin/
+  192  kubectl get minions
+  193  sudo kubectl get minions
+  194  kubelet get minions
+  195  sudo kubelet get minions
+  196  kubelet get minions
+  197  kubelet get minions
+  198  ls /opt/bin/
+  199  ls -al /opt/bin/
+  200  kubectl
+  201  sudo kubectl
+  202  sudo kubectl
+  203  flanneld
+  204  etcdctl ls
+  205  etcdctl ls --recurisve
+  206  etcdctl ls --recursive
+  207  etcd
+  208  etcdctl ls -recursive
+  209  etcdctl get /coreos.com/network/config
+  210  etcdctl ls -recursive
+  211  ifconfig |grep 172
+  212  ifconfig |grep 172
+  213  etcdctl ls -recursive
+  214  vim /media/configdrive/openstack/latest/user_data
+  215  etcdctl ls -recursive
+  216  ifconfig |grep 172
+  217  fleetctl --endpoint=http://172.16.231.131:4001 list-machines
+  218  kubectl
+  219  sudo kubectl
+  220  history |grep cdpmac
+  221  sudo scp cdpmac@172.17.8.1:~/Downloads/kube/* /opt/bin
+  222  sudo scp cdpmac@172.17.8.1:~/Downloads/kube/kubectl /opt/bin/kubectl2
+  223  cd /opt/bin/
+  224  ls
+  225  mv kubectl kubectl-nocan
+  226  sudo mv kubectl kubectl-nocan
+  227  mv kubectl2 kubectl
+  228  sudo mv kubectl2 kubectl
+
+  239  logout
+  240  kube-controller-manager
+  241  kube-controller-manager --help
+  242  sudo halt
+  243  kubectl
+  244  kubectl get minions
+  245  systemctl status flannel
+  246  systemctl status flanneld.service
+  247  flanneld --ip-masq=true
+  249  systemctl status flanneld.service
+  250  systemctl cat flanneld.service
+  251  proxy-socket
+  252  systemctl status flanneld.service
+  253  systemctl status flanneld.service
+  254  systemctl status flanneld.service
+  255  journalctl  -f -u flanneld
+  257  systemctl cat flanneld.service
+  258  vim /media/configdrive/openstack/latest/user_data
+  264  systemctl list-units
+  265  journalctl -f -u flanneld.service
+  266  kubectl get minions
+  267  history |grep cdpmac
+  268  kubectl get minions
+  269  kube-controller-manager
+  270  kube-controller-manager --help
+  271  fleetctl list-machines
+  272  history |grep cdpmac
+  275  fleetctl list-machines
+  278  kubectl get minions
+  279  kube-controller-manager --machines
+  280  kube-controller-manager --machines  --machines=172.17.8.101,172.17.8.102,172.17.8.103
+  281  kube-controller-manager   --machines=172.17.8.101,172.17.8.102,172.17.8.103
+  282  kube-controller-manager   --machines 172.17.8.101,172.17.8.102,172.17.8.103
+  283  kube-controller-manager   --machines=172.17.8.101,172.17.8.102,172.17.8.103
+  284  kube-controller-manager   --machines=172.17.8.101,172.17.8.102,172.17.8.103 --master=127.0.0.1:8080
+  285  kubectl get minions
+  286  kubectl help
+  287  sudo reboot
+  288  ls
+  289  ls
+  290  ls
+  291  ls
+  292  ls
+  293  ls
+  294  kubectl get minions
+  295  etcdctl ls --recusive
+  296  etcdctl ls --recursive
+  297  etcdctl get /registry/minions/172.16.231.131
+  298  etcdctl get /registry/minions/172.16.231.132
+  299  kubelet
+  300  sudo kubelet
+  301  systemctl list-units
+  302  sudo reboot
+  303  systemctl list-units
+  304  vim /media/configdrive/openstack/latest/user_data
+  305  sudo reboot
+  306  vim /media/configdrive/openstack/latest/user_data
+  307  sudo halt
+  308  logout
+  309  vim /media/configdrive/openstack/latest/user_data
+  310  kubectl get minions
+  311  kubectl get minions
+  312  vim /media/configdrive/openstack/latest/user_data
+  313  fleetctl list-machines
+  314  logout
+  315  fleetctl list-machines
+  316  logout
+  317  fleetctl list-machines
+  318  fleetctl list-machines
+  319  fleetctl list-machines
+  320  kubectl get minions
+  321  fleetctl ssh 99
+  322  fleetctl ssh
+  323  fleetctl ssh 75
+  324  fleetctl ssh 99
+  325  fleetctl ssh e8
+  326  fleetctl ssh e8
+  327  fleetctl ssh e8
+  328  logout
+  329  ls
+  330  docker ps
+  331  ps -aux |docker
+  332  ps -aux |gerp docker
+  333  ps -aux |grep docker
+  334  ps |grep docker
+  335  ps
+  336  ps  -a
+  337  ps  -au
+  338  ps  -aux
+  339  ps  -ux
+  340  ps  -ax
+  341  ps  -ax|grep docker
+  342  ps  -ax
+  343  ps  -ax|grep docker
+  344  systemctl cat docker
+  345  vim /etc/systemd/system/docker.service.d/51-docker-mirror.conf
+  346  sudo vim /etc/systemd/system/docker.service.d/51-docker-mirror.conf
+  347  sudo reboot
+  348  ps  -ax|grep docker
+  349  docker search ubuntu
+  350  ps  -ax|grep docker
+  351  systemctl list-units
+  352  systemctl cat .service                                                                loaded failed failed    Load cloud-config from /media/configdrive
+  353    -.slice                                                                                 loaded active active    Root Slice
+  354    system-addon\x2dconfig.slice                                                            loaded active active    system-addon\x2dconfig.slice
+  355    system-addon\x2drun.slice                                                               loaded active active    system-addon\x2drun.slice
+  356    system-getty.slice                                                                      loaded active active    system-getty.slice
+  357    system-sshd.slice
+  358  systemctl cat user-configdrive.service
+  359  journalctl -f -u user-configdrive.service
+  360  systemctl cat docker
+  361  vim /usr/lib64/systemd/system/docker.service
+  362  docker --registry-mirror=https://docker.yunpro.cn -d
+  363  docker --registry-mirror=https://docker.yunpro.cn -d
+  364  sudo docker --registry-mirror=https://docker.yunpro.cn -d
+  365   docker --registry-mirror=https://docker.yunpro.cn -d
+  366   docker -d
+  367  docker
+  368   docker --registry-mirror=https://docker.yunpro.cn --daemon
+  369  ps -ax|grep docker
+  370  ps -aux|grep docker
+  371  ps -ef|grep docker
+  372  kill 591
+  373  sudo kill 591
+  374  ps -ef|grep docker
+  375  ps -aux|grep docker
+  376  sudo kill 990
+  377  ps -ef|grep docker
+  378  ps -ef|grep docker
+  379  sudo halt
+  380   docker run -p 5000:5000 registry
+  381   docker run -p 5000:5000 registry
+  382  docker images
+  383  netstat -sin
+  384  netstat -ain
+  385  netstat
+  386   docker run -p 5000:5000 registry
+
+  400  netstat -a|grep 5000
+  401  netstat -ain|grep 5000
+  402  netstat -ai|grep 5000
+  403  netstat -a|grep 5000
+  404  docker ps
+  405  sudo reboot
+  406  netstat -a|grep 5000
+  407  netstat -apn|grep 5000
+  408  sudo netstat -apn|grep 5000
+  409  python ls
+  410  sudo netstat -apn
+  411  ps -aux |grep 757
+  412  kill 757
+  413  sudo kill 757
+  414  ps -aux |grep 757
+  415   docker run -p 5000:5000 registry
+  416  docker ps
+  417  ps -aus|grep docker
+  418  ps -aux|grep docker
+  419  docker images
+  420  sudo reboot
+  421  ls
+  422  docker ps
+  423  logout
+  424  docker images
+  427  docker search tomcat
+  428  docker pull tomcat
+  429  ls
+  430  history |scp
+  431  history |grep scp
+  432   scp cdpmac@172.17.8.1:~/Downloads/kube/* /opt/bin
+  433   scp cdpmac@172.17.8.1:~/Downloads/jeewx.war  ~/jeewx.war
+  434  ifconfig
+  435   scp cdpmac@172.17.231.1:~/Downloads/jeewx.war  ~/jeewx.war
+  436   scp cdpmac@172.16.231.1:~/Downloads/jeewx.war  ~/jeewx.war
+  437  docker images
+  438  mvn
+  439  docker -idu tomcat
+  440  docker run -idu tomcat
+  441  docker run -idt tomcat
+  442  docker ps all
+  443  docker ps -all
+  444  docker attach df
+  445  docker ls
+  446  docker
+  447  docker ps -all
+  448  docker restart df7b
+  449  docker ps -all
+  450  docker ps
+  451  docker attach df7b
+  452  docker -idt ubuntu
+  453  docker run -idt ubuntu
+  454  docker ps
+  455  docker search tomcat
+  456  docker ps
+  457  docker attach 45e
+  458  docker -it tomcat /bin/bash
+  459  docker run -it tomcat /bin/bash
+  460  docker ps
+  461  docker run -itd -p 22 -p 8089:8080 tomcat /bin/bash
+  462  curl localhost 8080
+  463  curl localhost 22
+  464  curl localhost:8089
+  465  ls
+  466  docker ps
+  467  docker attac
+  468  docker run -itd -p 22 -p 8089:8080 -v ~/ tomcat /bin/bash
+  469  docker attach 0edb
+  470  docker run -itd -p 22 -p 8089:8080 -v ~/:/mnt tomcat /bin/bash
+  471  docker attach d4cd
+  472  docker ps all
+  473  docker ps -all
+  474  docker restart d4c
+  475  docker ps
+  476  ifconfig
+  477  ls
+  478  curl local:8089
+  479  curl localhost:8089
+  480  docker ps
+  481  docker attach d4cd
+  482  ls
+  483  vim server.xml
+  484  vim server.xml
+  485  docker restartall
+  486  docker restart
+  487  docker restart -all
+  488  docker restart
+  489  docker ps
+  490  docker ps -all
+  491  docker restart d4cd
+  492  docker attach d4cd
+  493  ls
+  494  vim server.xml
+  495  sudo vim server.xml
+  496  exit
+  497  docker
+  498  docker search mongodb
+  499  docker search mongo
+  500  docker list
+  501  docker images
+  502  docker
+  503  docker start
+  504*
+  505  ls /etc/docker/
+  506  sudo ls /etc/docker/
+  507  docker ps
+  508  history
+  509  vim /usr/lib/systemd/system/docker.service
+  510  docker ps
+  511  history
+
+
+  [Unit]
+  Description=Docker Application Container Engine
+  Documentation=http://docs.docker.com
+  After=docker.socket early-docker.target network.target
+  Requires=docker.socket early-docker.target
+
+  [Service]
+  Environment=TMPDIR=/var/tmp
+  EnvironmentFile=-/run/flannel_docker_opts.env
+  MountFlags=slave
+  LimitNOFILE=1048576
+  LimitNPROC=1048576
+  ExecStart=/usr/lib/coreos/dockerd --daemon --host=fd:// $DOCKER_OPTS $DOCKER_OPT_BIP $DOCKER_OPT_MTU $DOCKER_OPT_IPMASQ
+
+  [Install]
+  WantedBy=multi-user.target
+  ~

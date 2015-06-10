@@ -1,0 +1,316 @@
+数组访问器
+args()
+for
+for(arg<-args){
+println(arg)
+}
+//arg 是val类型不可改值。
+
+
+foreach
+args.foreach(arg=>println(arg))
+
+
+数组
+
+val greetStrings = new Array[String](3)
+greetStrings(0) = "Hello"
+greetStrings(1) = ", "
+greetStrings(2) = "world!\n"
+for (i <- 0 to 2)
+  print(greetStrings(i))
+
+
+  val greetStrings: Array[String] = new Array[String](3)
+
+
+
+  Scala 没有操作符重载,因为它根本没有传统意义上的操作符。取而代之的 是,诸如+,-,*和/这样的字符可以用来做方法名。因此,当第一步里你在 Scala 解释器 里输入 1 + 2,你实际上正在 Int 对象 1 上调用一个名为+的方法,并把 2 当作参数传给它。 如图3.1所示,你也可以使用传统的方法调用语法把1 + 2替代写成(1).+(2)。
+
+  带有括号里参数和等号右边的对象的 update 方法的调用。例如, greetStrings(0) = "Hello"
+  将被转化为
+  greetStrings.update(0, "Hello")
+
+
+
+val numNames = Array("zero", "one", "two")
+val numNames2 = Array.apply("zero", "one", "two")
+
+
+Scala 的 List 类才是。和数组一样,List[String] 包含的仅仅是 String。Scala 的 List,scala.List,不同于 Java 的 java.util.List,总 是不可变的(而 Java 的 List 可变 )。更通常的说法,Scala 的 List 是设计给函数式风格 的编程用的。创建一个 List 很简单。代码 3.3 做了展示:
+
+
+List有个叫“:::”的方法实现叠加功能
+
+
+“cons”的‘::’Cons 把一个新元素组合到已有 List 的最前端,然后返回结果 List
+
+为什么列表不支持 append?
+类 List 没有提供 append 操作,因为随着列表变长 append 的耗时将呈线性增长,而 使用::做前缀则仅花费常量时间。如果你想通过添加元素来构造列表,你的选择是把它们 前缀进去,当你完成之后再调用 reverse;或使用 ListBuffer,一种提供 append 操作的 可变列表,当你完成之后调用 toList。ListBuffer 将在 22.2 节中描述。
+
+
+方法名
+表格 3.1 类型 List 的一些方法和作用 方法作用
+￼￼￼List() 或 Nil
+List("Cool", "tools", "rule)
+val thrill = "Will"::"fill"::"until"::Nil List("a", "b") ::: List("c", "d") thrill(2)
+thrill.count(s => s.length == 4) thrill.drop(2)
+thrill.dropRight(2)
+thrill.exists(s => s == "until") thrill.filter(s => s.length == 4)
+thrill.forall(s => s.endsWith("1")) thrill.foreach(s => print(s)) thrill.foreach(print)
+thrill.head
+thrill.init
+thrill.isEmpty thrill.last thrill.length thrill.map(s => s + "y")
+thrill.mkString(", ") thrill.remove(s => s.length == 4)
+空 List 创建带有三个值"Cool","tools"和"rule"的新List[String] 创建带有三个值"Will","fill"和"until"的新 List[String] 叠加两个列表(返回带"a","b","c"和"d"的新List[String]) 返回在 thrill 列表上索引为 2(基于 0)的元素(返回"until") 计算长度为4的String元素个数(返回2)
+返回去掉前 2 个元素的 thrill 列表(返回 List("until")) 返回去掉后 2 个元素的 thrill 列表(返回 List("Will")) 判断是否有值为"until"的字串元素在thrill里(返回true) 依次返回所有长度为 4 的元素组成的列表(返回 List("Will", "fill")) 辨别是否thrill列表里所有元素都以"l"结尾(返回true) 对thrill列表每个字串执行print语句("Willfilluntil") 与前相同,不过更简洁(同上)
+返回 thrill 列表的第一个元素(返回"Will")
+返回 thrill 列表除最后一个以外其他元素组成的列表(返回 List("Will", "fill"))
+说明 thrill 列表是否为空(返回 false)
+返回 thrill 列表的最后一个元素(返回"until")
+返回 thrill 列表的元素数量(返回 3) 返回由thrill列表里每一个String元素都加了"y"构成的列表 (返回List("Willy", "filly", "untily")) 用列表的元素创建字串(返回"will, fill, until") 返回去除了thrill列表中长度为4的元素后依次排列的元素列表 (返回 List("until"))
+￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼4
+要在最后用到 Nil 的理由是::是定义在 List 类上的方法。如果你想只是写成 1 :: 2 :: 3,由于 3 是 Int 类型,没有::方法,因此会导致编译失败。
+thrill.reverse
+thrill.sort((s, t) => s.charAt(0).toLowerCase < t.charAt(0).toLowerCase)
+thrill.tail
+第九步:使用 Tuple
+返回含有 thrill 列表的逆序元素的列表(返回 List("until", "fill", "Will"))
+返回包括 thrill 列表所有元素,并且第一个字符小写按照字母顺 序排列的列表(返回List("fill", "until", "Will"))
+返回除掉第一个元素的 thrill 列表(返回 List("fill", "until"))
+
+
+
+tuple。与列表一样,元组也是不可变的,但与列表不同, 元组可以包含不同类型的元素
+
+旦你已经实例化了一个元组,你可以用点号,下划线和一 个基于 1 的元素索引访问它。代码 3.4 展示了一个例子:
+val pair = (99, "Luftballons")
+println(pair._1)
+println(pair._2)
+从1开始
+
+
+最大的不同就是List是可以重复的。而Set是不能重复的。
+List适合经常追加数据，插入，删除数据。但随即取数效率比较低。
+Set适合经常地随即储存，插入，删除。但是在遍历时效率比较低。
+
+
+set
+
+var jetSet = Set("Boeing", "Airbus")
+jetSet += "Lear"
+println(jetSet.contains("Cessna"))
+
+如果你需要不可变集,就需要使用一个引用:import,如代码 3.6 所示:
+import scala.collection.mutable.Set
+
+Map 是 Scala 里另一种有用的集合类
+
+Map 的实现,如显示在类继承图 3.3 里的 HashMap,扩展了要么可变,要么不可变特质。 你可以使用与那些用在数组,列表和集中的一样的工厂方法去创造和初始化映射。例如, 代码 3.7 展示了可变映射的创造过程:
+import scala.collection.mutable.Map
+val treasureMap = Map[Int, String]()
+treasureMap += (1 -> "Go to island.")
+treasureMap += (2 -> "Find big X on ground.")
+treasureMap += (3 -> "Dig.")
+println(treasureMap(2))
+
+
+Scala编译器把如 1 -> "Go to island"这样的二元操作符表达式转换为(1).->("Go to island.")
+
+如果你更喜欢不可变映射,就不用引用任何类了,因为不可变映射是缺省的,代码 3.8 展 示了这个例子:
+val romanNumeral = Map(
+  1 -> "I", 2 -> "II", 3 -> "III", 4 -> "IV", 5 -> "V"
+)
+println(romanNumeral(4))
+
+
+
+def printArgs(args: Array[String]): Unit = {
+  var i = 0
+  while (i < args.length) {
+    println(args(i))
+i += 1 }
+}
+你可以通过去掉 var 的办法把这个代码变得更函数式风格,例如,像这样:
+def printArgs(args: Array[String]): Unit = {
+  for (arg <- args)
+    println(arg)
+}
+或这样:
+def printArgs(args: Array[String]): Unit = {
+  args.foreach(println)
+}
+
+
+
+Scala 的 assert 方法检查传入的 Boolean 并且如果是假,抛出 AssertionError。如果传 入的 Boolean 是真,assert 只是静静地返回。你将在第十四章学习更多关于断言和测试的 东西。
+import scala.io.Source
+if (args.length > 0) {
+  for (line <- Source.fromFile(args(0)).getLines)
+    print(line.length + " " + line)
+}
+else
+Console.err.println("Please enter filename")
+
+
+
+val lines = Source.fromFile(args(0)).getLines.toList
+最后的 toList 是必须加的,因为 getLines 方法返回的是枚举器
+
+
+
+在 Scala 里把成员公开的方法是不显式地指定任何访问修饰符。换句话说,你在 Java 里要写上 “public”的地方,在 Scala 里只要什么都不要写就成。Public 是 Scala 的缺省访问级别。
+
+如果没有发现任何显式的返回语句,Scala 方法将返回方法中最后一个计 算得到的值。
+
+
+对于方法来说推荐的风格实际是避免显式的尤其是多个返回语句。代之以把每个方法当作 是创建返回值的表达式。这种哲学将鼓励你制造很小的方法,把较大的方法分解为多个更 小的方法。另一方面,设计选择取决于设计内容,Scala 使得编写具有多个,显式的 return 的方法变得容易,如果那的确是你期望的。
+
+
+
+Scala 比 Java 更面向对象的一个方面是 Scala 没有静态成员。替代品
+第4章 类和对象 65 是,Scala 有单例对象:singleton object。除了用 object 关键字替换了 class 关键字以外,
+单例对象的定义看上去就像是类定义。代码 4.2 展示了一个例子:
+
+import scala.collection.mutable.Map object ChecksumAccumulator {
+  private val cache = Map[String, Int]()
+  def calculate(s: String): Int =
+    if (cache.contains(s))
+      cache(s)
+    else {
+      val acc = new ChecksumAccumulator
+      for (c <- s)
+        acc.add(c.toByte)
+      val cs = acc.checksum()
+      cache += (s -> cs)
+      cs
+} }
+
+表中的单例对象被叫做 ChecksumAccumulator,与前一个例子里的类同名。当单例对象与 某个类共享同一个名称时,他被称作是这个类的伴生对象:companion object。你必须在 同一个源文件里定义类和它的伴生对象。类被称为是这个单例对象的伴生类:companion class。类和它的伴生对象可以互相访问其私有成员。
+
+
+如果你是 Java 程序员,考虑单例对象的一种方式是把它当作是或许你在 Java 中写过的任 何静态方法之家。可以在单例对象上用类似的语法调用方法:单例对象名,点,方法名。 例如,可以如下方式调用 ChecksumAccumulator 单例对象的 calculate 方法:
+
+
+
+类和单例对象间的一个差别是,单例对象不带参数,而类可以。因为你不能用new关键字 实例化一个单例对象,你没机会传递给它参数。每个单例对象都被作为由一个静态变量指 向的虚构类:synthetic class的一个实例来实现,因此它们与Java静态类有着相同的初始 化语法。4特别要指出的是,单例对象会在第一次被访问的时候初始化。
+不与伴生类共享名称的单例对象被称为孤立对象:standalone object。由于很多种原因你 会用到它,包括把相关的功能方法收集在一起,或定义一个 Scala 应用的入口点。下一段 会说明这个用例。
+
+
+
+要执行 Scala 程序,你一定要提供一个有 main 方法(仅带一个参数,Array[String],且 结果类型为 Unit)的孤立单例对象名。任何拥有合适签名的 main 方法的单例对象都可以 用来作为程序的入口点。代码 4.3 展示了一个例子:
+// 文件 Summer.scala
+import ChecksumAccumulator.calculate object Summer {
+  def main(args: Array[String]) {
+    for (arg <- args)
+      println(arg + ": " + calculate(arg))
+  }
+￼}
+
+
+Scala 隐式引用了包 java.lang 和 scala 的成员,和名为 Predef 的单例对象的成员,到每个 Scala 源文件中。Predef,被放置在包 scala 中,包含了许多有用的方法。例如,当在 Scala 源文件中写 pringln 的时候,你实际调用了 Predef 的 println。(Predef.pringln 运转并调用 Console.println,做实际的工 作。)当你写 assert,你是在调用 Predef.assert。
+
+
+
+
+请注意,不论你用什么形式的整数文本初始化,Scala 的 shell 始终打印输出基于 10 的整 数值。因此解释器会把你用文本 0x00FF 初始化的 hex2 变量的值显示为十进制的 255。(
+
+
+val filename =
+  if (!args.isEmpty) args(0)
+  else "default.txt"
+  println(if (!args.isEmpty) args(0) else "default.txt")
+
+
+
+println(if (!args.isEmpty) args(0) else "default.txt")
+
+
+
+var line = ""
+while ((line = readLine()) != "") // 不起作用
+  println("Read: "+ line)
+
+
+
+ for (i <- 1 until 4)
+
+ val filesHere = (new java.io.File(".")).listFiles
+ for (file <- filesHere if file.getName.endsWith(".scala"))
+ ￼  println(file)
+ 或者你也可以这么写:
+
+ for (file <- filesHere)
+   if (file.getName.endsWith(".scala"))
+    println(file)
+
+for (
+  file <- filesHere
+  if file.isFile;
+  if file.getName.endsWith(".scala")
+) println(file)
+
+
+
+
+def scalaFiles =
+  for {
+   file <- filesHere
+   if file.getName.endsWith(".scala")
+  } yield file
+
+
+
+
+
+val half =
+  if (n % 2 == 0)
+n /2 else
+   throw new RuntimeException("n must be even")
+这里发生的事情是,如果 n 是偶数,half 将被初始化为 n 的一半。如果 n 不是偶数,那么在 half 能被初始化为任何值之前异常将被抛出。因此,无论怎么说,把抛出的异常当作任何类型的值都 是安全的。任何使用从 throw 返回值的尝试都不会起作用,因此这样做无害。
+从技术角度上来说,抛出异常的类型是 Nothing。尽管 throw 不实际得出任何值,你还是可以把 它当作表达式。这种小技巧或许看上去很怪异,但像在上面这样的例子里却常常很有用。if 的一 个分支计算值,另一个抛出异常并得出Nothing。整个if表达式的类型就是那个实际计算值的分 支的类型。Nothing 类型将在以后的 11.3 节中讨论。
+
+
+
+
+果熟悉 Java,不说你也知道,Scala 的行为与 Java 的差别仅源于 Java 的 try-finally 不产生 值。Java 里,如果 finally 子句包􏰁一个显式返回语句,或抛出一个异常,这个返回值或异常将 “凌驾”于任何之前源于 try 代码块或某个它的 catch 子句产生的值或异常之上。如:
+def f(): Int = try { return 1 } finally { return 2 } 调用 f()产生结果值 2。相反:
+def g(): Int = try { 1 } finally { 2 }
+
+
+
+def f(): Int = try { return 1 } finally { return 2 } 调用 f()产生结果值 2。相反:
+def g(): Int = try { 1 } finally { 2 }
+￼Scala 的 try-finally 子句
+￼￼￼￼￼￼￼
+}
+println(friend)
+第7章 内建控制结构 106
+调用 g()产生 1。这两个例子展示了有可能另大多数程序员感到惊奇的行为,因此通常最好还是 避免从 finally 子句中返回值。最好是把 finally 子句当作确保某些副作用,如关闭打开的文件, 发生的途径。
+
+
+
+
+缺省情况用下划线(_)说明,这是常用在 Scala 里作为占位符表示完全不 清楚的值的通配符。
+val firstArg = if (args.length > 0) args(0) else ""
+firstArg match {
+￼  case "salt" => println("pepper")
+  case "chips" => println("salsa")
+  case "eggs" => println("bacon")
+  case _ => println("huh?")
+}
+
+
+与 Java 的 switch 语句比,匹配表达式还有一些重要的差别。其中之一是任何种类的常量,或其 他什么东西,都能用作 Scala 里的 case,而不只是 Java 的 case 语句里面的整数类型和枚举常量。 在这个例子里,可选项是字串
+
+
+match 表达式产生的值储存在 friend 变量里。
+
+val firstArg = if (!args.isEmpty) args(0) else ""
+val friend =
+￼有副作用的 match 表达式
+￼firstArg match {
+  case "salt" => "pepper"
+  case "chips" => "salsa"
+  case "eggs" => "bacon"
+  case _ => "huh?"、}
