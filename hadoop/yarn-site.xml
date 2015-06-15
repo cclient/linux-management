@@ -26,7 +26,7 @@
 
     <property>
         <name>yarn.nodemanager.local-dirs</name>
-        <value>/tmp/nm-local-dir</value>
+        <value>/root/hadoopfs/nm-local-dir</value>
         <final>true</final>
     </property>
 

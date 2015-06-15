@@ -1,7 +1,7 @@
 sudo mkdir /usr/lib/jvm
 
 $ sudo tar -C /usr/lib/jvm -xzf jdk-7u55-linux-x64.tar.gz
-export JAVA_HOME=/usr/lib/jvm/jdk1.7.0_55
+e
 export JRE_HOME=${JAVA_HOME}/jre
 export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
 export PATH=${JAVA_HOME}/bin:$PATH
