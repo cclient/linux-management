@@ -1,0 +1,105 @@
+x509证书一般会用到三类文，key，csr，crt。
+Key 是私用密钥openssl格，通常是rsa算法。
+Csr 是证书请求文件，用于申请证书。在制作csr文件的时，必须使用自己的私钥来签署申，还可以设定一个密钥。
+crt是CA认证后的证书文，（windows下面的，其实是crt），签署人用自己的key给你签署的凭证。
+
+1.key的生成
+openssl genrsa -des3 -out server.key 2048
+这样是生成rsa私钥，des3算法，openssl格式，2048位强度。server.key是密钥文件名。为了生成这样的密钥，需要一个至少四位的密码。可以通过以下方法生成没有密码的key:
+openssl rsa -in server.key -out server.key
+
+server.key就是没有密码的版本了。
+
+2. 生成CA的crt
+openssl req -new -x509 -key server.key -out ca.crt -days 3650
+生成的ca.crt文件是用来签署下面的server.csr文件。
+
+3. csr的生成方法
+openssl req -new -key server.key -out server.csr
+需要依次输入国家，地区，组织，email。最重要的是有一个common name，可以写你的名字或者域名。如果为了https申请，这个必须和域名吻合，否则会引发浏览器警报。生成的csr文件交给CA签名后形成服务端自己的证书。
+
+4. crt生成方法
+CSR文件必须有CA的签名才可形成证书，可将此文件发送到verisign等地方由它验证，要交一大笔钱，何不自己做CA呢。
+openssl x509 -req -days 3650 -in server.csr -CA ca.crt -CAkey server.key -CAcreateserial -out server.crt
+输入key的密钥后，完成证书生成。-CA选项指明用于被签名的csr证书，-CAkey选项指明用于签名的密钥，-CAserial指明序列号文件，而-CAcreateserial指明文件不存在时自动生成。
+最后生成了私用密钥：server.key和自己认证的SSL证书：server.crt
+证书合并：
+cat server.key server.crt > server.pem
+
+openssl pkcs12 -export -in server.crt -inkey server.key -certfile ca.crt -out server.pfx
+
+
+客户端证书
+
+ openssl genrsa -out client-key.pem
+
+ openssl req -new -key client-key.pem -out client-csr.pem
+
+ openssl x509 -req -CA ca.crt -CAkey server.key  -CAcreateserial -in client-csr.pem -out client-cert.pem
+
+ openssl pkcs12 -export -in client-cert.pem -inkey client-key.pem -certfile ca.crt -out client.pfx
+
+
+
+ cat /System/Library/OpenSSL/openssl.cnf
+
+
+{ [Error: Hostname/IP doesn't match certificate's altnames: "Host: localhost. is not cert's CN: Cuidapeng"]
+
+
+
+
+老大要我在web server里面加上https功能，可是但就使用openssl生成证书就耗费了我两天时间，网上有很多相关的资料，但是都写的很复杂， 照着他们的来，还是走了很多弯路。
+
+我总结一下，步骤主要有：
+一、安装openssl，上一篇blog里面已经提及，装好在目录/usr/local下面能找到一个ssl的文件夹
+        cd   /usr/local/ssl
+二、拷贝openssl.cnf，把ssl下的openssl.cnf拷贝到你的工作目录下去，就是你要生成证书的目录，我的是/home/yinlijun/projects/server/
+        cp  openssl.cnf  /home/yinlijun/projects/server
+三、在工作目录下创建一个demoCA的文件夹， 新建两个文件，index.txt serial ， 再在demoCA下创建一个newcerts的文件夹
+        mkdir demoCA
+        cd demoCA
+        touch ./{serial,index.txt}
+四、在serial里面加两个字符01
+        vi serial
+        然后在里面输入01这两个字符
+        :wq 退出
+
+到这里 ，准备工作已经就绪， 可以开始生成需要的密钥和证书了，按照下面一步步来吧， 以下摘自<http://blog.csdn.net/darkstar21cn/archive/2005/06/11/392492.aspx>
+
+1.首先要生成服务器端的私钥(key文件):
+openssl genrsa -des3 -out server.key 1024
+运行时会提示输入密码,此密码用于加密key文件(参数des3便是指加密算法,当然也可以选用其他你认为安全的算法.),以后每当需读取此文件(通过openssl提供的命令或API)都需输入口令.如果觉得不方便,也可以去除这个口令,但一定要采取其他的保护措施!
+去除key文件口令的命令:
+openssl rsa -in server.key -out server.key
+
+2.openssl req -new -key server.key -out server.csr -config openssl.cnf
+生成Certificate Signing Request（CSR）,生成的csr文件交给CA签名后形成服务端自己的证书.屏幕上将有提示,依照其指示一步一步输入要求的个人信息即可.
+
+3.对客户端也作同样的命令生成key及csr文件:
+openssl genrsa -des3 -out client.key 1024
+openssl req -new -key client.key -out client.csr -config openssl.cnf
+
+4.CSR文件必须有CA的签名才可形成证书.可将此文件发送到verisign等地方由它验证,要交一大笔钱,何不自己做CA呢.
+openssl req -new -x509 -keyout ca.key -out ca.crt -config openssl.cnf
+
+5.用生成的CA的证书为刚才生成的server.csr,client.csr文件签名:
+Openssl ca -in server.csr -out server.crt -cert ca.crt -keyfile ca.key -config openssl.cnf
+Openssl ca -in client.csr -out client.crt -cert ca.crt -keyfile ca.key -config openssl.cnf
+
+现在我们所需的全部文件便生成了.
+
+
+mac curl 7.29.0 (mipsel-openwrt-linux-gnu)
+curl --cert ~/Documents/client.pfx --pass 1CUI --cacert ~/Documents/ca.crt https://www.httpsserver.com:8985
+
+openwrt 成功 curl 7.29.0 (mipsel-openwrt-linux-gnu)
+
+curl --key /root/client.key --cert /root/client.crt    --cacert /root/ca.crt  https://www.httpsserver.com:8985
+ubuntu 失败  curl 7.38.0
+
+curl --key ~/Documents/client.key --cert ~/Documents/client.crt --cacert ~/Documents/ca.crt https://www.httpsserver.com:8985
+
+还有一个可能是 openssl的版本问题。
+
+

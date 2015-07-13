@@ -24,3 +24,12 @@
    mysql> delete from user where USER='';
    mysql> FLUSH PRIVILEGES;//记得要这句话，否则如果关闭先前的终端，又会出现原来的错误
    mysql> \q
+
+
+
+
+添加远程
+
+   grant all PRIVILEGES on *.* to root@'172.16.231.1' identified by '1CUI';
+ grant all PRIVILEGES on discuz.* to ted@'123.123.123.123' identified by '123456';
+上面的语句表示将 discuz 数据库的所有权限授权给 ted 这个用户，允许 ted 用户在 123.123.123.123 这个 IP 进行远程登陆，并设置 ted 用户的密码为 123456 。

@@ -1,0 +1,9 @@
+关于 hadoop-2.2 配置中的 yarn.nodemanager.aux-services 项
+是“mapreduce.shuffle”，但如果在hadoop-2.2 中继续使用这个值，NodeManager 会启动失败，在logs/yarn-biadmin-nodemanager-hostname.log里会报如下的错：
+2014-01-19 22:35:04,309 FATAL org.apache.hadoop.yarn.server.nodemanager.containermanager.AuxServices: Failed to initialize mapreduce.shuffle
+java.lang.IllegalArgumentException: The ServiceName: mapreduce.shuffle set in yarn.nodemanager.aux-services is invalid.The valid service name should only contain a-zA-Z0-9_ and can not start with numbers
+
+
+解决方案：
+
+将yarn.nodemanager.aux-services项的值改为“mapreduce_shuffle”。

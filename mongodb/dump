@@ -1,0 +1,5 @@
+mongodump --host 127.0.0.1 --port 27017 -d lewifi -c auditOrigData -q {time:{\$gt:1423478000}} -o ~/auditmongologchange
+
+
+
+

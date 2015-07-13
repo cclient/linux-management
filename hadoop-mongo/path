@@ -1,0 +1,12 @@
+$HADOOP_HOME/lib/
+$HADOOP_HOME/share/hadoop/mapreduce/
+$HADOOP_HOME/share/hadoop/lib/
+
+运行时加载
+
+DistributedCache.addFileToClassPath(new Path("/root/software/mongo-java-driver-2.11.1.jar"), conf);
+DistributedCache.addFileToClassPath(new Path("/root/software/mongo-hadoop-core-1.4.0-SNAPSHOT.jar"), conf);
+
+
+坑爹的错误
+slave 写成ip 则 datanode

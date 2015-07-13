@@ -30,4 +30,17 @@
         <name>fs.checkpoint.dir</name>
         <value>/root/hadoopfs/namesecondary</value>
         <final>true</final>
-    </property> </configuration>
+    </property>
+    <property>
+
+        <name>dfs.replication</name>
+
+        <value>1</value>
+
+        (备注：replication 是数据副本数量，默认为3，salve少于3台就会报错)
+
+    </property>
+
+
+
+</configuration>

@@ -1,0 +1,36 @@
+#生成私钥key文件：
+openssl genrsa -out privatekey.pem 1024
+#通过私钥生成CSR证书签名
+
+openssl req -new -key privatekey.pem -out certrequest.csr
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:CN
+State or Province Name (full name) [Some-State]:BeiJing
+Locality Name (eg, city) []:BeiJing
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:Goyoo
+Organizational Unit Name (eg, section) []:Audit
+Common Name (e.g. server FQDN or YOUR name) []:Cuidapeng
+Email Address []:cclient@hotmail.com
+
+Please enter the following 'extra' attributes
+to be sent with your certificate request
+A challenge password []:
+An optional company name []:
+
+
+ openssl x509 -req -days 3650 -in certrequest.csr -CA ca.crt -CAkey server.key -CAcreateserial -out server.crt
+Signature ok
+subject=/C=CN/ST=Beijing/L=Beijing/O=Goyoo/OU=Audit/CN=Cuidapeng/emailAddress=cclient@hotmail.com
+Error opening CA Certificate ca.crt
+31660:error:02001002:system library:fopen:No such file or directory:/SourceCache/OpenSSL098/OpenSSL098-52.20.2/src/crypto/bio/bss_file.c:356:fopen('ca.crt','r')
+31660:error:20074002:BIO routines:FILE_CTRL:system lib:/SourceCache/OpenSSL098/OpenSSL098-52.20.2/src/crypto/bio/bss_file.c:358:
+unable to load certificate
+
+
+
