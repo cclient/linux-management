@@ -1,0 +1,69 @@
+Beeline version 1.2.0 by Apache Hive
+0: jdbc:hive2://localhost:10000> add FILE /root/nginxaccess.log
+0: jdbc:hive2://localhost:10000> list FILE
+0: jdbc:hive2://localhost:10000> ;
+Error: Error while processing statement: list does not exist (state=,code=1)
+0: jdbc:hive2://localhost:10000> list FILE;
++-----------+--+
+| resource  |
++-----------+--+
++-----------+--+
+No rows selected (0.299 seconds)
+0: jdbc:hive2://localhost:10000> list FILES;
++-----------+--+
+| resource  |
++-----------+--+
++-----------+--+
+No rows selected (0.021 seconds)
+0: jdbc:hive2://localhost:10000> add FILE /root/nginxaccess.log;
+INFO  : Added resources: [/root/nginxaccess.log]
+No rows affected (0.014 seconds)
+0: jdbc:hive2://localhost:10000> list FILES;
++------------------------+--+
+|        resource        |
++------------------------+--+
+| /root/nginxaccess.log  |
++------------------------+--+
+1 row selected (0.031 seconds)
+0: jdbc:hive2://localhost:10000>
+
+
+add FILE /root/nginxaccess.log; 本地
+
+
+0: jdbc:hive2://>  CREATE TABLE tests3 (foo STRING, bar STRING, cc STRING, dd STRING, ee STRING, ff STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY '\ ';
+
+ LOAD DATA LOCAL INPATH '/root/hivetest' OVERWRITE INTO TABLE tests3;
+
++-------------+-------------+------------+------------+------------+------------+--+
+| tests3.foo  | tests3.bar  | tests3.cc  | tests3.dd  | tests3.ee  | tests3.ff  |
++-------------+-------------+------------+------------+------------+------------+--+
+| a           | b           | c          | d          | e          | f          |
+| 1           | 2           | 3          | 4          | 5          | 6          |
+| ~           | @           | #          | $          | %          | ^          |
++-------------+-------------+------------+------------+------------+------------+--+
+
+0: jdbc:hive2://> select distinct foo from tests3
+0: jdbc:hive2://> ;
++------+--+
+| foo  |
++------+--+
+| 1    |
+| a    |
+| ~    |
++------+--+
+
+
+
+文档
+
+HCAT_LOG_DIR=${HCAT_LOG_DIR:-"$bin"/../var/log}
+HCAT_PID_DIR=${HCAT_PID_DIR:-$HCAT_LOG_DIR}
+
+修改 HCAT_LOG_DIR=${HCAT_LOG_DIR:-"$bin"/../var/log} 为
+
+
+root@debian03:/usr/local/apache-hive-1.2.0-bin/hcatalog# mkdir -p ./var/log
+
+
+ $HIVE_HOME/bin/beeline -u jdbc:hive2://

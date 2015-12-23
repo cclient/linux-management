@@ -1,4 +1,29 @@
 docker
+//Upstart
+  status docker
+
+  stop docker
+  start docker
+//service
+   service docker stop/start
+
+
+docker ui
+Shipyard
+DockerUI
+maDocker
+
+
+docker commit -m mm --auther='' containid jamtur01/apache2:tag
+
+Dockerfile
+exec 格式run  RUN ["apg-get"," install","-y","nginx"]
+EXPOSE 80 公开端口，可多个
+docker build -t ='jamtur01/static_web:v1' git@github......
+??
+
+
+
 clear all container file and mirror files
 
   docker kill $(docker ps -q) ; docker rm $(docker ps -a -q) ; docker rmi $(docker images -q -a)
@@ -18,8 +43,21 @@ root@af8bae53bdd3:/#
 
 后台运行容器
 docker run -d ubuntu:14.04 /bin/sh -c "while true; do echo hello world; sleep 1; done"
+          --name ubuntu
+          --restart=always /
+                    on-failure=:5(退出代码非-)
+docker inspech  --format='{{.State.Running}}' daemon_dave daemon_dave2
 
- docker logs insane_babbage
+docker ps -a（包含停止） -l(最后运行) -n x(最后x个容器)
+
+ docker logs --tail 10 insane_babbage 最后10行日志
+ docker logs --tail 0 -f insane_babbage 最后10行日志
+             -t 加时间
+
+ docker top
+ docker exex -d daemon_dave touch /etc/new.config
+ docker exec -t -i daemon_dave /bin/bash
+
 
  docker stop
  docker start
@@ -64,6 +102,18 @@ PID=$(docker inspect --format "{{ .State.Pid }}" <container>)
 $ nsenter --target $PID --mount --uts --ipc --net --pid
 下面给出一个完整的例子。
 
+
+# 在容器中运行"echo"命令，输出"hello word"
+$docker run image_name echo "hello word"
+
+# 交互式进入容器中
+$docker run -i -t image_name /bin/bash
+
+
+# 在容器中安装新的程序
+$docker run image_name apt-get install -y app_name
+
+
 $ sudo docker run -idt ubuntu
 243c32535da7d142fb0e6df616a3c3ada0b8ab417937c853a9e1c251f499f550
 $ sudo docker ps
@@ -83,4 +133,28 @@ $ echo $(docker-pid <container>)
 $ docker-enter <container> ls
 
 
+docker run
+root@'contain' :/#hostname
+cat //etc/hosts
+172.17.0.4 containid
+127.0.0.1 localhost
 
+网络配置
+ip a
+
+
+/etc/default/docker
+/etc/init/docker.conf
+/etc/sysconfig/docker
+/usr/lib/systemd/docker.service
+
+systemctl --system daemon-reload
+
+python -mjson.tool
+
+curl http:docker.example.com:2375/info
+        /images/contianmid
+        /images/json|python -mjson.tool
+        /images/search?trem=jamtur01
+        /containers/json
+        ?all=1

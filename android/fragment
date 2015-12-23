@@ -1,0 +1,61 @@
+
+HeadlinesFragment?
+
+  HeadlinesFragment firstFragment = new HeadlinesFragment();
+
+                // 如果此 Activity 是通过 Intent 发出的特殊指令来启动的，
+                // 请将该 Intent 的 extras 以参数形式传递给该 Fragment
+                firstFragment.setArguments(getIntent().getExtras());
+
+
+
+
+ FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+    // 将 fragment_container View 中的内容替换为此 Fragment ，
+    // 然后将该事务添加到返回堆栈，以便用户可以向后导航
+    transaction.replace(R.id.fragment_container, newFragment);
+ transaction.addToBackStack(null);
+
+ addToBackStack() 方法可接受可选的字符串参数，来为事务指定独一无二的名称。除非你打算使用 FragmentManager.BackStackEntry API 执行高级 Fragment 操作，否则无需使用此名称。
+
+
+
+ Fragments 通信
+ fragment 调 activity
+
+ public class HeadlinesFragment extends ListFragment {
+     OnHeadlineSelectedListener mCallback;
+
+     // Container Activity must implement this interface
+     public interface OnHeadlineSelectedListener {
+         public void onArticleSelected(int position);
+     }
+
+     @Override
+     public void onAttach(Activity activity) {
+         super.onAttach(activity);
+
+         // This makes sure that the container activity has implemented
+         // the callback interface. If not, it throws an exception
+         try {
+             mCallback = (OnHeadlineSelectedListener) activity;
+         } catch (ClassCastException e) {
+             throw new ClassCastException(activity.toString()
+                     + " must implement OnHeadlineSelectedListener");
+         }
+     }
+
+      @Override
+         public void onListItemClick(ListView l, View v, int position, long id) {
+             // Send the event to the host activity
+             mCallback.onArticleSelected(position);
+         }
+
+     ...
+ }
+
+activity 调 fragment
+   ArticleFragment articleFrag = (ArticleFragment)
+                getSupportFragmentManager().findFragmentById(R.id.article_fragment);
+articleFrag.function(arr,,,,).....

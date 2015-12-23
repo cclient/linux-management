@@ -1,0 +1,36 @@
+root@debian01:/home/cdpdebian# ls /etc/default/
+acpid  bsdmainutils   cron  devpts  etcd      grub  hwclock   kube-apiserver	       kubelet	   kube-scheduler  networking  nss  redis-server  rsyslog  tmpfs
+aufs   console-setup  dbus  docker  flanneld  halt  keyboard  kube-controller-manager  kube-proxy  locale	   nginx       rcS  rsync	  ssh	   useradd
+root@debian01:/home/cdpdebian# cat  /etc/default/etcd
+ETCD_OPTS="-name infra0   -initial-advertise-peer-urls http://172.16.231.176:2380   -listen-peer-urls http://172.16.231.176:2380   -initial-cluster-token etcd-cluster-1   -initial-cluster infra0=http://172.16.231.176:2380,infra1=http://172.16.231.175:2380,infra2=http://172.16.231.173:2380   -initial-cluster-state new"
+
+
+.service
+
+ The definition files for these services are searched for in /etc/systemd/system and /lib/systemd/system (and possibly other directories) under this name
+
+ serial-getty@ttyS2.service is the serial getty service instantiated for ttyS2.
+
+
+ [Unit]
+ Description=Serial Getty on %I
+ BindTo=dev-%i.device
+ After=dev-%i.device systemd-user-sessions.service
+
+ [Service]
+ ExecStart=-/sbin/agetty -s %I 115200,38400,9600
+ Restart=always
+ RestartSec=0
+
+
+ $ systemctl status serial-getty@ttyUSB0.service
+ serial-getty@ttyUSB0.service - Getty on ttyUSB0
+ 	  Loaded: loaded (/lib/systemd/system/serial-getty@.service; static)
+ 	  Active: active (running) since Mon, 26 Sep 2011 04:20:44 +0200; 2s ago
+ 	Main PID: 5443 (agetty)
+ 	  CGroup: name=systemd:/system/getty@.service/ttyUSB0
+ 		  └ 5443 /sbin/agetty -s ttyUSB0 115200,38400,9600
+
+//自动启动
+ 		  # ln -s /lib/systemd/system/serial-getty@.service /etc/systemd/system/getty.target.wants/serial-getty@ttyUSB0.service
+

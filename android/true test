@@ -1,0 +1,14 @@
+system_profiler SPUSBDataType
+        MI 3W:
+
+          Product ID: 0x0310
+          Vendor ID: 0x2717
+          Version: 2.32
+          Serial Number: 8a5ce45c
+          Speed: Up to 480 Mb/sec
+          Manufacturer: Xiaomi
+          Location ID: 0x14200000 / 16
+          Current Available (mA): 500
+          Current Required (mA): 500
+
+          Vendor ID: 0x2717

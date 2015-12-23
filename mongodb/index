@@ -1,0 +1,36 @@
+为特定字段加索引:
+
+db.collection.ensureIndex( { subject: "text", content: "text" })
+为所有字段加索引:
+
+db.collection.ensureIndex( { "$**": "text" },{ name: "TextIndex" })
+
+在文本里查询内容
+搜索一个词:
+[php] view plaincopy在CODE上查看代码片派生到我的代码片
+db.quotes.runCommand( "text", { search: "TOMORROW" } )
+
+http://docs.mongodb.org/manual/reference/operator/query/text/#op._S_text
+
+db.articles.createIndex( { subject: "text" } )
+Search for a Single Word
+The following query searches for the term coffee:
+
+db.articles.find( { $text: { $search: "coffee" } } )
+
+{ AP_MAC:
+   { '$in':
+      [ '00-21-26-00-CC-E8',
+        '00-21-26-00-C9-50',
+        '00-21-26-00-D0-94',
+        '00-21-26-00-D0-C2',
+        '00-21-26-00-D1-16',
+        '00-21-26-00-D1-42',
+        '00-21-26-00-DA-8A',
+        '00-21-26-00-D6-74',
+        '00-21-26-00-D5-F8' ] },
+  CAPTURE_TIME: { '$gt': 1442764800, '$lt': 1442937599 },
+  proto_name: 'http',
+  '$text': { '$search': '"google" "qq"' } }
+
+

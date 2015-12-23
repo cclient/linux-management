@@ -1,0 +1,62 @@
+static int telnetLogin = 0;		//telnet login flag
+static char telnetUser[96] = {0};     //telnet username
+printf("%02x ", data[n]);
+
+u_char pcLoginFlag[2] = {0x08, 0x25};
+if(data[data_len - 1] != 0x03)
+
+
+memcmp(data + 3, pcLoginFlag, 2)
+
+ntohl(*(u_int *)(data + 9));
+
+sprintf((char *)parse->username, "%u", nQqNumlogin);
+
+memcpy(parse->username, data + 82, *(data + 81) - 4);
+
+strstr类似 index and substring
+
+urlDecode(parse->toname);
+
+strncpy(parse->keyword,sztmp,32);
+
+unsigned int uin = htonl(*(unsigned int *)(psrc + 7));
+
+	if( 0 != SpinLock_tryLock(&pQue->spinlock))//������ʹ��
+
+	memset(pPar, 0, sizeof(PARSEENTRY));
+
+	fp = fopen(".\\port-mirroring.log","a");
+
+	fprintf(fp,"%s[error] " , getCurrentTime());
+
+	vsyslog( LOG_MAKEPRI( LOG_LOCAL1, LOG_ERR), message, arg_ptr );
+
+	vfprintf( stderr, message, arg_ptr);
+
+	if( (s = socket( PF_INET, SOCK_DGRAM, 0)) < 0 ){
+
+	if( ioctl(s, SIOCGIFHWADDR, &buffer) < 0 ){
+	strncpy( buffer.ifr_name, device, sizeof(buffer.ifr_name));
+
+	*ip = ((struct sockaddr_in *)&buffer.ifr_addr)->sin_addr.s_addr;if(send(sock, nlMsg, nlMsg->nlmsg_len, 0) < 0){
+
+
+	DIR *pDir = opendir(szPath);
+
+
+	#define InitSpinLock(x) pthread_mutex_init(&(x)->Mutex,NULL)
+
+
+    #define SpinLock_Lock(x) pthread_mutex_lock(&(x)->Mutex)
+
+    #define SpinLock_unLock(x) pthread_mutex_unlock(&(x)->Mutex)
+
+    #define DestroySpinLock(x) pthread_mutex_destroy(&(x)->Mutex)
+
+    #define SpinLock_tryLock(x) pthread_mutex_trylock(&(x)->Mutex)
+
+	}
+
+	}
+	}

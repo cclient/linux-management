@@ -1,0 +1,54 @@
+
+// 查找键值是否存在
+//	//	if v, ok := m1["a"]; ok {
+//	//		fmt.Println(v)
+//	//	} else {
+//	//		fmt.Println("Key Not Found")
+//	//	}
+
+打印数组
+fmt.Printf("%+v", cinemas)
+
+使用强制类型􏳴换可以解决这个编译错误:
+value1 := 64
+value2 = int32(value1) // 􏰄􏼀􏰼􏸨
+
+str = "Hello world" // 􏺪􏼑􏳎􏹦􏶂
+ch := str[0]
+
+ str 遍历
+
+ str := "Hello,􏼔􏼦"
+ n := len(str)
+ for i := 0; i < n; i++ {
+ ch := str[i] // 􏸅􏼧􏳽􏼨􏷰􏺪􏼑􏳎􏼩的􏺪􏼑􏰫􏵹􏺕为byte
+         fmt.Println(i, ch)
+     }
+
+     Unicode
+str := "Hello,􏼔􏼦"
+for i, ch := range str {
+fmt.Println(i, ch)//ch的􏵹􏺕为rune }
+
+
+func myfunc(args ...int) {
+for _, arg := range args {
+        fmt.Println(arg)
+    }
+}
+
+
+array := [5]int{1,2,3,4,5} // 􏴚􏵸􏰂􏱠􏳺􏳻一􏰭􏰳􏴼
+
+
+数组切片
+array := [5]int{1,2,3,4,5} // 􏴚􏵸􏰂􏱠􏳺􏳻一􏰭􏰳􏴼
+
+
+mySlice2 := make([]int, 5, 10)
+
+mySlice = append(mySlice, mySlice2...)
+
+delete(myMap, "1234")
+
+%-5t

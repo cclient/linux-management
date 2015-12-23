@@ -1,1 +1,18 @@
 netstat -ant|awk '{print $5}' |awk -F: '{print $1}'|sort |uniq -c|sort -rn
+
+
+
+1)统计80端口连接数
+netstat -nat|grep -i "80"|wc -l
+1
+2）统计httpd协议连接数
+ps -ef|grep httpd|wc -l
+1
+3）、统计已连接上的，状态为“established'
+netstat -na|grep ESTABLISHED|wc -l
+2
+4)、查出哪个IP地址连接最多,将其封了.
+ netstat -na|grep ESTABLISHED|awk '{print $5}'|awk -F: '{print $1}'|sort|uniq -c|sort -r +0n
+
+netstat -na|grep SYN|awk '{print $5}'|awk -F: '{print $1}'|sort|uniq -c|sort -r +0n
+

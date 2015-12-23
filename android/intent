@@ -1,0 +1,229 @@
+Uri number = Uri.parse("tel:5551234");
+Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
+
+// Map point based on address
+Uri location = Uri.parse("geo:0,0?q=1600+Amphitheatre+Parkway,+Mountain+View,+California");
+// Or map point based on latitude/longitude
+// Uri location = Uri.parse("geo:37.422219,-122.08364?z=14"); // z param is zoom level
+Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
+
+
+Uri webpage = Uri.parse("http://www.android.com");
+Intent webIntent = new Intent(Intent.ACTION_VIEW, webpage);
+
+setType
+
+Intent emailIntent = new Intent(Intent.ACTION_SEND);
+// The intent does not have a URI, so declare the "text/plain" MIME type
+emailIntent.setType(HTTP.PLAIN_TEXT_TYPE);
+emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] {"jon@example.com"}); // recipients
+emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Email subject");
+emailIntent.putExtra(Intent.EXTRA_TEXT, "Email message text");
+emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("content://path/to/email/attachment"));
+// You can also attach multiple items by passing an ArrayList of Uris
+
+
+创建日历事件：Events
+Intent calendarIntent = new Intent(Intent.ACTION_INSERT, Events.CONTENT_URI);
+Calendar beginTime = Calendar.getInstance().set(2012, 0, 19, 7, 30);
+Calendar endTime = Calendar.getInstance().set(2012, 0, 19, 10, 30);
+calendarIntent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis());
+calendarIntent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis());
+calendarIntent.putExtra(Events.TITLE, "Ninja class");
+calendarIntent.putExtra(Events.EVENT_LOCATION, "Secret dojo");
+
+?/
+
+ ACTION_VIEW 意向显示图
+ 尽可能具体地定义您的 Intent 非常重要。例如，如果您想要使用 ACTION_VIEW 意向显示图像，您应指定 image/*的 MIME 类型。 这可防止可“查看”数据的其他类型的应用（比如地图应用）被意向触发。
+
+
+确认是否存在接收意向的应用
+
+PackageManager packageManager = getPackageManager();
+List activities = packageManager.queryIntentActivities(intent,
+        PackageManager.MATCH_DEFAULT_ONLY);
+boolean isIntentSafe = activities.size() > 0;
+
+在您需要在用户尝试使用它之前禁用使用该意向的功能时，您应在Activity初次开始时执行此检查
+
+
+
+demo
+// Build the intent
+Uri location = Uri.parse("geo:0,0?q=1600+Amphitheatre+Parkway,+Mountain+View,+California");
+Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
+
+// Verify it resolves
+PackageManager packageManager = getPackageManager();
+List<ResolveInfo> activities = packageManager.queryIntentActivities(mapIntent, 0);
+boolean isIntentSafe = activities.size() > 0;
+
+// Start an activity if it's safe
+if (isIntentSafe) {
+    startActivity(mapIntent);
+}
+
+应用选择器
+Intent intent = new Intent(Intent.ACTION_SEND);
+...
+
+// Always use string resources for UI text.
+// This says something like "Share this photo with"
+String title = getResources().getString(R.string.chooser_title);
+// Create intent to show chooser
+Intent chooser = Intent.createChooser(intent, title);
+
+// Verify the intent will resolve to at least one activity
+if (intent.resolveActivity(getPackageManager()) != null) {
+    startActivity(chooser);
+}
+
+取值
+
+startActivityForResult()
+
+
+联系人
+static final int PICK_CONTACT_REQUEST = 1;  // The request code
+...
+private void pickContact() {
+    Intent pickContactIntent = new Intent(Intent.ACTION_PICK, Uri.parse("content://contacts"));
+    pickContactIntent.setType(Phone.CONTENT_TYPE); // Show user only contacts w/ phone numbers
+    startActivityForResult(pickContactIntent, PICK_CONTACT_REQUEST);
+}
+
+
+@Override
+protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    // Check which request we're responding to
+    if (requestCode == PICK_CONTACT_REQUEST) {
+        // Make sure the request was successful
+        if (resultCode == RESULT_OK) {
+            // The user picked a contact.
+            // The Intent's data Uri identifies which contact was selected.
+
+            // Do something with the contact here (bigger example below)
+        }
+    }
+}
+
+
+
+“联系人” 应用（在一些较旧的版本中是 Contacts 应用）始终返回带内容 URI（识别所选联系人）的结果，并且“照相机” 应用在 "data" 额外项中返回 Bitmap
+
+
+
+@Override
+protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    // Check which request it is that we're responding to
+    if (requestCode == PICK_CONTACT_REQUEST) {
+        // Make sure the request was successful
+        if (resultCode == RESULT_OK) {
+            // Get the URI that points to the selected contact
+            Uri contactUri = data.getData();
+            // We only need the NUMBER column, because there will be only one row in the result
+            String[] projection = {Phone.NUMBER};
+
+            // Perform the query on the contact to get the NUMBER column
+            // We don't need a selection or sort order (there's only one result for the given URI)
+            // CAUTION: The query() method should be called from a separate thread to avoid blocking
+            // your app's UI thread. (For simplicity of the sample, this code doesn't do that.)
+            // Consider using CursorLoader to perform the query.
+            Cursor cursor = getContentResolver()
+                    .query(contactUri, projection, null, null, null);
+            cursor.moveToFirst();
+
+            // Retrieve the phone number from the NUMBER column
+            int column = cursor.getColumnIndex(Phone.NUMBER);
+            String number = cursor.getString(column);
+
+            // Do something with the phone number...
+        }
+    }
+}
+
+
+
+注意：在 Android 2.3（API 级别 9）之前， 在 Contacts Provider 上执行查询（如以上所示）需要您的应用声明 READ_CONTACTS 权限（请参阅安全与权限）。 但是，自 Android 2.3 版本开始，“联系人”应用授予您的应用在联系人提供商向您返回结果时从联系人提供商临时读取信息的权限。 该临时权限仅适用于所请求的特定联系人，因此您只能查询意向的 Uri 指定的联系人，除非您声明 READ_CONTACTS 权限。
+
+
+
+如果您构建一款可与用户的好友分享消息或照片的社交应用，您最关注的是支持 ACTION_SEND 意向以便用户可以从另一应用发起 “共享”操作并且启动您的应用执行该操作
+
+
+操作
+数据
+类别
+
+对要执行的操作命名的字符串。通常是平台定义的值之一，比如 ACTION_SEND 或 ACTION_VIEW。
+使用 <action> 元素在您的意向过滤器中指定此值。您在此元素中指定的值必须是操作的完整字符串名称，而不是 API 常数（请参阅以下示例）。
+
+
+用 <data> 元素在您的意向过滤器中指定此内容。使用此元素中的一个或多个属性，您可以只指定 MIME 类型、URI 前缀、URI 架构或这些的组合以及其他指示所接受数据类型的项。
+
+注意：如果您无需声明关于数据的具体信息 Uri（比如，您的Activity处理其他类型的“额外”数据而不是 URI 的时间），您应只指定 android:mimeType 属性声明您的Activity处理的数据类型，比如 text/plain 或 image/jpeg。
+
+提供另外一种表征处理意向的Activity的方法，通常与用户手势或Activity开始的位置有关。 系统支持多种不同的类别，但大多数都很少使用。 ﻿但是，所有隐含意向默认使用 CATEGORY_DEFAULT 进行定义。
+用 <category> 元素在您的意向过滤器中指定此内容。
+
+
+<activity android:name="ShareActivity">
+    <intent-filter>
+        <action android:name="android.intent.action.SEND"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+        <data android:mimeType="text/plain"/>
+        <data android:mimeType="image/*"/>
+    </intent-filter>
+</activity>
+每个入站意向仅指定一项操作和一个数据类型，但可以在每个 <intent-filter> 中声明 <action>、<category> 和 <data> 元素的多个实例。
+
+比如，假定您的Activity同时处理 ACTION_SEND 和 ACTION_SENDTO 意向的文本和图像。在这种情况下，您必须为两个操作定义两种不同的意向过滤器，因为 ACTION_SENDTO 意向必须使用数据 Uri 指定使用 send 或 sendto URI 架构的收件人地址。 例如：
+
+<activity android:name="ShareActivity">
+    <!-- filter for sending text; accepts SENDTO action with sms URI schemes -->
+    <intent-filter>
+        <action android:name="android.intent.action.SENDTO"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+        <data android:scheme="sms" />
+        <data android:scheme="smsto" />
+    </intent-filter>
+    <!-- filter for sending text or images; accepts SEND action and text or image data -->
+    <intent-filter>
+        <action android:name="android.intent.action.SEND"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+        <data android:mimeType="image/*"/>
+        <data android:mimeType="text/plain"/>
+    </intent-filter>
+</activity>
+
+为了接收隐含意向，您必须在意向过滤器中包含 CATEGORY_DEFAULT 类别
+
+
+
+ Intent intent = getIntent();
+    Uri data = intent.getData();
+
+    // Figure out what to do based on the intent type
+    if (intent.getType().indexOf("image/") != -1) {
+        // Handle intents with image data ...
+    } else if (intent.getType().equals("text/plain")) {
+        // Handle intents with text ...
+    }
+
+
+
+// Create intent to deliver some kind of result data
+Intent result = new Intent("com.example.RESULT_ACTION", Uri.parse("content://result_uri");
+setResult(Activity.RESULT_OK, result);
+finish();
+
+结果默认设置为 RESULT_CANCELED。因此，如果用户在完成操作动作或设置结果之前按了返回按钮，原始Activity会收到“已取消”的结果。
+
+
+如果您使用结果代码传递整数，并且您无需包含 Intent，您可以调用 setResult() 并且仅传递结果代码。 例如：
+
+setResult(RESULT_COLOR_RED);
+finish();
+在这种情况下，只有几个可能的结果，因此结果代码是一个本地定义的整数（大于 0）。 当您向自己应用中的Activity返回结果时，这将非常有效，因为接收结果的Activity可引用公共常数来确定结果代码的值。
+

@@ -1,0 +1,43 @@
+socat readline tcp:$target:8888
+  212  socat
+  213  brew install socat
+  214  socat TCP_LISTEN:2001,fork EXEC:"ls -al" &
+  215  socat -h
+  216  socat tcp-listen:2001,fork EXEC:"ls -al" &
+  217  socat tcp-listen:2001,fork EXEC:"ls -al" &&
+  218  socat tcp-listen:2001,fork EXEC:"$1" &&
+  219  socat tcp-listen:2001 &&
+  220  ps -ef |grep socat
+  222  ps -ef |grep socat
+  223  socat tcp-listen:2001 &&
+  224  ps -ef |grep socat
+  225  socat tcp-listen:2001,fork &
+  275  socat openssl-listen:4433,reuseaddr,cert=server.csr,cafile=ca.crt system:bash,pty,stderr
+  276  socat openssl-listen:4433,reuseaddr,cert=server.pfx,cafile=ca.crt system:bash,pty,stderr
+  277  socat openssl-listen:4433,reuseaddr,cert=server.csr,cafile=ca.crt system:bash,pty,stderr
+  278  socat openssl-listen:4433,reuseaddr,cert=server.crt,cafile=ca.crt system:bash,pty,stderr
+  279  socat openssl-listen:4433,reuseaddr,cafile=ca.crt system:bash,pty,stderr
+  280  socat openssl-listen:4433,reuseaddr,cert=server.csr,cafile=ca.crt system:bash,pty,stderr
+  281  socat openssl-listen:4433,reuseaddr,cert=server.key,cafile=ca.crt system:bash,pty,stderr
+  282  socat openssl-listen:4433,reuseaddr,cert=server.pfx,cafile=ca.crt system:bash,pty,stderr
+  283  socat openssl-listen:4433,reuseaddr,cert=server.crt,cafile=ca.crt system:bash,pty,stderr
+  284  socat openssl-listen:4433,reuseaddr,cafile=ca.crt system:bash,pty,stderr
+  285  socat openssl-listen:4433,reuseaddr,cafile=ca.crt system:bash,pty,stderr
+  295  socat -d -d READLINE,history=$HOME/.http_history TCP4:www.qq.com:8http://www.wendangwang.com/doc/dff35b1d7fad22bb334202530
+  296  socat -d -d READLINE,history=$HOME/.http_history TCP4:www.qq.com:80http://www.wendangwang.com/doc/dff35b1d7fad22bb33420253
+  297  socat -d -d READLINE,history=$HOME/.http_history TCP4:www.qq.com
+  298  socat TCP4-LISTEN:8888 TCP4:www.qq.com:80
+  299  socat TCP4-LISTEN:8888 TCP4:www.qq.com:80
+  300  socat TCP4-LISTEN:8889 TCP4:www.qq.com:80
+  301  socat TCP4-LISTEN:8889 TCP4:www.qq.com:80
+  302  socat TCP4-LISTEN:8890 TCP4:www.qq.com:80
+  303  socat -d -d TCP-LISTEN:11443,reuseaddr TUN:192.168.255.1/24,up
+  306  socat -h
+  307  socat TCP:1.2.3.4:11443 TUN:192.168.255.2/24,up
+  308  socat TCP:1.2.3.4:11443 TUN:192.168.255.2/24,up
+  309  socat TCP:127.0.0.1:11443 TUN:192.168.255.2/24,up
+  501  socat
+
+  socat readline tcp:127.0.0.1:8888
+
+socat tcp-listen:8888 system:bash,pty,stderr

@@ -1,0 +1,3 @@
+查看表结构
+
+table|BaiduUser|BaiduUser|4|CREATE TABLE "BaiduUser" ("_id" INTEGER PRIMARY KEY ,"Tel" TEXT NOT NULL ,"UserName" TEXT NOT NULL ,"Email" TEXT NOT NULL ,"PassWord" TEXT NOT NULL ,"Portrait" TEXT NOT NULL ,"NameUrl" TEXT NOT NULL ,"NameWeak" TEXT NOT NULL ,"NameLink" TEXT NOT NULL ,"ITiebaId" TEXT NOT NULL ,"NameShow" TEXT NOT NULL ,"MobilePhone" TEXT NOT NULL ,"OpenUid" TEXT NOT NULL )

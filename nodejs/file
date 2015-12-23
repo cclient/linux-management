@@ -1,0 +1,14 @@
+
+//var allcodeandname=(function(){
+//    var fs = require('fs');
+//    var data = fs.readFileSync(__dirname+'/areacode',{encoding:'utf-8'});
+//    var lines = (data + '').split('\n');
+//    var allcodeandname={};
+//    lines.forEach(function(line){
+//        var infos=line.split(' ');
+//        allcodeandname[infos[0]]=infos[1];
+//    });
+//    return allcodeandname;
+//})()
+//
+//exports.allcodeandname=allcodeandname;

@@ -1,0 +1,135 @@
+保存键值集
+SharedPreferences
+
+以从您的应用中的任何 Context 调用此方法。
+在 Fragment 内执行的demo
+getSharedPreferences("preference_file_key") 命名
+Context context = getActivity();
+SharedPreferences sharedPref = context.getSharedPreferences(
+        getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+
+
+getPreferences()  默认
+
+Context context = getActivity();
+SharedPreferences sharedPref = context.getSharedPreferences(
+        getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+
+
+写入
+SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+SharedPreferences.Editor editor = sharedPref.edit();
+editor.putInt(getString(R.string.saved_high_score), newHighScore);
+editor.commit();
+读取
+
+SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+int defaultValue = getResources().getInteger(R.string.saved_high_score_default);
+long highScore = sharedPref.getInt(getString(R.string.saved_high_score), defaultValue);
+
+
+文件
+读写
+<manifest ...>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    ...
+</manifest>
+只读READ_EXTERNAL_STORAGE
+
+getFilesDir()
+getCacheDir() 务必删除所有不再需要的文件并对在指定时间您使用的内存量实现合理大小限制，比如，1MB。 如果在系统即将耗尽存储，它会在不进行警告的情况下删除您的缓存文件。
+File file = new File(context.getFilesDir(), filename);
+
+写入
+String filename = "myfile";
+String string = "Hello world!";
+FileOutputStream outputStream;
+
+try {
+  outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
+  outputStream.write(string.getBytes());
+  outputStream.close();
+} catch (Exception e) {
+  e.printStackTrace();
+}
+
+应用的内部缓存目录中以该名称创建文件：
+
+public File getTempFile(Context context, String url) {
+    File file;
+    try {
+        String fileName = Uri.parse(url).getLastPathSegment();
+        file = File.createTempFile(fileName, null, context.getCacheDir());
+    catch (IOException e) {
+        // Error while creating file
+    }
+    return file;
+}
+
+
+外部存储
+始终确认其容量。 您可以通过调用 getExternalStorageState() 查询外部存储状态。 如果返回的状态为 MEDIA_MOUNTED，那么您可以对您的文件进行读写
+
+/* Checks if external storage is available for read and write */
+public boolean isExternalStorageWritable() {
+    String state = Environment.getExternalStorageState();
+    if (Environment.MEDIA_MOUNTED.equals(state)) {
+        return true;
+    }
+    return false;
+}
+
+/* Checks if external storage is available to at least read */
+public boolean isExternalStorageReadable() {
+    String state = Environment.getExternalStorageState();
+    if (Environment.MEDIA_MOUNTED.equals(state) ||
+        Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+        return true;
+    }
+    return false;
+}
+
+如果您要使用外部存储上的公共文件，请使用 getExternalStoragePublicDirectory() 方法获取表示外部存储上相应目录的 File 。该方法使用指定 您想要保存以便它们可以与其他公共文件在逻辑上组织在一起的文件类型的参数，比如 DIRECTORY_MUSIC 或 DIRECTORY_PICTURES。 例如：
+
+public File getAlbumStorageDir(String albumName) {
+    // Get the directory for the user's public pictures directory.
+    File file = new File(Environment.getExternalStoragePublicDirectory(
+            Environment.DIRECTORY_PICTURES), albumName);
+    if (!file.mkdirs()) {
+        Log.e(LOG_TAG, "Directory not created");
+    }
+    return file;
+}
+
+
+例如，您可以使用以下方法来创建个人相册的目录：
+
+public File getAlbumStorageDir(Context context, String albumName) {
+    // Get the directory for the app's private pictures directory.
+    File file = new File(context.getExternalFilesDir(
+            Environment.DIRECTORY_PICTURES), albumName);
+    if (!file.mkdirs()) {
+        Log.e(LOG_TAG, "Directory not created");
+    }
+    return file;
+}
+如果没有适合您文件的预定义子目录名称，您可以改为调用 getExternalFilesDir() 并传递 null。这将返回外部存储上您的应用的专用目录 的根目录。
+
+getExternalFilesDir() 在用户卸载您的应用时删除的目录内创建目录。
+
+
+保存在 DIRECTORY_RINGTONES 中的文件由系统介质扫描程序归类为铃声，而不是音乐。
+
+删除文件
+您应始终删除不再需要的文件。删除文件最直接的方法是让打开的文件参考自行调用 delete()。
+
+myFile.delete();
+如果文件保存在内部存储中，您还可以请求 Context 通过调用 deleteFile() 来定位和删除文件：
+
+myContext.deleteFile(fileName);
+
+注意：当用户卸载您的应用时，Android 系统会删除以下各项：
+您保存在内部存储中的所有文件
+您使用 getExternalFilesDir() 保存在外部存储中的所有文件。
+但是，您应手动删除使用 getCacheDir() 定期创建的所有缓存文件并且定期删除不再需要的其他文件
+

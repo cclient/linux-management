@@ -1,0 +1,48 @@
+Remote Address:112.90.51.173:80
+Request URL:http://www.zhihu.com/login/email
+Request Method:POST
+Status Code:200 OK
+Response Headers
+view source
+Access-Control-Allow-Credentials:true
+Access-Control-Allow-Origin:http://www.zhihu.com
+Cache-Control:no-store
+Connection:keep-alive
+Content-Encoding:gzip
+Content-Length:64
+Content-Security-Policy:default-src *; frame-src *.zhihu.com getpocket.com note.youdao.com; script-src *.zhihu.com *.google-analytics.com zhstatic.zhihu.com 'unsafe-eval'; style-src *.zhihu.com 'unsafe-inline'
+Content-Type:application/json
+Date:Fri, 18 Sep 2015 06:47:20 GMT
+Pragma:no-cache
+Server:zhihu_nginx
+Set-Cookie:z_c0="QUFEQWp3QWZBQUFYQUFBQVlRSlZUWGhBSTFaTVpoeWhOOFFnUzZ1c1Y1Wkxhemg4U0dlRWZRPT0=|1442558840|9241a359c53ee4eeee6495b7064cf5548d7eb9a2"; Domain=zhihu.com; expires=Sat, 17 Sep 2016 06:47:20 GMT; httponly; Path=/
+Set-Cookie:unlock_ticket="QUFEQWp3QWZBQUFYQUFBQVlRSlZUWUM2LTFVZFZXN1poQWlDS1BFcHdoa1BUTWstX2dNdVpnPT0=|1442558840|df07d05c6687162a96446a4a9e699fe59721be95"; Domain=zhihu.com; expires=Fri, 18 Sep 2015 07:16:20 GMT; Path=/
+Set-Cookie:n_c=; Domain=zhihu.com; expires=Thu, 18 Sep 2014 06:47:20 GMT; Path=/
+Vary:Accept-Encoding
+X-Frame-Options:DENY
+Request Headers
+view source
+Accept:*/*
+Accept-Encoding:gzip, deflate
+Accept-Language:zh-CN,zh;q=0.8,en;q=0.6
+Cache-Control:no-cache
+Connection:keep-alive
+Content-Length:97
+Content-Type:application/x-www-form-urlencoded; charset=UTF-8
+Cookie:_za=1c41b7a8-d8eb-47bc-956b-7f3767931d7b; q_c1=2e83ceae49a8478ba023a406fb0364e3|1441031494000|1427813684000; tc=AQAAAA8rqG5a9AsAhy1ad8/lacAt76mS; _xsrf=a142b6679dde409f279137ffa89ddfdc; connect.sid=s%3Ay4PG0bZI36oB09miee5CXpBsgkWhNKly.ybcqBPJP7CyAf1o1ktEbJP1bhLzIP4zdI3zEHoeu43o; __utmt=1; cap_id="YzUzZGVmM2MwOTRkNGEwZjk5ZjQ0ZmI3OTI1YjRkZjI=|1442558780|ea1507e497df6e0a0c823ff0b332c398ac34399f"; __utma=51854390.41607289.1435052684.1442507015.1442557958.9; __utmb=51854390.10.8.1442558763009; __utmc=51854390; __utmz=51854390.1442464930.6.4.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); __utmv=51854390.000--|2=registration_date=20131010=1^3=entry_date=20150331=1
+Host:www.zhihu.com
+Origin:http://www.zhihu.com
+Pragma:no-cache
+Referer:http://www.zhihu.com/
+User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36
+X-Requested-With:XMLHttpRequest
+Form Data
+view source
+view URL encoded
+_xsrf:a142b6679dde409f279137ffa89ddfdc
+password:panhui
+remember_me:true
+email:cccdddppp@163.com
+Name
+email
+www.zhihu.com

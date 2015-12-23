@@ -20,3 +20,19 @@ SLF4J: Found binding in [jar:file:/usr/local/spark-1.3.1-bin-hadoop2.6/lib/spark
 
 因为hadoop 和spark都有SLF4J
 注掉/etc/profile中的 spark环境变量reboot 解决
+
+
+
+
+hadoop fs -ls /
+出错
+15/08/21 02:33:54 WARN conf.Configuration: core-site.xml:an attempt to override final parameter: fs.defaultFS;  Ignoring.
+改core-site.xml 中的
+
+  <property>
+<name>fs.defaultFS</name>
+        <value>hdfs://172.16.231.176</value>
+        <final>true</final>
+    </property>
+
+

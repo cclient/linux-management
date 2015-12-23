@@ -1,0 +1,130 @@
+09-17 23:02:41.830    3693-3710/? E/baidu name﹕ 18701520209
+09-17 23:02:42.130    3693-3710/? E/baidu token﹕ 132f6fdeace775a4ebe39e50f1c2b612
+09-17 23:02:42.210    3693-3710/? E/baidu pubkey﹕ -----BEGIN PUBLIC KEY-----
+    MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDcrnv/mqZG05wnptNl5TQRaSzW
+    22GS+bMgZDYGl5pcxizFkguFONG7JtMZDDjzBDYK8gIXjGLnornLNJcjpzNDm9B5
+    ERGZo1pBQHmYY1qyUOoQn/gNyT4LQImgJ3+vSSlL39/eYTHIR6f9xWTRroBhWHjq
+    PCczlVhDPo1hEcKL/QIDAQAB
+    -----END PUBLIC KEY-----
+09-17 23:02:42.210    3693-3710/? E/baidu key﹕ 1CVc2RizAC1JaCHnEWTX7ZJ0doGDxjEQ
+09-17 23:02:46.620    3693-3710/? E/baidu pwd﹕ 2fymnIfl8Q1uP6u+oFV2BRC+zv3jeCO/bJRHpZicdVoJuDQEf+YZgmmw1wHc5fDsxrQXOjVMmABARnGd8PHYbkOjVvreP2QjX1no+Uri0A/h7KcVM2MQXtSptS5tCt6fTynpiunT04LVaMy24cR7gREy5Guqag5Sh1ubpMG15BA=
+09-17 23:02:46.930    3693-3710/? E/baidu login﹕ <!DOCTYPE html><html><head><meta http-equiv=Content-Type content="text/html; charset=UTF-8"></head><body><script>
+    var href = decodeURIComponent("http:\/\/tieba.baidu.com\/tb\/static-common\/html\/pass\/v3Jump.html")+"?"
+    var accounts = '&accounts='
+    href += "err_no=0&callback=parent.bd__pcbs__ra2bo3&codeString=&userName=18701520209&phoneNumber=&mail=&hao123Param=Rzl6TFdOSFJqbGpNRWRxYjBGUFVVTkxOR1Z6YnpkSE1IY3hjRTVxU21VeWMzWlpmalZ6TVRFNWExcFplVXBYUVZGQlFVRkJKQ1FBQUFBQUFBQUFBQUVBQUFEMzZWc2IxOC03NnNmZzBNUUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQm5XLWxVWjF2cFZV&u=https://passport.baidu.com/&tpl=&secstate=&gotourl=&authtoken=&loginproxy=&resetpwd=&vcodetype=&lstr=&ltoken=&bckv=1&bcsync=rQwyiSBN3T8FKGrYi5pRTM0MHxX2nwNa5v5Rf1M7PvCdljW94Q4aInFezqRYa8Z1syA3IdAb6Xwz8EAIeydQAX7W%2F1n9xRSfYz6jkSLUFmsWS3aDSOMhTWjHf0UbW%2Fyl%2FWea7BrxREpXPYFgzKDfumwT4CDqFN1%2FKLsj0kf73YxPwSNdXeZo2yEHJTsPrwlLe6%2FhstMU%2FkgL8hxwpiacHO8WzQuRalM3SXIN3lNtKnGyMm3WboXLIB7M4h%2Bm9xNUe09sAIlpulkSz0OP6%2BpQgS%2Fp%2FwtridHtNO5GUOjyoMWYh0hoW%2FIwq9m3HAltCoKX3id92Nh0JfqPbpLH6XJ24g%3D%3D&bcchecksum=2867805556&code=&bdToken=&realnameswitch=&bctime=1442502169"+accounts;
+    if(window.location){
+    window.location.replace(href);
+    }else{
+    document.location.replace(href);
+    }
+    </script>
+09-17 23:02:46.930    3693-3710/? E/baidu login﹕ login success
+09-17 23:02:46.930    3693-3710/? E/baidu cookie﹕ BAIDUID=705567DF4F2F6D9F410655AD129C5EEB:FG=1;HOSUPPORT=1;HISTORY=69cd43ed92da45bf10cd8e8dee36a104351e58;PTOKEN=5234bbd780ba5564b0db630eef29c18b;STOKEN=ae428951732fb44aa95bb60dfab88dd2324cae7637abad3cbd1a8b518af18960;SAVEUSERID=bd2c8c3b0865a7b4c9d76cecb6dfab;USERNAMETYPE=3;UBI=fi_PncwhpxZ%7ETaJc2YitpgXBBk1-aIEbrO7yGtVzJyU8gKNDQ3GHfFSwp5-SwiYpkFRRY2oqHAGzHKOPpcG98F7%7ERHGnSed6xBXL6KDZe%7EdGn8riJ8JTg-3Bm10CTYTB52ZMMzm-sTnblLyIBVhh3gU-Vhk;
+09-17 23:02:47.070    3693-3710/? E/baidu bars div﹕ <table>
+    <tbody>
+    <tr>
+    <th style="width:242px">吧名</th>
+    <th style="width:140px">经验值</th>
+    <th style="width:193px">等级</th>
+    <th style="width:155px">取消关注</th>
+    </tr>
+    </tbody>
+    </table>
+09-17 23:02:47.070    3693-3710/? E/baidu my bar﹕ [ 09-17 23:02:47.070  3693: 3710 I/TestRunner ]
+    finished: testBaiDuLogin(com.mac.cdp.androidbaidusign.util.BaiduSignTest)
+
+
+
+
+
+09-17 23:04:44.130    8956-8971/? E/baidu name﹕ 18701520209
+09-17 23:04:44.300    8956-8971/? E/baidu token﹕ 534a5d05eeaba4814644d0280126e800
+09-17 23:04:44.380    8956-8971/? E/baidu pubkey﹕ -----BEGIN PUBLIC KEY-----
+    MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC6wx2lT6z58W0sOmp1tVjJREVl
+    +UcktRYGsLENjs0IyJUS+P5+w6mZ88ABBdVbXJ09zDBS/RyTAIibBgy3kiPeoE2I
+    Ps9uyeSzRc26Sc5QIU0eKWkBAIqBxMVp+BBJTSclqcqpXrR9wGwW8k6CH2JmRH44
+    x//zia52jLEs2y6TfwIDAQAB
+    -----END PUBLIC KEY-----
+09-17 23:04:44.380    8956-8971/? E/baidu key﹕ oZ3M4KGfDr7ijvdmbwuKK4GfzT3DwUHm
+09-17 23:04:47.170    8956-8971/? E/baidu pwd﹕ aM+Bsuycv3Dfc6xih4i3rPEAk3FnEHcpRybCPr6/EoFy2td2QWBL5GnsfbJHbk7q8Z03YW63p8obRjvrlqgX5TcdGf9+R86iz21wID5UT/7JLZ/Gbfe0Avo6DdzCJ+7roPnN0hgzkaCUBZzLQR4SNioV8U+aNksnj7pVGhWdYWk=
+09-17 23:04:47.480    8956-8971/? E/baidu login﹕ <!DOCTYPE html><html><head><meta http-equiv=Content-Type content="text/html; charset=UTF-8"></head><body><script>	var href = decodeURIComponent("http:\/\/tieba.baidu.com\/tb\/static-common\/html\/pass\/v3Jump.html")+"?"var accounts = '&accounts='href += "err_no=0&callback=parent.bd__pcbs__ra2bo3&codeString=&userName=18701520209&phoneNumber=&mail=&hao123Param=eFJXSEkzVkRjdE1tTlhaM1ZaYWxFMFMwNXFWemhIWmpneVdrcE1aa0ZuU1VSV1ZHRXpTREJOVjFOWmVVcFhRVkZCUVVGQkpDUUFBQUFBQUFBQUFBRUFBQUQzNlZzYjE4LTc2c2ZnME1RQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFKTFctbFdTMXZwVlIw&u=https://passport.baidu.com/&tpl=&secstate=&gotourl=&authtoken=&loginproxy=&resetpwd=&vcodetype=&lstr=&ltoken=&bckv=1&bcsync=nyBKLlRsp5vzPRV9PkoFg5mu%2B445UEbnv6p6qPJYE0dOUhg4HJ%2BqYSVl7mCKK4cTBST9J%2B4DEQhb12lq6tHveCYcwZedpSAS7P5GhBYiY6FqswhFiBIvjBUzO%2BkH7YrvDe2uGFFYf2mZ3rNynk9o4w3ARp1Oju0DStgNv8E%2FTP2kmbbfjOkMr1QIMZLklsmg6RM9vrpE9Lu0UawNlh1XhtJnmj%2FUR8FT52kdED%2BeMgh3csSABjuRtkjplswf60uKOkKhU6UI7P8REIyeXaL3SVXSqJ%2BR6wPzN01UsryAwkWcpHYJ0zN%2BTLUxY2%2Fr5SFTN1OvfBBAGApTgPSzrtx%2B1Q%3D%3D&bcchecksum=2710153455&code=&bdToken=&realnameswitch=&bctime=1442502290"+accounts;if(window.location){    window.location.replace(href);}else{   document.location.replace(href); }</script>
+09-17 23:04:47.480    8956-8971/? E/baidu login﹕ login success
+09-17 23:04:47.480    8956-8971/? E/baidu cookie﹕ BAIDUID=41CF93C8AC29E844FA1A1BE508D0E27E:FG=1;HOSUPPORT=1;HISTORY=69cd43ed92da45bf10cd8e8dee36a104351e58;BDUSS=xRWHI3VDctMmNXZ3VZalE0S05qVzhHZjgyWkpMZkFnSURWVGEzSDBNV1NZeUpXQVFBQUFBJCQAAAAAAAAAAAEAAAD36Vsb18-76sfg0MQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJLW-lWS1vpVR0;PTOKEN=800cbe6481610c4a4dd2338d2c529ed3;STOKEN=f232b03685a886e3717771e35e3dcc4dc6e5f1dca4c0a54f3fe3ef539b8129a8;SAVEUSERID=bd2c8c3b0865a7b4c9d76cecb6dfab;USERNAMETYPE=3;UBI=fi_PncwhpxZ%7ETaJc-0DS%7EPj2jYPQFRxjkOVKNti06Gpgxuv2e3SwXCj5Wrjek1QB07gFHkR3bg%7ES8wXejJiwu7RGTZZB4kuKRgxFl1Lx-yEIOdq4QLSf002aR826ph9yCKjCIrNc9tYNpnR8lu3rvxd7LtR;
+09-17 23:04:47.650    8956-8971/? E/baidu bars div﹕ <table>
+    <tbody>
+    <tr>
+    <th style="width:242px">����</th>
+    <th style="width:140px">����ֵ</th>
+    <th style="width:193px">�ȼ�</th>
+    <th style="width:155px">ȡ���ע</th>
+    </tr>
+    <tr>
+    <td><a href="/f?kw=%D7%ED%D5%ED%BD%AD%C9%BD" title="����ɽ">����ɽ</a></td>
+    <td><a class="cur_exp" target="_blank" href="/f/like/level?kw=%D7%ED%D5%ED%BD%AD%C9%BD&amp;lv_t=lv_nav_intro">606</a></td>
+    <td><a style="display:block;" class="like_badge badge_lv2_2" title="8����Ա" target="_blank" href="/f/like/level?kw=%D7%ED%D5%ED%BD%AD%C9%BD&amp;lv_t=lv_nav_intro">
+    <div class="like_badge_title">
+    ������
+    </div>
+    <div class="like_badge_lv">
+    8
+    </div></a></td>
+    <td><span onclick="ForumManager.undo_like(this.getAttribute('balvid'), this.getAttribute('balvname'), this.getAttribute('tbs'))" balvid="6031967" balvname="%D7%ED%D5%ED%BD%AD%C9%BD" tbs="960074684f29b5fe1442502290"><img class="pt" src="http://static.tieba.baidu.com/tb/static-member/img/close.gif"></span></td>
+    </tr>
+    <tr>
+    <td><a href="/f?kw=%BD%F5%D2%C2%D2%B9%D0%D0" title="����ҹ��">����ҹ��</a></td>
+    <td><a class="cur_exp" target="_blank" href="/f/like/level?kw=%BD%F5%D2%C2%D2%B9%D0%D0&amp;lv_t=lv_nav_intro">591</a></td>
+    <td><a style="display:block;" class="like_badge badge_lv2_2" title="8����Ա" target="_blank" href="/f/like/level?kw=%BD%F5%D2%C2%D2%B9%D0%D0&amp;lv_t=lv_nav_intro">
+    <div class="like_badge_title">
+    �ٻ�
+    </div>
+    <div class="like_badge_lv">
+    8
+    </div></a></td>
+    <td><span onclick="ForumManager.undo_like(this.getAttribute('balvid'), this.getAttribute('balvname'), this.getAttribute('tbs'))" balvid="409254" balvname="%BD%F5%D2%C2%D2%B9%D0%D0" tbs="960074684f29b5fe1442502290"><img class="pt" src="http://static.tieba.baidu.com/tb/static-member/img/close.gif"></span></td>
+    </tr>
+    <tr>
+    <td><a href="/f?kw=%D6%D0%B9%FA%BA%C3%C9%F9%D2%F4" title="�й������">�й������</a></td>
+    <td><a class="cur_exp" target="_blank" href="/f/like/level?kw=%D6%D0%B9%FA%BA%C3%C9%F9%D2%F4&amp;lv_t=lv_nav_intro">211</a></td>
+    <td><a style="display:block;" class="like_badge badge_lv2_1" title="7����Ա" target="_blank" href="/f/like/level?kw=%D6%D0%B9%FA%BA%C3%C9%F9%D2%F4&amp;lv_t=lv_nav_intro">
+    <div class="like_badge_title">
+    ����ӯ��
+    </div>
+    <div class="like_badge_lv">
+    7
+    </div></a></td>
+    <td><span onclick="ForumManager.undo_like(this.getAttribute('balvid'), this.getAttribute('balvname'), this.getAttribute('tbs'))" balvid="4345164" balvname="%D6%D0%B9%FA%BA%C3%C9%F9%D2%F4" tbs="960074684f29b5fe1442502290"><img class="pt" src="http://static.tieba.baidu.com/tb/static-member/img/close.gif"></span></td>
+    </tr>
+    <tr>
+    <td><a href="/f?kw=%BF%C2%C4%CF" title="����">����</a></td>
+    <td><a class="cur_exp" target="_blank" href="/f/like/level?kw=%BF%C2%C4%CF&amp;lv_t=lv_nav_intro">113</a></td>
+    <td><a style="display:block;" class="like_badge badge_lv2_1" title="6����Ա" target="_blank" href="/f/like/level?kw=%BF%C2%C4%CF&amp;lv_t=lv_nav_intro">
+    <div class="like_badge_title">
+    ����֮��
+    </div>
+    <div class="like_badge_lv">
+    6
+    </div></a></td>
+    <td><span onclick="ForumManager.undo_like(this.getAttribute('balvid'), this.getAttribute('balvname'), this.getAttribute('tbs'))" balvid="339" balvname="%BF%C2%C4%CF" tbs="960074684f29b5fe1442502290"><img class="pt" src="http://static.tieba.baidu.com/tb/static-member/img/close.gif"></span></td>
+    </tr>
+    <tr>
+    <td><a href="/f?kw=%C7%EF%D6%AE%BB%D8%D2%E4" title="��֮����">��֮����</a></td>
+    <td><a class="cur_exp" target="_blank" href="/f/like/level?kw=%C7%EF%D6%AE%BB%D8%D2%E4&amp;lv_t=lv_nav_intro">90</a></td>
+    <td><a style="display:block;" class="like_badge badge_lv2" title="5����Ա" target="_blank" href="/f/like/level?kw=%C7%EF%D6%AE%BB%D8%D2%E4&amp;lv_t=lv_nav_intro">
+09-17 23:04:47.650    8956-8971/? E/baidu my bar﹕ [ 09-17 23:04:47.650  8956: 8971 E/baidu my bar ]
+    ����ɽ
+09-17 23:04:47.650    8956-8971/? E/baidu my bar﹕ ����ҹ��
+09-17 23:04:47.650    8956-8971/? E/baidu my bar﹕ �й������
+09-17 23:04:47.650    8956-8971/? E/baidu my bar﹕ ����
+09-17 23:04:47.650    8956-8971/? E/baidu my bar﹕ ��֮����
+09-17 23:04:47.650    8956-8971/? E/baidu my bar﹕ ħ�����
+09-17 23:04:47.650    8956-8971/? E/baidu my bar﹕ ����
+09-17 23:04:47.650    8956-8971/? E/baidu my bar﹕ clannad
+09-17 23:04:47.650    8956-8971/? E/baidu my bar﹕ ��̬Ӳ��
+09-17 23:04:47.650    8956-8971/? E/baidu my bar﹕ ˫��̥
+09-17 23:04:47.650    8956-8971/? E/baidu my bar﹕ ���
+09-17 23:04:47.650    8956-8971/? E/baidu my bar﹕ angelbeats
+09-17 23:04:47.650    8956-8971/? E/baidu my bar﹕ ���
+09-17 23:04:47.650    8956-8971/? E/baidu my bar﹕ ����
+09-17 23:04:47.650    8956-8971/? E/baidu my bar﹕ ΢С˵
+09-17 23:04:47.650    8956-8971/? E/baidu my bar﹕ androidstudio
+09-17 23:04:47.650    8956-8971/? E/baidu my bar﹕ ����������Щ�¶�

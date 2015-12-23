@@ -1,0 +1,8 @@
+  380  beeline --help
+  381  beeline  -u  jdbc:hive2://localhost:10000
+  382  beeline  -u  jdbc:hive2://localhost:10000
+  383  scp root@debian01:~/nginxaccess.log ~/
+  384  beeline  -u  jdbc:hive2://localhost:10000
+426   /usr/local/apache-hive-1.2.0-bin/hcatalog/sbin/hcat_server.sh
+  427   /usr/local/apache-hive-1.2.0-bin/hcatalog/sbin/hcat_server.sh start
+    hcatalog/sbin/webhcat_server.sh start

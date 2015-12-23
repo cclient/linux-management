@@ -1,0 +1,66 @@
+Check System Version at Runtime
+private void setUpActionBar() {
+    // Make sure we're running on Honeycomb or higher to use ActionBar APIs
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+    }
+}
+
+android:showAsAction="ifRoom" in your menu resource XML. It's safe to do this in a cross-version XML file, because the older versions of Android simply ignore the showAsAction attribute (that is, you do not need a separate version in res/menu-v11/).
+
+ 正确实现您的Activity生命周期方法可确保您的应用按照以下几种方式良好运行，包括：
+
+如果用户在使用您的应用时接听来电或切换到另一个应用，它不会崩溃。
+在用户未主动使用它时不会消耗宝贵的系统资源。
+如果用户离开您的应用并稍后返回，不会丢失用户的进度。
+当屏幕在横向和纵向之间旋转时，不会崩溃或丢失用户的进度。
+
+
+保存Activity状态
+public void onSaveInstanceState(Bundle savedInstanceState) {
+    // Save the user's current game state
+    savedInstanceState.putInt(STATE_SCORE, mCurrentScore);
+    savedInstanceState.putInt(STATE_LEVEL, mCurrentLevel);
+
+    // Always call the superclass so it can save the view hierarchy state
+    super.onSaveInstanceState(savedInstanceState);
+}
+
+恢复Activity状态
+因为无论系统正在创建Activity的新实例还是重新创建先前的实例，都会调用 onCreate() 方法，因此您必须在尝试读取它之前检查状态 Bundle 是否为 null。 如果为 null，则系统将创建Activity的新实例，而不是恢复已销毁的先前实例。
+
+例如，此处显示您如何可以在 onCreate() 中恢复一些状态数据：
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState); // Always call the superclass first
+
+    // Check whether we're recreating a previously destroyed instance
+    if (savedInstanceState != null) {
+        // Restore value of members from saved state
+        mCurrentScore = savedInstanceState.getInt(STATE_SCORE);
+        mCurrentLevel = savedInstanceState.getInt(STATE_LEVEL);
+    } else {
+        // Probably initialize members with default values for a new instance
+    }
+    ...
+}
+您可以选择实现系统在 onStart() 方法之后调用的 onRestoreInstanceState() ，而不是在onCreate() 期间恢复状态。 系统只在存在要恢复的已保存状态时调用 onRestoreInstanceState() ，因此您无需检查 Bundle 是否为 null：
+
+public void onRestoreInstanceState(Bundle savedInstanceState) {
+    // Always call the superclass so it can restore the view hierarchy
+    super.onRestoreInstanceState(savedInstanceState);
+
+    // Restore state members from saved instance
+    mCurrentScore = savedInstanceState.getInt(STATE_SCORE);
+    mCurrentLevel = savedInstanceState.getInt(STATE_LEVEL);
+}
+
+
+f you're using the v7 appcompat library, your activity should instead extend ActionBarActivity, which is a subclass of FragmentActivity (for more information, read Adding the Action Bar).
+
+
+
+
+
+持久化

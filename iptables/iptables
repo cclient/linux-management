@@ -1,0 +1,50 @@
+iptables [-t 表名] <-A|I|D|R> 链名[规则编号] [-i|o 网卡名称][-p 协议类型] [-s 源IP|源子网][--sport 源端口][-d 目的IP][--dport 目的端口]< -j 动作>
+-t filter(default),nat mangle
+链 INPUT OUTPUT FORWARD PREROUTING(DNAT) POSTROUTING(SNAT)
+
+
+定义默认策略 -P
+iptables -t -P <链名> <job>
+
+查看规则
+iptables -t -L 链名
+
+
+
+
+iptables实现端口转发的过程(修改版)(转)[@more@]
+看了不少关于用iptables实现端口转发的文章,但感觉都没有把问题说得很清楚,现接合我自己设置和使用的经历,谈谈它的实现过程.
+设我们有一台计算机,有两块网卡,eth0连外网,ip为1.2.3.4;eth1连内网,ip为192.168.0.1.现在需要把发往地址1.2.3.4的81端口的ip包转发到ip地址192.168.0.2的8180端口,设置如下:
+1. iptables -t nat -A PREROUTING -d 1.2.3.4 -p tcp -m tcp --dport 81 -j DNAT --to-destination192.168.0.2:8180
+2. iptables -t nat -A POSTROUTING -s 192.168.0.0/255.255.0.0 -d 192.168.0.2 -p tcp -m tcp --dport 8180 -j SNAT --to-source 192.168.0.1
+
+iptables -t nat -A PREROUTING -d 45.62.122.33 -p tcp -m tcp --dport 10051 -j DNAT --to-destination10.0.8.6:10051
+
+iptables -t nat -A POSTROUTING -s 10.0.8.0/255.255.255.0 -d 10.8.0.6 -p tcp -m tcp --dport 80 -j SNAT --to 10.0.8.1
+
+
+
+在ubuntu中由于不存在 /etc/init.d/iptales文件，所以无法使用service等命令来启动iptables，需要用modprobe命令。
+启动iptables
+modprobe ip_tables
+关闭iptables（关闭命令要比启动复杂）
+iptables -F
+iptables -X
+iptables -Z
+iptables -P INPUT ACCEPT
+iptables -P OUTPUT ACCEPT
+iptables -P FORWARD ACCEPT
+modprobe -r ip_tables
+依次执行以上命令即可关闭iptables，否则在执行modproble -r ip_tables时将会提示
+FATAL: Module ip_tables is in use.
+上述问题最总得到解决。
+
+另外附上一些好的配置Vsftpd和iptables的博客站点：
+
+1，http://blog.163.com/xyz_1112/blog/static/3869440220080442851960/
+
+2，http://www.cnblogs.com/hhuai/archive/2011/02/12/1952647.html
+
+3，http://www.cnblogs.com/JemBai/archive/2009/02/05/1384413.html
+
+4，http://www.zrblog.net/7027.html
